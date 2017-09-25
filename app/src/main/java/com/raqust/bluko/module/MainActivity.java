@@ -1,7 +1,9 @@
-package com.raqust.bluko;
+package com.raqust.bluko.module;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.raqust.bluko.R;
 
 public class MainActivity extends AppCompatActivity {
 

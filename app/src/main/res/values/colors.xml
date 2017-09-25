@@ -3,4 +3,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+
+    <color name="startcolor_footer_progressbar">#00000000</color>
+    <color name="centercolor_footer_progressbar">#4d000000</color>
+    <color name="endcolor_footer_progressbar">#8a000000</color>
+    <color name="text_tips_footer">#8a000000</color>
+
 </resources>

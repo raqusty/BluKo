@@ -3,7 +3,14 @@
 
     <string name="contentDescription">null</string>
 
+
+    <string name="size_progress_bar_footer">没有数据</string>
+
+
     <string name="not_data">没有数据</string>
     <string name="not_web">找不到页面\n检查网络后请点击此页面刷新</string>
+
+    <string name="no_more_data">呜。没有更多数据了！_(:з」∠)_</string>
+    <string name="data_loading">正在加载更多数据...</string>
 
 </resources>
