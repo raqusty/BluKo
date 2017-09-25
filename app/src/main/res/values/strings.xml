@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Bluko</string>
+
+    <string name="contentDescription">null</string>
+
+    <string name="not_data">没有数据</string>
+    <string name="not_web">找不到页面\n检查网络后请点击此页面刷新</string>
+
 </resources>
