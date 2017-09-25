@@ -13,7 +13,7 @@ import com.raqust.bluko.common.AbstractFooterAdapter;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/9/25.
+ * Created by zehao on 2017/9/25.
  */
 
 public class HomeAdapter extends AbstractFooterAdapter<String> {

@@ -6,8 +6,8 @@ import android.support.v7.widget.Toolbar;
 
 import com.raqust.bluko.R;
 import com.raqust.bluko.common.AbstractFooterAdapter;
-import com.raqust.bluko.common.BaseActivity;
-import com.raqust.bluko.common.ToolBarManager;
+import com.raqust.bluko.common.activity.BaseActivity;
+import com.raqust.bluko.common.activity.ToolBarManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- * Created by Administrator on 2017/9/25.
+ * Created by zehao on 2017/9/25.
  */
 
 public class FirstActivity extends BaseActivity {

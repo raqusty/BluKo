@@ -1,4 +1,4 @@
-package com.raqust.bluko.common;
+package com.raqust.bluko.common.activity;
 
 import android.content.Context;
 import android.content.Intent;

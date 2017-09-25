@@ -1,4 +1,4 @@
-package com.raqust.bluko.common;
+package com.raqust.bluko.common.activity;
 
 public interface IBasePageOperations {
     /**
