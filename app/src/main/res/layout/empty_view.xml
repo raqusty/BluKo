@@ -21,6 +21,6 @@
         android:layout_above="@id/empty_view_tv_text_tips"
         android:layout_centerHorizontal="true"
         android:contentDescription="@string/contentDescription"
-        android:src="@mipmap/no_report" />
+        android:src="@mipmap/no_data" />
 
 </RelativeLayout>

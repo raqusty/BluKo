@@ -1,0 +1,23 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary" />
+
+    <com.raqust.bluko.common.widget.CommonRecyclerView
+        android:id="@+id/commond_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.raqust.bluko.common.widget.CommonRecyclerView>
+
+
+</LinearLayout>
+
+

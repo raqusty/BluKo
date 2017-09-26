@@ -10,4 +10,5 @@
     <color name="endcolor_footer_progressbar">#8a000000</color>
     <color name="text_tips_footer">#8a000000</color>
 
+    <color name="main_bg">#ffffff</color>
 </resources>

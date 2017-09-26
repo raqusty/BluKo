@@ -1,7 +1,6 @@
 package com.raqust.bluko.common;
 
 import android.content.Context;
-import android.support.annotation.LayoutRes;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -11,13 +10,10 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-
 import com.raqust.bluko.R;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.ButterKnife;
 
 /**
  * 1.在实例化对象时决定需不需要用footer
@@ -37,12 +33,12 @@ public abstract class AbstractFooterAdapter<T> extends RecyclerView.Adapter<Abst
     protected List<T> mDataList = new ArrayList<T>();
 
     protected Context mContext;
-
-    //是否要footer
-    private boolean mHasFooter = false;
     //Footer的显示样式
     protected int mFooterState = TYPE_TIP_EMTPY_FOOTER;
-
+    /************* 以下 adapter 点击事件************/
+    protected OnItemClickLitener mAdapterClick;
+    //是否要footer
+    private boolean mHasFooter = false;
     private View mFooterView;
     private ProgressBar mProgressBar;
     private TextView mTip;
@@ -157,28 +153,11 @@ public abstract class AbstractFooterAdapter<T> extends RecyclerView.Adapter<Abst
      */
     protected abstract int getValidViewType(int position);
 
-    protected class RylViewHolder extends RecyclerView.ViewHolder {
-
-        public RylViewHolder(View itemView) {
-            super(itemView);
-
-        }
-
-    }
-
-    protected class FooterHolder extends RylViewHolder {
-
-        public FooterHolder(View view, int type) {
-            super(view);
-        }
-    }
-
     /************* 以下 让图片显示不 闪烁  ************/
     @Override
     public long getItemId(int position) {
         return position;
     }
-    /************* 以上 让图片显示不 闪烁  ************/
 
     /************* 以下 如果是gridLayoutManager，处理一下，让foot占一整行，************/
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
@@ -196,6 +175,7 @@ public abstract class AbstractFooterAdapter<T> extends RecyclerView.Adapter<Abst
             });
         }
     }
+    /************* 以上 让图片显示不 闪烁  ************/
 
     /**
      * 子类需要用 onAttachedToRecyclerView 的话，用这个
@@ -216,17 +196,30 @@ public abstract class AbstractFooterAdapter<T> extends RecyclerView.Adapter<Abst
         }
     }
 
-    /************* 以上 如果是gridLayoutManager，处理一下，让foot占一整行，************/
-
-    /************* 以下 adapter 点击事件************/
-    protected OnItemClickLitener mAdapterClick;
-
     public void setOnItemClickLitener(OnItemClickLitener onClick) {
         mAdapterClick = onClick;
     }
 
+    /************* 以上 如果是gridLayoutManager，处理一下，让foot占一整行，************/
+
     public interface OnItemClickLitener {
         public void onClick(int point);
+    }
+
+    protected class RylViewHolder extends RecyclerView.ViewHolder {
+
+        public RylViewHolder(View itemView) {
+            super(itemView);
+
+        }
+
+    }
+
+    protected class FooterHolder extends RylViewHolder {
+
+        public FooterHolder(View view, int type) {
+            super(view);
+        }
     }
     /************* 以上 adapter 点击事件************/
 }
