@@ -25,7 +25,7 @@ public class HomeAdapter extends AbstractFooterAdapter<ImageEntity> {
     private LayoutInflater mLayoutInflater;
 
     public HomeAdapter(Context context, List list) {
-        super(context, list, false);
+        super(context, list, true);
         mLayoutInflater = LayoutInflater.from(context);
     }
 
