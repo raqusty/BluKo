@@ -137,12 +137,14 @@ public class FirstActivity extends BaseActivity {
         mAdapter.notifyDataChange(postion);
         mSwipeRefreshLayout.setRefreshing(false);
 
-        String url = "http://www.csdn.net/";
+        //http://app.lamian.tv/api/Lamian_v3/recommend/video?pageSize=20&all=1&page=1&
+        String url = "http://app.lamian.tv/api/Lamian_v3/recommend/video";
         OkHttpUtils
                 .get()
                 .url(url)
-                .addParams("username", "hyman")
-                .addParams("password", "123")
+                .addParams("pageSize", "20")
+                .addParams("page", "1")
+                .addParams("all", "1")
                 .build()
                 .execute(new StringCallback() {
                     @Override
