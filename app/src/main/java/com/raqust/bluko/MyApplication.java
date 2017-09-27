@@ -3,6 +3,8 @@ package com.raqust.bluko;
 import android.app.Application;
 import android.content.Context;
 
+import com.raqust.bluko.common.net.NetUtils;
+
 public class MyApplication extends Application {
     private static MyApplication instance;
 
@@ -21,6 +23,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        NetUtils.init(instance);
 
     }
 

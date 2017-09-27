@@ -12,16 +12,18 @@ import com.raqust.bluko.R;
 import com.raqust.bluko.common.AbstractFooterAdapter;
 import com.raqust.bluko.common.activity.BaseActivity;
 import com.raqust.bluko.common.activity.ToolBarManager;
+import com.raqust.bluko.common.net.CallBack.IHttpResponseCallBack;
+import com.raqust.bluko.common.net.NetUtils;
 import com.raqust.bluko.common.widget.CommonRecyclerView;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
 import okhttp3.Call;
-import okhttp3.Request;
 
 /**
  * Created by zehao on 2017/9/25.
@@ -137,26 +139,28 @@ public class FirstActivity extends BaseActivity {
         mAdapter.notifyDataChange(postion);
         mSwipeRefreshLayout.setRefreshing(false);
 
-        //http://app.lamian.tv/api/Lamian_v3/recommend/video?pageSize=20&all=1&page=1&
         String url = "http://app.lamian.tv/api/Lamian_v3/recommend/video";
-        OkHttpUtils
-                .get()
-                .url(url)
-                .addParams("pageSize", "20")
-                .addParams("page", "1")
-                .addParams("all", "1")
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        Log.i("linzehao","123  ");
-                    }
 
-                    @Override
-                    public void onResponse(String response, int id) {
-                        Log.i("linzehao","response  "+response);
-                    }
-                });
+        HashMap<String, String> strParams = new HashMap<String, String>();
+        strParams.put("pageSize", "20");
+        strParams.put("page", "1");
+        strParams.put("all", "1");
+        NetUtils.requestGetString(url, strParams, new IHttpResponseCallBack<String>() {
+            @Override
+            public void onSuccess(String responseResult) {
+                Log.i("linzehao", "responseResult  " + responseResult);
+            }
+
+            @Override
+            public void onFail(int errorCode, String message, String result) {
+                Log.i("linzehao", "onFail  ");
+            }
+
+            @Override
+            public void onFinished() {
+                Log.i("linzehao", "onFinished  ");
+            }
+        });
 
     }
 

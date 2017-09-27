@@ -1,11 +1,9 @@
-package com.raqust.bluko.common.net;
+package com.raqust.bluko.common.net.Impl;
 
 import android.app.Application;
 
 import com.raqust.bluko.common.net.CallBack.IHttpResponseCallBack;
 import com.raqust.bluko.common.net.Params.HttpRequestParams;
-
-import java.io.File;
 
 /**
  * Created on 2017/9/27.
@@ -24,25 +22,34 @@ public class RemoteNetUtil {
 
 
     /**
-     * 成功以String形式返回body的内容
+     * get 成功以String形式返回body的内容
      *
      * @param requestParams    请求参数
      * @param responseCallBack 响应回调接口
      */
-    public static void requestForString(HttpRequestParams requestParams, IHttpResponseCallBack<String> responseCallBack) {
-        baseRemoteSdkImpl.requestForString(requestParams, responseCallBack);
+    public static void requestGetString(HttpRequestParams requestParams, IHttpResponseCallBack<String> responseCallBack) {
+        baseRemoteSdkImpl.requestGetString(requestParams, responseCallBack);
     }
 
 
     /**
-     * 成功以File形式返回body的内容
+     * post 成功以String形式返回body的内容
      *
-     * @param saveFilePath     要保存的路径--包括文件名
      * @param requestParams    请求参数
      * @param responseCallBack 响应回调接口
      */
-    public static void requestForFile(String saveFilePath, HttpRequestParams requestParams, IHttpResponseCallBack<File> responseCallBack) {
-        baseRemoteSdkImpl.requestForFile(saveFilePath, requestParams, responseCallBack);
+    public static void requestPostString(HttpRequestParams requestParams, IHttpResponseCallBack<String> responseCallBack) {
+        baseRemoteSdkImpl.requestPostString(requestParams, responseCallBack);
+    }
+
+    /**
+     * 成功以File形式返回body的内容
+     *
+     * @param requestParams    请求参数
+     * @param responseCallBack 响应回调接口
+     */
+    public static void requestPostFile( HttpRequestParams requestParams, IHttpResponseCallBack<String> responseCallBack) {
+        baseRemoteSdkImpl.requestPostFile( requestParams, responseCallBack);
     }
 
 

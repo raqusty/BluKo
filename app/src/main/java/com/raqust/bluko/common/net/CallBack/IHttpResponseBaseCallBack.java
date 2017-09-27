@@ -6,35 +6,31 @@ public abstract class IHttpResponseBaseCallBack {
      * 取消请求回调的方法
      *
      * @param reason
-     * @param originalObject
      */
-    public void onCancelled(String reason, Object originalObject) {
+    public void onCancelled(String reason) {
 
     }
 
     /**
      * 结束一次请求
      *
-     * @param originalObject
      */
-    public abstract void onFinished(Object originalObject);
+    public abstract void onFinished();
 
     ;
 
     /**
      * 网络请求之前调用
      *
-     * @param originalObject
      */
-    public void onWaiting(Object originalObject) {
+    public void onWaiting() {
     }
 
     /**
      * 网络请求开始之后调用
      *
-     * @param originalObject
      */
-    public void onStarted(Object originalObject) {
+    public void onStarted() {
     }
 
     /**
@@ -43,9 +39,8 @@ public abstract class IHttpResponseBaseCallBack {
      * @param total
      * @param current
      * @param isDownloading
-     * @param originalObject
      */
-    public void onLoading(long total, long current, boolean isDownloading, Object originalObject) {
+    public void onLoading(long total, long current, boolean isDownloading) {
 
     }
 }

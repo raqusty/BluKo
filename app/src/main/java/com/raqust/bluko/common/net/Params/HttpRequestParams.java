@@ -25,19 +25,16 @@ public class HttpRequestParams {
     //直接以字符串的流的形式作为参数（POST_CONTENT,PUT_CONTENT）
     public String bodyContent;
     // 上传到服务器的文件
-    public ArrayList<File> submitFileList;
-    //原来的参数，初始值为null
-    public Object originalObject;
+    public ArrayList<FileInput> submitFileList;
 
 
-    //  连接到服务器的超时时间，单位：毫秒，以前奕报告默认是15秒
-    public int connectTimeout;
-    // 从服务器获取数据的超时时间，单位：毫秒，以前奕报告默认是15秒
-    public int getTimeout;
+    //  连接到服务器的超时时间，单位：毫秒
+    public int connectTimeout ;
+    // 从服务器获取数据的超时时间，单位：毫秒
+    public int getTimeout ;
 
     private HttpRequestParams(Builder builder) {
         this.RequestType = builder.RequestType;
-        this.originalObject = builder.originalObject;
         this.hostUrl = builder.hostUrl;
         if (null != builder.headParams) {
             this.headParams = builder.headParams;
@@ -66,8 +63,6 @@ public class HttpRequestParams {
     public static class Builder {
         //http的提交方式
         private HttpRequestType RequestType = HttpRequestType.POST_FORM;
-        //原来的参数，初始值为null
-        private Object originalObject;
         // url地址
         private String hostUrl = "";
         // 传递到服务器的头参数
@@ -75,11 +70,11 @@ public class HttpRequestParams {
         // 传递到服务器的参数
         private HashMap<String, String> strParams;
         // 上传到服务器的文件
-        private ArrayList<File> submitFileList;
+        private ArrayList<FileInput> submitFileList;
         private String bodyContent = "";
-        //  连接到服务器的超时时间，单位：秒，以前奕报告默认是15秒
+        //  连接到服务器的超时时间，单位：秒
         private int connectTimeout = 15000;
-        // 从服务器获取数据的超时时间，单位：秒，以前奕报告默认是15秒
+        // 从服务器获取数据的超时时间，单位：秒
         private int getTimeout = 15000;
 
 
@@ -91,7 +86,7 @@ public class HttpRequestParams {
             return this;
         }
 
-        public Builder setSubmitFileList(ArrayList<File> submitFileList) {
+        public Builder setSubmitFileList(ArrayList<FileInput> submitFileList) {
             this.submitFileList = submitFileList;
             return this;
         }
@@ -124,13 +119,6 @@ public class HttpRequestParams {
             return this;
         }
 
-
-        public Builder setOriginalObject(Object originalObject) {
-            this.originalObject = originalObject;
-            return this;
-        }
-
-
         public Builder setBodyContent(String bodyContent) {
             this.bodyContent = bodyContent;
             return this;
@@ -140,6 +128,19 @@ public class HttpRequestParams {
             return new HttpRequestParams(this);
         }
 
+
+    }
+
+    public static class FileInput {
+        public String key;
+        public String filename;
+        public File file;
+
+        public FileInput(String name, String filename, File file) {
+            this.key = name;
+            this.filename = filename;
+            this.file = file;
+        }
 
     }
 
