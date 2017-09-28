@@ -5,182 +5,71 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 
 import com.raqust.bluko.R;
 import com.raqust.bluko.common.AbstractFooterAdapter;
 import com.raqust.bluko.common.activity.BaseActivity;
 import com.raqust.bluko.common.activity.ToolBarManager;
-import com.raqust.bluko.common.net.CallBack.IHttpResponseCallBack;
-import com.raqust.bluko.common.net.NetUtils;
 import com.raqust.bluko.common.widget.CommonRecyclerView;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
+import com.raqust.bluko.module.main.entity.EventEntity;
+import com.raqust.bluko.module.main.entity.EventListEntity;
+import com.raqust.bluko.module.main.presenter.HomePresenter;
+import com.raqust.bluko.module.main.view.IHomeView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
-import okhttp3.Call;
 
 /**
  * Created by zehao on 2017/9/25.
  */
 
-public class FirstActivity extends BaseActivity {
+public class FirstActivity extends BaseActivity implements IHomeView {
     @BindView(R.id.commond_recycler)
     CommonRecyclerView mRecyclerView;
 
     @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
-
     @BindView(R.id.toolbar)
     Toolbar mToolBar;
 
-    HomeAdapter mAdapter;
-
-    private List<ImageEntity> mListData = new ArrayList<>();
-    private List<String> mImageList = new ArrayList<>();
+    private HomeAdapter mAdapter;
+    private List<EventEntity> mListData = new ArrayList<>();
+    private HomePresenter mPresenter;
+    private int mCurPage = 1;
 
     @Override
     public void initViews() {
-
+        mPresenter = new HomePresenter(this);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         mAdapter = new HomeAdapter(mContext, mListData);
 
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addItemDecoration(new SpacesItemDecoration(16));
-
-        requestData(1);
+        mCurPage = 1;
+        requestData(mCurPage);
     }
 
     private void requestData(int page) {
-        if (page == 1) {
-            mListData.clear();
-        }
-
-        mImageList.add("http://res11.lamian.tv/lamian//822/20170822/15033872244123500_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//821/20170821/15033177114051520_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//821/20170821/15033165172151790_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//821/20170821/15033025373086470_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//818/20170818/15030379104065540_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//816/20170816/15028871859368510_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//815/20170815/15027678741853030_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//630/20170630/14988054629564710_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//629/20170629/14987258696271810_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//628/20170628/14986171803083730_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//821/20170821/15033177114051520_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//821/20170821/15033165172151790_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//821/20170821/15033025373086470_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//818/20170818/15030379104065540_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//816/20170816/15028871859368510_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//815/20170815/15027678741853030_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//630/20170630/14988054629564710_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//629/20170629/14987258696271810_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//628/20170628/14986171803083730_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//628/20170628/14986140311624880_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//627/20170627/14985496004965060_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//627/20170627/14985444732928180_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//621/20170621/14980273139278970_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//621/20170621/14980271537947090_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//621/20170621/14980146301590010_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//629/20170629/14987258696271810_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//628/20170628/14986171803083730_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//628/20170628/14986140311624880_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//627/20170627/14985496004965060_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//627/20170627/14985444732928180_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//621/20170621/14980273139278970_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//621/20170621/14980271537947090_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//621/20170621/14980146301590010_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//823/20170823/15034546129990140_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//823/20170823/15034534904247080_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//823/20170823/15034533114442300_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//823/20170823/15034532167068160_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//822/20170822/15033872244123500_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//821/20170821/15033177114051520_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//821/20170821/15033165172151790_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//821/20170821/15033025373086470_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//818/20170818/15030379104065540_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//816/20170816/15028871859368510_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//815/20170815/15027678741853030_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//630/20170630/14988054629564710_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//629/20170629/14987258696271810_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//628/20170628/14986171803083730_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//628/20170628/14986140311624880_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//627/20170627/14985496004965060_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//627/20170627/14985444732928180_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//621/20170621/14980273139278970_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//621/20170621/14980271537947090_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//621/20170621/14980146301590010_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//629/20170629/14987258696271810_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//628/20170628/14986171803083730_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//628/20170628/14986140311624880_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//627/20170627/14985496004965060_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//627/20170627/14985444732928180_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//621/20170621/14980273139278970_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//621/20170621/14980271537947090_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//621/20170621/14980146301590010_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//823/20170823/15034546129990140_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//823/20170823/15034534904247080_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//823/20170823/15034533114442300_262_147_0.jpg");
-        mImageList.add("http://res11.lamian.tv/lamian//823/20170823/15034532167068160_262_147_0.jpg");
-
-        ImageEntity imageEntity;
-        int postion = mListData.size();
-
-        for (int i = 0; i < 10; i++) {
-            imageEntity = new ImageEntity(i + " " + i, mImageList.get(mImageIndex % mImageList.size()));
-            mListData.add(imageEntity);
-            mImageIndex++;
-        }
-        mAdapter.notifyDataChange(postion);
-        mSwipeRefreshLayout.setRefreshing(false);
-
-        String url = "http://app.lamian.tv/api/Lamian_v3/recommend/video";
-
-        HashMap<String, String> strParams = new HashMap<String, String>();
-        strParams.put("pageSize", "20");
-        strParams.put("page", "1");
-        strParams.put("all", "1");
-        NetUtils.requestGetString(url, strParams, new IHttpResponseCallBack<String>() {
-            @Override
-            public void onSuccess(String responseResult) {
-                Log.i("linzehao", "responseResult  " + responseResult);
-            }
-
-            @Override
-            public void onFail(int errorCode, String message, String result) {
-                Log.i("linzehao", "onFail  ");
-            }
-
-            @Override
-            public void onFinished() {
-                Log.i("linzehao", "onFinished  ");
-            }
-        });
-
+        mPresenter.getCommentList(1 + "", page);
     }
-
-    int mImageIndex = 0;
 
     @Override
     public void setListener() {
         mAdapter.setOnItemClickLitener(new AbstractFooterAdapter.OnItemClickLitener() {
             @Override
             public void onClick(int point) {
-
-
             }
         });
 
         mRecyclerView.setScrollListten(new CommonRecyclerView.ScrollListten() {
             @Override
             public void onScrolledToBottom() {
-                Log.i("linzehao", "onScrolledToBottom");
-                requestData(2);
+                mCurPage++;
+                requestData(mCurPage);
 
             }
         });
@@ -188,7 +77,8 @@ public class FirstActivity extends BaseActivity {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                requestData(1);
+                mCurPage = 1;
+                requestData(mCurPage);
             }
         });
     }
@@ -213,6 +103,15 @@ public class FirstActivity extends BaseActivity {
         return mToolBar;
     }
 
+    @Override
+    public void setCommentList(EventListEntity result) {
+        if (mCurPage == 1)
+            mListData.clear();
+        int postion = mListData.size();
+        mListData.addAll(result.getList());
+        mAdapter.notifyDataChange(postion);
+        mSwipeRefreshLayout.setRefreshing(false);
+    }
 
     public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
         private int space;

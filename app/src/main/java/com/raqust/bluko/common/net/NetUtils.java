@@ -3,9 +3,17 @@ package com.raqust.bluko.common.net;
 import android.app.Application;
 
 import com.raqust.bluko.common.net.CallBack.IHttpResponseCallBack;
+import com.raqust.bluko.common.net.CallBack.IJsonBaseCallBack;
+import com.raqust.bluko.common.net.CallBack.JsonListResponseCallBack;
+import com.raqust.bluko.common.net.CallBack.JsonResponseCallBack;
+import com.raqust.bluko.common.net.CallBack.JsonStringResponseCallBack;
+import com.raqust.bluko.common.net.Constant.Constant;
 import com.raqust.bluko.common.net.Impl.RemoteNetUtil;
 import com.raqust.bluko.common.net.Params.HttpRequestParams;
 import com.raqust.bluko.common.net.Params.HttpRequestType;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,52 +25,46 @@ import java.util.HashMap;
  */
 
 public class NetUtils {
-    //链接超时时间
-    public static final int CONNEC_TTIME_OUT = 1500;
-
-    //响应超时时间
-    public static final int RESPOND_TTIME_OUT = 1500;
 
     public static void init(Application application) {
         RemoteNetUtil.init(application);
     }
 
-
     /**
      * get string
      *
      * @param url
-     * @param responseCallBack
+     * @param jsonCallback
      */
-    public static void requestGetString(String url, IHttpResponseCallBack<String> responseCallBack) {
-        requestGetString(url, null, responseCallBack);
+    public static void requestGetString(String url, IJsonBaseCallBack jsonCallback) {
+        requestGetString(url, null, jsonCallback);
     }
 
-    public static void requestGetString(String url, HashMap<String, String> strParams, IHttpResponseCallBack<String> responseCallBack) {
-        requestGetString(url, strParams, null, responseCallBack);
+    public static void requestGetString(String url, HashMap<String, String> strParams, IJsonBaseCallBack jsonCallback) {
+        requestGetString(url, strParams, null, jsonCallback);
     }
 
-    public static void requestGetString(String url, HashMap<String, String> strParams, HashMap<String, String> headParams, IHttpResponseCallBack<String> responseCallBack) {
+    public static void requestGetString(String url, HashMap<String, String> strParams, HashMap<String, String> headParams, IJsonBaseCallBack jsonCallback) {
         HttpRequestParams requestParams = getRequestParams(url, HttpRequestType.GET_STRING);
         requestParams.strParams = strParams;
         requestParams.headParams = headParams;
-        RemoteNetUtil.requestGetString(requestParams, responseCallBack);
+        RemoteNetUtil.requestGetString(requestParams, dealData(jsonCallback));
     }
 
     /**
      * post string
      *
      * @param url
-     * @param responseCallBack
+     * @param jsonCallback
      */
-    public static void requestPostString(String url, IHttpResponseCallBack<String> responseCallBack) {
-        requestPostString(url, null, responseCallBack);
+    public static void requestPostString(String url, IJsonBaseCallBack jsonCallback) {
+        requestPostString(url, null, jsonCallback);
     }
 
-    public static void requestPostString(String url, HashMap<String, String> headParams, IHttpResponseCallBack<String> responseCallBack) {
+    public static void requestPostString(String url, HashMap<String, String> headParams, IJsonBaseCallBack jsonCallback) {
         HttpRequestParams requestParams = getRequestParams(url, HttpRequestType.POST_STRING);
         requestParams.headParams = headParams;
-        RemoteNetUtil.requestPostString(requestParams, responseCallBack);
+        RemoteNetUtil.requestPostString(requestParams, dealData(jsonCallback));
     }
 
     /**
@@ -70,23 +72,23 @@ public class NetUtils {
      *
      * @param url
      * @param fileList
-     * @param responseCallBack
+     * @param jsonCallback
      */
-    public static void requestPostFile(String url, ArrayList<HttpRequestParams.FileInput> fileList, IHttpResponseCallBack<String> responseCallBack) {
-        requestPostFile(url, fileList, null, responseCallBack);
+    public static void requestPostFile(String url, ArrayList<HttpRequestParams.FileInput> fileList, IJsonBaseCallBack jsonCallback) {
+        requestPostFile(url, fileList, null, jsonCallback);
     }
 
-    public static void requestPostFile(String url, ArrayList<HttpRequestParams.FileInput> fileList, HashMap<String, String> strParams, IHttpResponseCallBack<String> responseCallBack) {
-        requestPostFile(url, fileList, strParams, null, responseCallBack);
+    public static void requestPostFile(String url, ArrayList<HttpRequestParams.FileInput> fileList, HashMap<String, String> strParams, IJsonBaseCallBack jsonCallback) {
+        requestPostFile(url, fileList, strParams, null, jsonCallback);
     }
 
     public static void requestPostFile(String url, ArrayList<HttpRequestParams.FileInput> fileList, HashMap<String, String> strParams,
-                                       HashMap<String, String> headParams, IHttpResponseCallBack<String> responseCallBack) {
+                                       HashMap<String, String> headParams, IJsonBaseCallBack jsonCallback) {
         HttpRequestParams requestParams = getRequestParams(url, HttpRequestType.POST_FORM);
         requestParams.submitFileList = fileList;
         requestParams.strParams = strParams;
         requestParams.headParams = headParams;
-        RemoteNetUtil.requestPostFile(requestParams, responseCallBack);
+        RemoteNetUtil.requestPostFile(requestParams, dealData(jsonCallback));
     }
 
 
@@ -98,10 +100,75 @@ public class NetUtils {
         RemoteNetUtil.cancelAllRequest();
     }
 
+    /*以下是逻辑****************************************************************************************************************************************
+     **************************************************************************************************************************************************
+     **************************************************************************************************************************************************/
+
+    /**
+     * 获取 https请求参数，设置通用参数，比如请求时间
+     *
+     * @param url
+     * @param type
+     * @return
+     */
     private static HttpRequestParams getRequestParams(String url, HttpRequestType type) {
-        return new HttpRequestParams.Builder().setRequestType(type).setConnectTimeout(CONNEC_TTIME_OUT).setGetTimeout(RESPOND_TTIME_OUT).setHostUrl(url).build();
+        return new HttpRequestParams.Builder().setRequestType(type).setConnectTimeout(Constant.CONNEC_TTIME_OUT)
+                .setGetTimeout(Constant.RESPOND_TTIME_OUT).setHostUrl(url).build();
 
     }
 
+    /**
+     * 数据回调给model层，进行json处理
+     * 处理数据格式，如果有处理code 的返回值
+     *
+     * @param jsonCallback
+     * @return
+     */
+    private static IHttpResponseCallBack dealData(final IJsonBaseCallBack jsonCallback) {
+        IHttpResponseCallBack<String> responseCallBack = new IHttpResponseCallBack<String>() {
+            @Override
+            public void onSuccess(String responseResult) {
+                JSONObject resultJson = null;
+                try {
+                    resultJson = new JSONObject(responseResult);
+                    String statusCode = resultJson.getString(Constant.RESPOND_CODE);
+                    String msg = resultJson.getString(Constant.RESPOND_MSG);
+                    String data = resultJson.getString(Constant.RESPOND_DATA);
+                    if ((Constant.RESPOND_ERROR_SUCCESS + "").equals(statusCode)) {
+                        if (jsonCallback instanceof JsonListResponseCallBack) {
+                            ((JsonListResponseCallBack) jsonCallback).preSuccess(statusCode, msg, data);
+                        } else if (jsonCallback instanceof JsonResponseCallBack) {
+                            ((JsonResponseCallBack) jsonCallback).preSuccess(statusCode, msg, data);
+                        } else if (jsonCallback instanceof JsonStringResponseCallBack) {
+                            ((JsonStringResponseCallBack) jsonCallback).preSuccess(statusCode, msg, data);
+                        }
+                    } else {
+                        jsonCallback.onFail(statusCode + "", msg, data);
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    jsonCallback.onFail(Constant.RESPOND_ERROR_ANALYSIS + "", Constant.RESPOND_ERROR_ANALYSIS_MSG, "");
+
+                }
+                jsonCallback.onFinished();
+            }
+
+            @Override
+            public void onFail(int errorCode, String message, String result) {
+                jsonCallback.onFail(errorCode + "", message, result);
+                jsonCallback.onFinished();
+
+            }
+
+            @Override
+            public void onFinished() {
+                jsonCallback.onFinished();
+            }
+        };
+        return responseCallBack;
+
+    }
 
 }

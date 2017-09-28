@@ -14,6 +14,7 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.raqust.bluko.R;
 import com.raqust.bluko.common.AbstractFooterAdapter;
+import com.raqust.bluko.module.main.entity.EventEntity;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ import java.util.List;
  * Created by zehao on 2017/9/25.
  */
 
-public class HomeAdapter extends AbstractFooterAdapter<ImageEntity> {
+public class HomeAdapter extends AbstractFooterAdapter<EventEntity> {
     private LayoutInflater mLayoutInflater;
 
     public HomeAdapter(Context context, List list) {
@@ -37,10 +38,10 @@ public class HomeAdapter extends AbstractFooterAdapter<ImageEntity> {
 
     @Override
     public void onBindValidViewHolder(final RylViewHolder holder, int position) {
-        ImageEntity imageEntity = mDataList.get(position);
-        ((ViewHolder) holder).mText.setText("作品 " + imageEntity.getText());
+        EventEntity imageEntity = mDataList.get(position);
+        ((ViewHolder) holder).mText.setText("作品 ");
 
-        Glide.with(mContext).load(imageEntity.getUrl())
+        Glide.with(mContext).load(imageEntity.getImageIco())
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .crossFade(1000)
                 .placeholder(R.mipmap.no_data_image)

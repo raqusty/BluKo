@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.raqust.bluko.common.net.CallBack.IHttpResponseBaseCallBack;
 import com.raqust.bluko.common.net.CallBack.IHttpResponseCallBack;
+import com.raqust.bluko.common.net.Constant.Constant;
 import com.raqust.bluko.common.net.Params.HttpRequestParams;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.builder.GetBuilder;
@@ -29,7 +30,7 @@ import okhttp3.OkHttpClient;
 
 public class BaseRemoteOkImpl implements IBaseRemoteSdk {
     static final String TAG = "BaseRemoteOkImpl";
-    static final int NET_ERROR = -100;
+
 
     @Override
     public void init(Application application) {
@@ -156,23 +157,29 @@ public class BaseRemoteOkImpl implements IBaseRemoteSdk {
 
 
     private void setRequestCallback(OkHttpRequestBuilder builder, final IHttpResponseCallBack<String> responseCallBack, HttpRequestParams requestParams) {
-        RequestCall call = builder.build();
-        call.connTimeOut(requestParams.connectTimeout);
-        call.readTimeOut(requestParams.getTimeout);
+        try {
+            RequestCall call = builder.build();
+            call.connTimeOut(requestParams.connectTimeout);
+            call.readTimeOut(requestParams.getTimeout);
 
-        call.execute(new StringCallback() {
-            @Override
-            public void onError(Call call, Exception e, int id) {
-                responseCallBack.onFail(NET_ERROR, e.getMessage(), id + "");
-                responseCallBack.onFinished();
-            }
+            call.execute(new StringCallback() {
+                @Override
+                public void onError(Call call, Exception e, int id) {
+                    responseCallBack.onFail(Constant.RESPOND_ERROR_NET, e.getMessage(), id + "");
+                    responseCallBack.onFinished();
+                }
 
-            @Override
-            public void onResponse(String response, int id) {
-                Log.i(TAG, "Success  ");
-                responseCallBack.onSuccess(response);
-                responseCallBack.onFinished();
-            }
-        });
+                @Override
+                public void onResponse(String response, int id) {
+                    Log.i(TAG, "Success  ");
+                    responseCallBack.onSuccess(response);
+                    responseCallBack.onFinished();
+                }
+            });
+        } catch (Exception e) {
+            responseCallBack.onFail(Constant.RESPOND_ERROR_NET, e.getMessage(),"");
+        }
+
+
     }
 }

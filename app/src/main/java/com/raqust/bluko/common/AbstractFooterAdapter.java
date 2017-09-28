@@ -131,8 +131,8 @@ public abstract class AbstractFooterAdapter<T> extends RecyclerView.Adapter<Abst
     @Override
     public RylViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_TIP_FOOTER) {
-            ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            parent.addView(mFooterView, layoutParams);
+//            ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//            parent.addView(mFooterView, layoutParams);
             return new FooterHolder(mFooterView, viewType);
         } else {
             return onCreateValidViewHolder(parent);
