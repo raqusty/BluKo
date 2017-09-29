@@ -6,6 +6,8 @@ import com.raqust.bluko.module.main.model.HomeModel;
 import com.raqust.bluko.module.main.model.IHomeModel;
 import com.raqust.bluko.module.main.view.IHomeView;
 
+import javax.inject.Inject;
+
 /**
  * Created on 2017/9/28.
  * Introduce :
@@ -17,6 +19,7 @@ public class HomePresenter {
     private IHomeView mView;
     private IHomeModel mModel;
 
+    @Inject
     public HomePresenter(IHomeView view) {
         mView = view;
         mModel = new HomeModel();

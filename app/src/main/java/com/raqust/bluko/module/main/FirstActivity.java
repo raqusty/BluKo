@@ -7,12 +7,13 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.bumptech.glide.Glide;
 import com.raqust.bluko.R;
 import com.raqust.bluko.common.AbstractFooterAdapter;
 import com.raqust.bluko.common.activity.BaseActivity;
 import com.raqust.bluko.common.activity.ToolBarManager;
 import com.raqust.bluko.common.widget.CommonRecyclerView;
+import com.raqust.bluko.module.DaggerMainComponent;
+import com.raqust.bluko.module.MainModule;
 import com.raqust.bluko.module.main.entity.EventEntity;
 import com.raqust.bluko.module.main.entity.EventListEntity;
 import com.raqust.bluko.module.main.presenter.HomePresenter;
@@ -20,6 +21,8 @@ import com.raqust.bluko.module.main.view.IHomeView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 
@@ -39,12 +42,19 @@ public class FirstActivity extends BaseActivity implements IHomeView {
 
     private HomeAdapter mAdapter;
     private List<EventEntity> mListData = new ArrayList<>();
-    private HomePresenter mPresenter;
+
     private int mCurPage = 1;
+
+    @Inject
+    HomePresenter mPresenter;
 
     @Override
     public void initViews() {
-        mPresenter = new HomePresenter(this);
+        DaggerMainComponent.builder()
+                .mainModule(new MainModule(this))
+                .build()
+                .inject(this);
+
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         mAdapter = new HomeAdapter(mContext, mListData);
 
