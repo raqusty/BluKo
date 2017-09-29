@@ -9,9 +9,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.raqust.bluko.R;
 import com.raqust.bluko.common.AbstractFooterAdapter;
 import com.raqust.bluko.module.main.entity.EventEntity;
@@ -38,21 +35,24 @@ public class HomeAdapter extends AbstractFooterAdapter<EventEntity> {
 
     @Override
     public void onBindValidViewHolder(final RylViewHolder holder, int position) {
-        EventEntity imageEntity = mDataList.get(position);
+        final EventEntity imageEntity = mDataList.get(position);
         ((ViewHolder) holder).mText.setText("作品 ");
-
+//        ((ViewHolder) holder).mImage.setTag(imageEntity.getImageIco());
         Glide.with(mContext).load(imageEntity.getImageIco())
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .crossFade(1000)
+//                .crossFade(1000)
+                .dontAnimate()
+                .thumbnail(0.5f)
                 .placeholder(R.mipmap.no_data_image)
                 .error(R.mipmap.no_net_image)
-//                    .into(((MyViewHolder) holder).tv);
-                .into(new SimpleTarget<GlideDrawable>() {
-                    @Override
-                    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
-                        ((ViewHolder) holder).mImage.setImageDrawable(resource);
-                    }
-                });
+                .into(((ViewHolder) holder).mImage);
+//                .into(new SimpleTarget<GlideDrawable>() {
+//                    @Override
+//                    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
+//                        if(((ViewHolder) holder).mImage.getTag().equals(imageEntity.getImageIco()))
+//                          ((ViewHolder) holder).mImage.setImageDrawable(resource);
+//                    }
+//                });
     }
 
     @Override

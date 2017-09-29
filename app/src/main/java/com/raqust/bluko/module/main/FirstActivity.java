@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.bumptech.glide.Glide;
 import com.raqust.bluko.R;
 import com.raqust.bluko.common.AbstractFooterAdapter;
 import com.raqust.bluko.common.activity.BaseActivity;
@@ -81,6 +82,7 @@ public class FirstActivity extends BaseActivity implements IHomeView {
                 requestData(mCurPage);
             }
         });
+
     }
 
     @Override
