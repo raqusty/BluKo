@@ -21,5 +21,14 @@ public class HomeModel implements IHomeModel {
         strParams.put("page", page + "");
         strParams.put("pageSize", "30");
         NetUtils.requestGetString("http://app.lamian.tv/api/Lamian_v3/recommend/video", strParams, callback);
+
+
+//        HashMap<String, String> strParams = new HashMap<String, String>();
+//        strParams.put("cate", 0+"");
+//        strParams.put("page", page + "");
+//        strParams.put("sort", "addTime");
+////        http://app.lamian.tv/api/Lamian_v2/getEventList
+////        http://app.lamian.tv/api/Lamian_v3/recommend/video
+//        NetUtils.requestGetString("http://app.lamian.tv/api/Lamian_v2/getEventList ", strParams, callback);
     }
 }
