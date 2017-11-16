@@ -33,6 +33,7 @@ public class HomeAdapter extends AbstractFooterAdapter<EventEntity> {
         return new ViewHolder(mLayoutInflater.inflate(R.layout.layout_item, parent, false));
     }
 
+
     @Override
     public void onBindValidViewHolder(final RylViewHolder holder, int position) {
         final EventEntity imageEntity = mDataList.get(position);

@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Bluko.iml" filepath="$PROJECT_DIR$/Bluko.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Bluko.iml" filepath="$PROJECT_DIR$/.idea/Bluko.iml" />
+      <module fileurl="file://D:\workplace\Android\github_project\Bluko\Bluko.iml" filepath="D:\workplace\Android\github_project\Bluko\Bluko.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
