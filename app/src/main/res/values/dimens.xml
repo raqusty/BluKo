@@ -3,4 +3,7 @@
 
     <dimen name="size_progress_bar_footer">10dp</dimen>
 
+    <dimen name="grid_expected_size">120dp</dimen>
+
+
 </resources>

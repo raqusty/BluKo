@@ -41,5 +41,7 @@ dependencies {
     provided 'com.google.dagger:dagger-compiler:2.4'
     compile 'org.glassfish:javax.annotation:10.0-b28'
 
+    compile 'com.zhihu.android:matisse:0.4.3'
+
     testCompile 'junit:junit:4.12'
 }
