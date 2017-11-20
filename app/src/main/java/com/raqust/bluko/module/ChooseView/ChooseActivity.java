@@ -1,56 +1,58 @@
 package com.raqust.bluko.module.ChooseView;
 
 import android.content.pm.ActivityInfo;
-import android.graphics.Rect;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
+import com.example.matisse.Matisse;
+import com.example.matisse.MimeType;
+import com.example.matisse.engine.impl.GlideEngine;
+import com.example.matisse.filter.Filter;
+import com.example.matisse.internal.entity.CaptureStrategy;
 import com.raqust.bluko.R;
-import com.raqust.bluko.common.AbstractFooterAdapter;
 import com.raqust.bluko.common.activity.BaseActivity;
 import com.raqust.bluko.common.activity.ToolBarManager;
-import com.raqust.bluko.common.widget.CommonRecyclerView;
-import com.raqust.bluko.module.DaggerMainComponent;
-import com.raqust.bluko.module.MainModule;
-import com.raqust.bluko.module.main.HomeAdapter;
-import com.raqust.bluko.module.main.entity.EventEntity;
-import com.raqust.bluko.module.main.entity.EventListEntity;
-import com.raqust.bluko.module.main.presenter.HomePresenter;
-import com.raqust.bluko.module.main.view.IHomeView;
-import com.zhihu.matisse.Matisse;
-import com.zhihu.matisse.MimeType;
-import com.zhihu.matisse.engine.impl.GlideEngine;
-import com.zhihu.matisse.filter.Filter;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Inject;
-
-import butterknife.BindView;
 
 /**
  * Created by zehao on 2017/9/25.
  */
 
-public class ChooseActivity extends BaseActivity   {
+public class ChooseActivity extends BaseActivity {
 
 
     @Override
     public void initViews() {
+//        Matisse.from(ChooseActivity.this)
+//                .choose(MimeType.allOf())
+//                .countable(true)
+//                .maxSelectable(9)
+////                .addFilter(new GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
+//                .gridExpectedSize(getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
+//                .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
+//                .thumbnailScale(0.85f)
+//                .imageEngine(new GlideEngine())
+//                .forResult(1111);
+
         Matisse.from(ChooseActivity.this)
-                .choose(MimeType.allOf())
+                .choose(MimeType.ofAll(), false)
                 .countable(true)
+                .capture(true)
+                .captureStrategy(
+                        new CaptureStrategy(true, "com.raqust.bluko.fileprovider"))
                 .maxSelectable(9)
 //                .addFilter(new GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
-                .gridExpectedSize(getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
-                .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
+                .gridExpectedSize(
+                        getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
+                .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
                 .thumbnailScale(0.85f)
                 .imageEngine(new GlideEngine())
                 .forResult(1111);
+
+
+//        Matisse.from(ChooseActivity.this)
+//                .choose(MimeType.ofVideo())
+//                .showSingleMediaType(true)
+//                .maxSelectable(3)
+//                .forResult(2222);
     }
 
 

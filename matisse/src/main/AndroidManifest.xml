@@ -1,0 +1,12 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.matisse">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application>
+        <activity android:name="com.example.matisse.ui.MatisseActivity" />
+        <activity android:name="com.example.matisse.internal.ui.AlbumPreviewActivity" />
+        <activity android:name="com.example.matisse.internal.ui.SelectedPreviewActivity" />
+    </application>
+</manifest>
