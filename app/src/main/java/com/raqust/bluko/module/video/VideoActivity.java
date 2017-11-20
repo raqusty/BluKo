@@ -62,16 +62,21 @@ public class VideoActivity extends BaseActivity {
             case R.id.local_exoplayer:
                 break;
             case R.id.local_ijkplayer:
+                intent = new Intent(VideoActivity.this, ijkActivity.class);
+                intent.putExtra("url","content://media/external/video/media/2151746");
+                startActivity(intent);
                 break;
             case R.id.local_videoview:
                  intent = new Intent(VideoActivity.this, VideoViewActivity.class);
                 intent.putExtra("url","content://media/external/video/media/2151746");
                 startActivity(intent);
-
                 break;
             case R.id.net_exoplayer:
                 break;
             case R.id.net_ijkplayer:
+                intent = new Intent(VideoActivity.this, ijkActivity.class);
+                intent.putExtra("url","http://flashmedia.eastday.com/newdate/news/2016-11/shznews1125-19.mp4");
+                startActivity(intent);
                 break;
             case R.id.net_videoview:
                 intent = new Intent(VideoActivity.this, VideoViewActivity.class);
