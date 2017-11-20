@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/local_videoview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:gravity="center"
+            android:text="VideoView 本地"/>
+
+        <TextView
+            android:id="@+id/net_videoview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:gravity="center"
+            android:text="VideoView 网络"/>
+
+        <TextView
+            android:id="@+id/local_exoplayer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:gravity="center"
+            android:text="exoplayer 本地"/>
+
+        <TextView
+            android:id="@+id/net_exoplayer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:gravity="center"
+            android:text="exoplayer 网络"/>
+
+        <TextView
+            android:id="@+id/local_ijkplayer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:gravity="center"
+            android:text="ijkplayer 本地"/>
+
+        <TextView
+            android:id="@+id/net_ijkplayer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:gravity="center"
+            android:text="ijkplayer 网络"/>
+
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

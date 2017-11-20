@@ -6,7 +6,6 @@ import android.support.v7.widget.Toolbar;
 import com.example.matisse.Matisse;
 import com.example.matisse.MimeType;
 import com.example.matisse.engine.impl.GlideEngine;
-import com.example.matisse.filter.Filter;
 import com.example.matisse.internal.entity.CaptureStrategy;
 import com.raqust.bluko.R;
 import com.raqust.bluko.common.activity.BaseActivity;
@@ -73,7 +72,7 @@ public class ChooseActivity extends BaseActivity {
 
     @Override
     protected int getContentViewResId() {
-        return R.layout.activity_choose_view;
+        return R.layout.activity_choose;
     }
 
     @Override
