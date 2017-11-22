@@ -28,7 +28,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".module.video.VideoViewActivity"></activity>
-        <activity android:name=".module.video.ijkActivity"></activity>
+        <activity android:name=".module.video.ijkActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait">
+
+        </activity>
 
 
         <activity android:name=".module.ChooseView.ChooseActivity"></activity>

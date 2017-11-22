@@ -2,11 +2,14 @@ package com.raqust.bluko.module.video;
 
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.PowerManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -15,8 +18,7 @@ import com.dou361.ijkplayer.listener.OnShowThumbnailListener;
 import com.dou361.ijkplayer.widget.PlayStateParams;
 import com.dou361.ijkplayer.widget.PlayerView;
 import com.raqust.bluko.R;
-import com.raqust.bluko.common.activity.BaseActivity;
-import com.raqust.bluko.common.activity.ToolBarManager;
+import com.raqust.bluko.common.utils.MediaUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -42,6 +44,24 @@ public class ijkActivity extends AppCompatActivity {
         this.mContext = this;
         rootView = getLayoutInflater().from(this).inflate(R.layout.activity_ijk_view, null);
         setContentView(rootView);
+
+        rootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
+            @Override
+            public void onGlobalLayout() {
+
+                //比较Activity根布局与当前布局的大小
+                int heightDiff = rootView.getRootView().getHeight() - rootView.getHeight();
+                if (heightDiff > 100) {
+                    //大小超过100时，一般为显示虚拟键盘事件
+                    rootView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+                } else {
+                    //大小小于100时，为不显示虚拟键盘或虚拟键盘隐藏
+                    rootView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+
+                }
+            }
+        });
 
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         wakeLock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "liveTAG");
@@ -91,6 +111,69 @@ public class ijkActivity extends AppCompatActivity {
                 .setChargeTie(true,60)
                 .startPlay();
 
+    }
+
+
+    /**
+     * 播放本地视频
+     */
+
+    private String getLocalVideoPath(String name) {
+        String sdCard = Environment.getExternalStorageDirectory().getPath();
+        String uri = sdCard + File.separator + name;
+        return uri;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (player != null) {
+            player.onPause();
+        }
+        /**demo的内容，恢复系统其它媒体的状态*/
+        MediaUtils.muteAudioFocus(mContext, true);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (player != null) {
+            player.onResume();
+        }
+        /**demo的内容，暂停系统其它媒体的状态*/
+        MediaUtils.muteAudioFocus(mContext, false);
+        /**demo的内容，激活设备常亮状态*/
+        if (wakeLock != null) {
+            wakeLock.acquire();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (player != null) {
+            player.onDestroy();
+        }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (player != null) {
+            player.onConfigurationChanged(newConfig);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (player != null && player.onBackPressed()) {
+            return;
+        }
+        super.onBackPressed();
+        /**demo的内容，恢复设备亮度状态*/
+        if (wakeLock != null) {
+            wakeLock.release();
+        }
     }
 
 }
