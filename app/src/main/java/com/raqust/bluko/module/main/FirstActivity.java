@@ -62,6 +62,9 @@ public class FirstActivity extends BaseActivity implements IHomeView {
         mRecyclerView.addItemDecoration(new SpacesItemDecoration(16));
         mCurPage = 1;
         requestData(mCurPage);
+
+
+
     }
 
     private void requestData(int page) {

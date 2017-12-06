@@ -20,10 +20,11 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    implementation(name: 'xalle_android-release', ext: 'aar')
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -35,22 +36,21 @@ dependencies {
     compile 'com.zhy:okhttputils:2.6.2'
     //butterknife  以下写法结局 butterknife  dagger 冲突
     compile 'com.jakewharton:butterknife:8.5.1'
-    annotationProcessor  'com.jakewharton:butterknife-compiler:8.5.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     //dagger  以下写法结局 butterknife  dagger 冲突
     compile 'com.google.dagger:dagger:2.4'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.4'
     compile 'org.glassfish:javax.annotation:10.0-b28'
-
     //    根据需要支持去拓展，在jjdxm-ijkplayer中默认加入了armv7a的了
     compile 'com.dou361.ijkplayer-armv7a:jjdxm-ijkplayer-armv7a:1.0.0'
     compile 'com.dou361.ijkplayer-armv5:jjdxm-ijkplayer-armv5:1.0.0'
     compile 'com.dou361.ijkplayer-arm64:jjdxm-ijkplayer-arm64:1.0.0'
     compile 'com.dou361.ijkplayer-x86:jjdxm-ijkplayer-x86:1.0.0'
     compile 'com.dou361.ijkplayer-x86_64:jjdxm-ijkplayer-x86_64:1.0.0'
-
     //ijk
     compile project(':jjdxm-ijkplayer')
-
     testCompile 'junit:junit:4.12'
     compile project(path: ':matisse')
+    //    compile files('libs/commons-codec-1.10.jar')/
+    implementation files('libs/xalle.jar')
 }
