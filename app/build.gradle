@@ -4,12 +4,24 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.raqust.bluko"
+        applicationId "com.xingfei.xingqiu"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters 'armeabi-v7a'
+        }
+
+        manifestPlaceholders = [
+                JSHARE_PKGNAME : applicationId,
+                JPUSH_APPKEY : "dc2a9d357dec729ee6f08d44", //极光控制台创建应用得到的 AppKey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+                TENCENT_APPID: "1106475557",//腾讯开放平台注册应用得到的 appId
+        ]
+
     }
     buildTypes {
         release {
@@ -53,4 +65,10 @@ dependencies {
     compile project(path: ':matisse')
     //    compile files('libs/commons-codec-1.10.jar')/
     implementation files('libs/xalle.jar')
+
+    implementation 'cn.jiguang.sdk:jshare:1.3.0'  // 此处以 JShare 1.3.0 版本为例，具体版本请参考压缩包 libs 的 jar 包版本。
+    implementation 'cn.jiguang.sdk:jshare-qqmodel:1.3.0'  // 此处以 jshare-qqmodel 1.3.0 版本为例，具体版本请参考压缩包 libs 的 jar 包版本。
+    implementation 'cn.jiguang.sdk:jshare-wechatmodel:1.3.0'  // 此处以 jshare-wechatmodel 1.3.0 版本为例，具体版本请参考压缩包 libs 的 jar 包版本。
+//    implementation 'cn.jiguang.sdk:jshare-sinamodel:1.3.0'  // 此处以 jshare-sinamodel 1.3.0 版本为例，具体版本请参考压缩包 libs 的 jar 包版本。
+    implementation 'cn.jiguang.sdk:jcore:1.1.5'  // 此处以 JCore 1.1.5 版本为例，具体版本请参考压缩包 libs 的 jar 包版本。
 }
