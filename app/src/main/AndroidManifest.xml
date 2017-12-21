@@ -35,6 +35,10 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
     <!-- jpush                                    -->
 
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -44,7 +48,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".module.LoginActivity">
+        <activity android:name=".module.Gallery.GalleryFinal">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -60,17 +64,27 @@
 
         </activity>
 
+        <activity
+            android:name="cn.finalteam.rxgalleryfinal.ui.activity.MediaActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            />
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            />
+
 
         <activity android:name=".module.ChooseView.ChooseActivity"></activity>
 
         <!--<provider-->
-            <!--android:name="android.support.v4.content.FileProvider"-->
-            <!--android:authorities="com.raqust.bluko.fileprovider"-->
-            <!--android:exported="false"-->
-            <!--android:grantUriPermissions="true">-->
-            <!--<meta-data-->
-                <!--android:name="android.support.FILE_PROVIDER_PATHS"-->
-                <!--android:resource="@xml/file_paths_public"></meta-data>-->
+        <!--android:name="android.support.v4.content.FileProvider"-->
+        <!--android:authorities="com.raqust.bluko.fileprovider"-->
+        <!--android:exported="false"-->
+        <!--android:grantUriPermissions="true">-->
+        <!--<meta-data-->
+        <!--android:name="android.support.FILE_PROVIDER_PATHS"-->
+        <!--android:resource="@xml/file_paths_public"></meta-data>-->
         <!--</provider>-->
 
         <!-- Required SDK 核心功能-->
@@ -112,13 +126,13 @@
         <!-- 发到 Google Play 的 APK 可以设置为 google-play; -->
         <!-- 发到其他市场的 APK 可以设置为 xxx-market。 -->
         <!-- 目前这个渠道统计功能的报表还未开放。-->
-        <meta-data
-            android:name="JPUSH_CHANNEL"
-            android:value="developer-default" />
+        <!--<meta-data-->
+        <!--android:name="JPUSH_CHANNEL"-->
+        <!--android:value="developer-default" />-->
         <!-- Required. AppKey copied from Portal -->
         <!--<meta-data-->
-            <!--android:name="JPUSH_APPKEY"-->
-            <!--android:value="EkezsGDdtJzp99pC" />-->
+        <!--android:name="JPUSH_APPKEY"-->
+        <!--android:value="EkezsGDdtJzp99pC" />-->
     </application>
 
 </manifest>

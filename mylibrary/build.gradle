@@ -1,17 +1,29 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
 
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters 'armeabi-v7a'
+        }
+
+        manifestPlaceholders = [
+                JSHARE_PKGNAME : "com.xingfei.xingqiu",
+                JPUSH_APPKEY : "dc2a9d357dec729ee6f08d44", //极光控制台创建应用得到的 AppKey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+                TENCENT_APPID: "1106475557",//腾讯开放平台注册应用得到的 appId
+        ]
 
     }
 
@@ -22,15 +34,24 @@ android {
         }
     }
 
+
+
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:25.3.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-
-
+    //    api 'cn.jiguang.sdk:jshare:1.3.0'  // 此处以 JShare 1.3.0 版本为例，具体版本请参考压缩包 libs 的 jar 包版本。
+    //    api 'cn.jiguang.sdk:jshare-qqmodel:1.3.0'  // 此处以 jshare-qqmodel 1.3.0 版本为例，具体版本请参考压缩包 libs 的 jar 包版本。
+    //    api 'cn.jiguang.sdk:jshare-wechatmodel:1.3.0'  // 此处以 jshare-wechatmodel 1.3.0 版本为例，具体版本请参考压缩包 libs 的 jar 包版本。
+    ////    implementation 'cn.jiguang.sdk:jshare-sinamodel:1.3.0'  // 此处以 jshare-sinamodel 1.3.0 版本为例，具体版本请参考压缩包 libs 的 jar 包版本。
+    //    api 'cn.jiguang.sdk:jcore:1.1.5'  // 此处以 JCore 1.1.5 版本为例，具体版本请参考压缩包 libs 的 jar 包版本。
+    api files('libs/jcore-android-1.1.8.jar')
+    api files('libs/jshare-android-1.3.0.jar')
+    api files('libs/jshare-qq-android-1.3.0.jar')
+    api files('libs/jshare-sina-android-1.3.0.jar')
+    api files('libs/jshare-wechat-android-1.3.0.jar')
 }
