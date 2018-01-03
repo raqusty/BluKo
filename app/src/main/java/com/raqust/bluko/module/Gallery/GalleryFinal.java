@@ -1,7 +1,11 @@
 package com.raqust.bluko.module.Gallery;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +35,9 @@ public class GalleryFinal extends BaseActivity {
     @BindView(R.id.result)
     TextView textView;
     private List<MediaBean> list = null;
+
+    @BindView(R.id.imageview)
+    ImageView imageview;
 
     @Override
     public void initViews() {
@@ -97,6 +104,9 @@ public class GalleryFinal extends BaseActivity {
                                 for (MediaBean bean : list) {
                                     Log.i("linzehao", bean.getOriginalPath());
                                     str = str + bean.getOriginalPath() + "/r/n";
+//                                    Uri uri = Uri.parse(bean.getOriginalPath());
+                                    Bitmap bm = BitmapFactory.decodeFile(bean.getOriginalPath());
+                                    imageview.setImageBitmap(bm);
                                 }
                                 textView.setText(str);
                                 Toast.makeText(getBaseContext(), "已选择" + imageMultipleResultEvent.getResult().size() + "张图片", Toast.LENGTH_SHORT).show();
