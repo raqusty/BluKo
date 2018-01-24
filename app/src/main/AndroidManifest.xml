@@ -36,8 +36,8 @@
     <!-- jpush                                    -->
 
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
 
     <application
         android:name=".MyApplication"
@@ -48,7 +48,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".module.Gallery.GalleryFinal">
+        <activity android:name=".module.oss.OssActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -133,6 +133,9 @@
         <!--<meta-data-->
         <!--android:name="JPUSH_APPKEY"-->
         <!--android:value="EkezsGDdtJzp99pC" />-->
+
+
+
     </application>
 
 </manifest>

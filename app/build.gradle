@@ -29,6 +29,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions "tier"
+    productFlavors {
+        pro {
+            dimension "tier"
+            buildConfigField("String", "API_HOST", "\"http://app.dev.gc.xf.io/\"")
+        }
+        free {
+            dimension "tier"
+            buildConfigField("String", "API_HOST", "\"http://app.test.gc.xf.io/\"")
+        }
+    }
 }
 
 dependencies {
@@ -38,7 +50,7 @@ dependencies {
     })
     compile 'cn.finalteam.rxgalleryfinal:library:1.0.9'
 
-
+    compile 'com.aliyun.dpa:oss-android-sdk:2.4.5'
 
     implementation(name: 'xalle_android-release', ext: 'aar')
     compile 'com.android.support:appcompat-v7:25.3.1'
