@@ -48,10 +48,9 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    compile group: 'commons-codec', name: 'commons-codec', version: '1.10'
     compile 'cn.finalteam.rxgalleryfinal:library:1.0.9'
-
     compile 'com.aliyun.dpa:oss-android-sdk:2.4.5'
-
     implementation(name: 'xalle_android-release', ext: 'aar')
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:recyclerview-v7:25.3.1'
@@ -81,10 +80,13 @@ dependencies {
     compile project(path: ':matisse')
     //    compile files('libs/commons-codec-1.10.jar')/
     implementation files('libs/xalle.jar')
-
-    implementation 'cn.jiguang.sdk:jshare:1.3.0'  // 此处以 JShare 1.3.0 版本为例，具体版本请参考压缩包 libs 的 jar 包版本。
-    implementation 'cn.jiguang.sdk:jshare-qqmodel:1.3.0'  // 此处以 jshare-qqmodel 1.3.0 版本为例，具体版本请参考压缩包 libs 的 jar 包版本。
-    implementation 'cn.jiguang.sdk:jshare-wechatmodel:1.3.0'  // 此处以 jshare-wechatmodel 1.3.0 版本为例，具体版本请参考压缩包 libs 的 jar 包版本。
-//    implementation 'cn.jiguang.sdk:jshare-sinamodel:1.3.0'  // 此处以 jshare-sinamodel 1.3.0 版本为例，具体版本请参考压缩包 libs 的 jar 包版本。
-    implementation 'cn.jiguang.sdk:jcore:1.1.5'  // 此处以 JCore 1.1.5 版本为例，具体版本请参考压缩包 libs 的 jar 包版本。
+    implementation 'cn.jiguang.sdk:jshare:1.3.0'
+    // 此处以 JShare 1.3.0 版本为例，具体版本请参考压缩包 libs 的 jar 包版本。
+    implementation 'cn.jiguang.sdk:jshare-qqmodel:1.3.0'
+    // 此处以 jshare-qqmodel 1.3.0 版本为例，具体版本请参考压缩包 libs 的 jar 包版本。
+    implementation 'cn.jiguang.sdk:jshare-wechatmodel:1.3.0'
+    // 此处以 jshare-wechatmodel 1.3.0 版本为例，具体版本请参考压缩包 libs 的 jar 包版本。
+    //    implementation 'cn.jiguang.sdk:jshare-sinamodel:1.3.0'  // 此处以 jshare-sinamodel 1.3.0 版本为例，具体版本请参考压缩包 libs 的 jar 包版本。
+    implementation 'cn.jiguang.sdk:jcore:1.1.5'
+    // 此处以 JCore 1.1.5 版本为例，具体版本请参考压缩包 libs 的 jar 包版本。
 }

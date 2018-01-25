@@ -48,7 +48,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".module.oss.OssActivity">
+        <activity android:name=".module.RsaActivity.RsaActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
