@@ -36,7 +36,7 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
     <!-- jpush                                    -->
 
-
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 
@@ -64,6 +64,8 @@
             android:screenOrientation="portrait">
 
         </activity>
+        <activity android:name="com.raqust.bluko.module.main.FirstActivity"></activity>
+        <activity android:name="com.raqust.bluko.module.LoginActivity"></activity>
 
         <activity
             android:name="cn.finalteam.rxgalleryfinal.ui.activity.MediaActivity"
@@ -135,8 +137,25 @@
         <!--android:name="JPUSH_APPKEY"-->
         <!--android:value="EkezsGDdtJzp99pC" />-->
 
+        <service android:name="cn.jpush.android.service.PushService"
+            android:process=":multiprocess"
+            tools:node="replace" >
 
+        </service>
 
+        <receiver
+            android:name="com.raqust.bluko.common.message.receiver.JpushImplReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION" />
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_CLICK_ACTION" />
+                <action android:name="cn.jpush.android.intent.CONNECTION" />
+                <category android:name="com.xingfeiinc.app" />
+            </intent-filter>
+        </receiver>
 
     </application>
 

@@ -3,6 +3,7 @@ package com.raqust.bluko;
 import android.app.Application;
 import android.content.Context;
 
+import com.raqust.bluko.common.message.PushManager;
 import com.raqust.bluko.common.net.NetUtils;
 
 public class MyApplication extends Application {
@@ -25,6 +26,7 @@ public class MyApplication extends Application {
         super.onCreate();
         NetUtils.init(instance);
 
+        PushManager.INSTANCE.init(this);
     }
 
     @Override

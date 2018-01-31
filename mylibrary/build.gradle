@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -54,4 +55,8 @@ dependencies {
     api files('libs/jshare-qq-android-1.3.0.jar')
     api files('libs/jshare-sina-android-1.3.0.jar')
     api files('libs/jshare-wechat-android-1.3.0.jar')
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }

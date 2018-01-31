@@ -5,6 +5,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
 import com.raqust.bluko.R;
@@ -62,8 +63,8 @@ public class FirstActivity extends BaseActivity implements IHomeView {
         mRecyclerView.addItemDecoration(new SpacesItemDecoration(16));
         mCurPage = 1;
         requestData(mCurPage);
-
-
+        Log.i("linzehao",getIntent().getStringExtra("articleId"))
+        ;
 
     }
 
