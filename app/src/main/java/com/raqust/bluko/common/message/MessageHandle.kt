@@ -12,11 +12,6 @@ import android.widget.RemoteViews
 import com.google.gson.Gson
 import com.raqust.bluko.R
 import com.raqust.bluko.common.message.entity.MessageEntity
-import com.raqust.bluko.module.ChooseView.ChooseActivity
-import com.raqust.bluko.module.LoginActivity
-import com.raqust.bluko.module.XalleActivity
-import com.raqust.bluko.module.main.FirstActivity
-import com.raqust.bluko.module.video.ijkActivity
 import org.json.JSONObject
 
 /**
@@ -35,8 +30,12 @@ object MessageHandle {
      * extrasJson 收到的json数据
      */
     fun handleMessage(context: Context, title: String, message: String, msgId: String, extrasJson: String) {
+        if (TextUtils.isEmpty(extrasJson)) {
+            Log.e(tag, "extrasJson is null")
+            return
+        }
         val msgEntity = getMsgEntity(extrasJson)
-        var msgIntent = handleIntent(context, msgEntity.msgCode)
+        var msgIntent = handleIntent(msgEntity.msgCode)
         if (msgIntent != null) {
             msgIntent = getMsgParams(msgIntent, msgEntity.params)
             handleNotification(context, title, message, msgId, msgIntent)
@@ -83,14 +82,14 @@ object MessageHandle {
         //如果是大于16的，就用自定义的类型
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             val remoteViews = RemoteViews(context.packageName, R.layout.layout_notification)
-            remoteViews.setTextViewText(R.id.layout_app, "helloGame")
+            remoteViews.setTextViewText(R.id.layout_app, context.packageName)
             remoteViews.setTextViewText(R.id.layout_text, title)
             remoteViews.setImageViewResource(R.id.layout_image, R.mipmap.ic_launcher_round)
             remoteViews.setTextViewText(R.id.layout_text1, message)
             builder.setCustomBigContentView(remoteViews)
         }
         builder.setDefaults(NotificationCompat.DEFAULT_ALL)
-        builder.setFullScreenIntent(pendingIntent,true);
+//        builder.setFullScreenIntent(pendingIntent, true);
         builder.setContentIntent(pendingIntent)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(title)
@@ -102,47 +101,49 @@ object MessageHandle {
     /**
      * 跳转的intent
      */
-    private fun handleIntent(context: Context, msgCode: String): Intent? {
+    private fun handleIntent(msgCode: String): Intent? {
         var intent: Intent? = null
         when (msgCode) {
             MsgConstants.MSG_WEBVIEW -> {
-                intent = Intent(context, ChooseActivity::class.java)
+                intent = Intent(MsgConstants.INTENT_WEBVIEW)
             }
             MsgConstants.MSG_NOTIFY -> {
-                intent = Intent(context, LoginActivity::class.java)
+                intent = Intent(MsgConstants.INTENT_MESSAGE_DETAIL)
             }
             MsgConstants.MSG_AT_FIRST_COMMENT -> {
-                intent = Intent(context, FirstActivity::class.java)
+                intent = Intent(MsgConstants.INTENT_HOME_DETAIL)
             }
             MsgConstants.MSG_AT_SECOND_COMMENT -> {
-                intent = Intent(context, XalleActivity::class.java)
+                intent = Intent(MsgConstants.INTENT_COMMENT_DETAIL)
             }
             MsgConstants.MSG_AT_CONTENT -> {
-                intent = Intent(context, ijkActivity::class.java)
+                intent = Intent(MsgConstants.INTENT_HOME_DETAIL)
             }
             MsgConstants.MSG_PRAISE_FIRST_COMMENT -> {
-                intent = Intent(context, ChooseActivity::class.java)
+                intent = Intent(MsgConstants.INTENT_HOME_DETAIL)
             }
             MsgConstants.MSG_PRAISE_SECOND_COMMENT -> {
-                intent = Intent(context, ChooseActivity::class.java)
+                intent = Intent(MsgConstants.INTENT_COMMENT_DETAIL)
             }
             MsgConstants.MSG_PRAISE_CONTENT -> {
-                intent = Intent(context, ChooseActivity::class.java)
+                intent = Intent(MsgConstants.INTENT_HOME_DETAIL)
             }
             MsgConstants.MSG_FIRST_COMMENT -> {
-                intent = Intent(context, ChooseActivity::class.java)
+                intent = Intent(MsgConstants.INTENT_HOME_DETAIL)
             }
             MsgConstants.MSG_FORWARD_CONTENT -> {
-                intent = Intent(context, ChooseActivity::class.java)
+                intent = Intent(MsgConstants.INTENT_HOME_DETAIL)
             }
             MsgConstants.MSG_SECOND_COMMENT -> {
-                intent = Intent(context, ChooseActivity::class.java)
+                intent = Intent(MsgConstants.INTENT_COMMENT_DETAIL)
             }
             MsgConstants.MSG_WATCH -> {
-                intent = Intent(context, ChooseActivity::class.java)
+                //Todo  暂时没有
+//                intent = Intent(MsgConstants.INTENT_HOME_DETAIL)
             }
             MsgConstants.MSG_SECRET_LETTER -> {
-                intent = Intent(context, ChooseActivity::class.java)
+                //Todo  暂时没有
+//                intent = Intent(MsgConstants.INTENT_HOME_DETAIL)
             }
         }
         return intent

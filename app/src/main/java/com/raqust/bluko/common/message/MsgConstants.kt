@@ -25,4 +25,10 @@ object MsgConstants {
     val PATH_COMMENT_DETAIL = "/home/comment_detail_acitivity"//评论详情
     val PATH_HOME_DETAIL = "/home/detail_acitivity"//首页详情
     val PATH_MESSAGE_DETAIL = "/message/message_detail"//消息列表
+
+
+    val INTENT_WEBVIEW = "webview"//webview
+    val INTENT_COMMENT_DETAIL = "activity.CommentDetailActivity"//评论详情
+    val INTENT_HOME_DETAIL = "activity.HomeDetailActivity"//首页详情
+    val INTENT_MESSAGE_DETAIL = "activity."//消息列表
 }
