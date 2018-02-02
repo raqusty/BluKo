@@ -15,6 +15,8 @@ import android.widget.TextView;
 import com.raqust.bluko.R;
 import com.raqust.bluko.common.widget.MultiStateView;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity implements IToolBar,
@@ -98,6 +100,17 @@ public abstract class BaseActivity extends AppCompatActivity implements IToolBar
 //        MyApplication.getRefWatcher().watch(this);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

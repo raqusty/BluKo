@@ -5,7 +5,7 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.xingfeiinc.app"
+        applicationId APPLICATION_ID
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode
@@ -17,11 +17,11 @@ android {
         }
 
         manifestPlaceholders = [
-                JSHARE_PKGNAME : applicationId,
-                JPUSH_APPKEY : "764094b9544e59250780e965", //极光控制台创建应用得到的 AppKey.
-                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
-                TENCENT_APPID: "1106475557",//腾讯开放平台注册应用得到的 appId
-                JPUSH_PKGNAME : applicationId,
+                JPUSH_PKGNAME : APPLICATION_ID,
+                JSHARE_PKGNAME: APPLICATION_ID,
+                JPUSH_APPKEY  : JPUSH_APPKEY, //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL : JPUSH_CHANNEL, //暂时填写默认值即可.
+                TENCENT_APPID : TENCENT_APPID//腾讯开放平台注册应用得到的 appId
         ]
 
     }
@@ -95,6 +95,8 @@ dependencies {
     compile 'cn.jiguang.sdk:jpush:3.1.1'  // 此处以JPush 3.1.1 版本为例。
     compile 'cn.jiguang.sdk:jcore:1.1.9'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"  // 此处以JCore 1.1.9 版本为例。
+
+    compile 'org.greenrobot:eventbus:3.1.1'
 }
 repositories {
     mavenCentral()

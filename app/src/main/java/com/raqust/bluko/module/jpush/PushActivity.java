@@ -14,7 +14,13 @@ import android.widget.TextView;
 import com.raqust.bluko.R;
 import com.raqust.bluko.common.activity.BaseActivity;
 import com.raqust.bluko.common.activity.ToolBarManager;
+import com.raqust.bluko.common.event.DataSynEvent;
+import com.raqust.bluko.common.event.MessageEvent;
 import com.raqust.bluko.module.ChooseView.ChooseActivity;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -139,6 +145,10 @@ public class PushActivity extends BaseActivity {
             case R.id.text4:
                 break;
             case R.id.text5:
+                DataSynEvent a = new DataSynEvent();
+                a.setCount(234234);
+
+                EventBus.getDefault().post(a);
                 break;
             case R.id.text6:
                 break;
@@ -147,5 +157,16 @@ public class PushActivity extends BaseActivity {
         }
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(DataSynEvent event) {
+//        QQShare.setText(event.getCount()+"");
+        QQShare.setText(""+event.getCount());
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageEvent event) {
+//        QQShare.setText(event.getCount()+"");
+        WeiBoShare.setText("asdfadfadfad");
+    }
 
 }

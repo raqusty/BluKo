@@ -11,8 +11,13 @@ import android.util.Log
 import android.widget.RemoteViews
 import com.google.gson.Gson
 import com.raqust.bluko.R
+import com.raqust.bluko.common.event.DataSynEvent
 import com.raqust.bluko.common.message.entity.MessageEntity
 import org.json.JSONObject
+import com.raqust.bluko.common.event.MessageEvent
+import com.zhy.http.okhttp.OkHttpUtils.post
+import org.greenrobot.eventbus.EventBus
+
 
 /**
  * Created by linzehao
@@ -34,13 +39,28 @@ object MessageHandle {
             Log.e(tag, "extrasJson is null")
             return
         }
+
         val msgEntity = getMsgEntity(extrasJson)
-        var msgIntent = handleIntent(msgEntity.msgCode)
-        if (msgIntent != null) {
-            msgIntent = getMsgParams(msgIntent, msgEntity.params)
-            handleNotification(context, title, message, msgId, msgIntent)
-        } else {
-            Log.e(tag, "intent is null")
+        when(msgEntity.notify){
+            0 ->{//0 ：隐藏通知栏
+
+            }
+            1 ->{//1 ：显示通知栏
+                var msgIntent = handleIntent(msgEntity.msgCode)
+                if (msgIntent == null) {
+                    Log.e(tag, "intent is null")
+                    return
+                }
+                msgIntent = getMsgParams(msgIntent, msgEntity.params)
+                handleNotification(context, title, message, msgId, msgIntent)
+                var data = DataSynEvent().count
+                EventBus.getDefault().post(data)
+                EventBus.getDefault().post(MessageEvent())
+
+            }
+            2 ->{//2：可显示可不显示
+
+            }
         }
     }
 
