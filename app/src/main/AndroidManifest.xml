@@ -50,11 +50,15 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".module.jpush.PushActivity">
+        </activity>
+
+        <activity android:name=".module.RsaActivity.RsaActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity android:name=".module.XalleActivity"></activity>
         <activity android:name=".module.video.VideoViewActivity"></activity>

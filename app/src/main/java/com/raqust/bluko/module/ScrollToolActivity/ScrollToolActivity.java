@@ -10,11 +10,13 @@ import android.widget.TextView;
 import com.raqust.bluko.R;
 import com.raqust.bluko.common.activity.BaseActivity;
 import com.raqust.bluko.common.activity.ToolBarManager;
+import com.raqust.bluko.common.widget.CommonRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by linzehao
@@ -27,7 +29,7 @@ public class ScrollToolActivity extends BaseActivity {
     List<String> list = new ArrayList<String>();
 
     @BindView(R.id.recyclerview)
-    RecyclerView mRecyclerView;
+    CommonRecyclerView mRecyclerView;
 
     @BindView(R.id.myName1)
     TextView mTextView;
@@ -41,7 +43,7 @@ public class ScrollToolActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-        for (int i = 0; i < 40; i++) {
+        for (int i = 0; i < 10; i++) {
             list.add("" + i);
         }
         adapter = new itemAdapter(list, this);
@@ -82,6 +84,13 @@ public class ScrollToolActivity extends BaseActivity {
                 }
             }
         });
+
+        mRecyclerView.setScrollListten(new CommonRecyclerView.ScrollListten() {
+            @Override
+            public void onScrolledToBottom() {
+
+            }
+        });
     }
 
     @Override
@@ -104,4 +113,9 @@ public class ScrollToolActivity extends BaseActivity {
         return R.layout.activity_scroll_tool;
     }
 
+    @OnClick(R.id.myName1)
+    public void onClick(View v){
+//        manager.smoothScrollToPosition(mRecyclerView,mRecyclerView.getScrollState(),0);
+        mRecyclerView.smoothScrollToPosition(10);
+    }
 }

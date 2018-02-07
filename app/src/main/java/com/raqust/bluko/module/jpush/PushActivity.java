@@ -55,6 +55,7 @@ public class PushActivity extends BaseActivity {
 
     @Override
     public void initViews() {
+        mEventKey = true;
     }
 
     @Override
@@ -166,7 +167,7 @@ public class PushActivity extends BaseActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(MessageEvent event) {
 //        QQShare.setText(event.getCount()+"");
-        WeiBoShare.setText("asdfadfadfad");
+        WeiBoShare.setText(event.getMsgCount() +"  "+event.getMsgType() );
     }
 
 }

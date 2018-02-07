@@ -15,6 +15,7 @@ import com.raqust.bluko.common.event.DataSynEvent
 import com.raqust.bluko.common.message.entity.MessageEntity
 import org.json.JSONObject
 import com.raqust.bluko.common.event.MessageEvent
+import com.raqust.bluko.common.utils.AppUtil
 import com.zhy.http.okhttp.OkHttpUtils.post
 import org.greenrobot.eventbus.EventBus
 
@@ -53,15 +54,19 @@ object MessageHandle {
                 }
                 msgIntent = getMsgParams(msgIntent, msgEntity.params)
                 handleNotification(context, title, message, msgId, msgIntent)
-                var data = DataSynEvent().count
-                EventBus.getDefault().post(data)
-                EventBus.getDefault().post(MessageEvent())
+
 
             }
             2 ->{//2：可显示可不显示
-
+                if (AppUtil.isBackground(context)){
+                    EventBus.getDefault().post(MessageEvent(1,msgEntity.msgCode))
+                }else{
+                    EventBus.getDefault().post(MessageEvent(2,msgEntity.msgCode))
+                }
             }
+
         }
+
     }
 
     /**

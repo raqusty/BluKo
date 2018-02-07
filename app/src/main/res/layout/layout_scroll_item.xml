@@ -23,6 +23,5 @@
         android:background="@color/colorPrimaryDark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="aasdfadfasdfadfadf"
         android:padding="25dp" />
 </LinearLayout>

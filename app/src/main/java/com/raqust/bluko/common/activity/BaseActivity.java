@@ -26,6 +26,8 @@ public abstract class BaseActivity extends AppCompatActivity implements IToolBar
     protected Context mContext;
     // ActionBar实例
     protected Toolbar mToolbar;
+    //
+    protected Boolean mEventKey = false;
 
     /**
      * 获取ContentView的资源Id
@@ -52,6 +54,9 @@ public abstract class BaseActivity extends AppCompatActivity implements IToolBar
 
         // 初始化界面
         initViews();
+        if (mEventKey){
+            EventBus.getDefault().register(this);
+        }
         // 获取顶部导航栏实例
         initBar();
         // 设置监听器
@@ -98,18 +103,21 @@ public abstract class BaseActivity extends AppCompatActivity implements IToolBar
     protected void onDestroy() {
         super.onDestroy();
 //        MyApplication.getRefWatcher().watch(this);
+        if (mEventKey) {
+            EventBus.getDefault().unregister(this);
+        }
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        EventBus.getDefault().register(this);
+
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        EventBus.getDefault().unregister(this);
+
     }
 
     @Override
