@@ -12,6 +12,7 @@ import com.google.gson.reflect.TypeToken;
 import com.raqust.bluko.R;
 import com.raqust.bluko.common.activity.BaseActivity;
 import com.raqust.bluko.common.activity.ToolBarManager;
+import com.raqust.bluko.common.utils.AppUtil;
 import com.raqust.bluko.common.utils.RSAEncryptUtil;
 
 import org.json.JSONObject;
@@ -226,7 +227,8 @@ public class RsaActivity extends BaseActivity {
 //                } catch (Exception e) {
 //                    e.printStackTrace();
 //                }
-
+                Log.d(TAG, "312" +  RsaActivity.class.getName());
+                Log.d(TAG, "322" +  RsaActivity.class);
 
 
                 break;
@@ -235,15 +237,6 @@ public class RsaActivity extends BaseActivity {
         }
     }
 
-    public  KeyPair generateRSAKeyPair(int keyLength) {
-        try {
-            KeyPairGenerator kpg = KeyPairGenerator.getInstance(RSA);
-            kpg.initialize(2048, new SecureRandom());
-            return kpg.genKeyPair();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+
 
 }

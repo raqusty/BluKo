@@ -3,8 +3,12 @@ package com.raqust.bluko.common.utils;
 import android.util.Base64;
 
 import java.security.KeyFactory;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.security.SecureRandom;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
@@ -53,4 +57,14 @@ public class RsaEncrypt {
         return new String(arr,"UTF8");
     }
 
+    public KeyPair generateRSAKeyPair(int keyLength) {
+        try {
+            KeyPairGenerator kpg = KeyPairGenerator.getInstance(RSA);
+            kpg.initialize(2048, new SecureRandom());
+            return kpg.genKeyPair();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

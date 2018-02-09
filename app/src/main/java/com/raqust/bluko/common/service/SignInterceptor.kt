@@ -6,6 +6,7 @@ import com.google.gson.Gson
 import com.raqust.bluko.common.utils.RSAEncryptUtil
 import com.raqust.bluko.common.utils.RSAEncryptUtil.publicKeyString
 import com.raqust.bluko.common.utils.RsaEncrypt
+import com.raqust.bluko.module.RsaActivity.RsaActivity
 import okhttp3.*
 import okio.Buffer
 import org.json.JSONObject
@@ -31,10 +32,9 @@ class SignInterceptor : Interceptor {
         //请求前
         var response = chain.proceed(newRequest)
         //请求后
-
         val mediaType = response.body().contentType()
         val content = response.body().string()
-//
+
         return encryptKeyAgain(content, request) ?: response.newBuilder()
                 .body(ResponseBody.create(mediaType, content))
                 .build()
@@ -48,7 +48,7 @@ class SignInterceptor : Interceptor {
     private fun encryptKeyAgain(bodyString: String, request: Request): Response? {
         val json = JSONObject(bodyString)
         val code = json.getInt("code")
-        if (code == 1231) {
+        if (code == 400008) {
 //         PubKey.setPubKey(json.get("word").toString())
             var newRequest = encryptKey(request)
             val client = OkHttpClient.Builder().readTimeout(5, TimeUnit.SECONDS).build()
