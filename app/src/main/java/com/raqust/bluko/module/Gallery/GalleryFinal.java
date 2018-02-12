@@ -72,7 +72,8 @@ public class GalleryFinal extends BaseActivity {
                         .with(GalleryFinal.this)
                         .image()
                         .radio()
-                        .cropAspectRatioOptions(0, new AspectRatio("3:3", 30, 30))
+                        .cropAspectRatioOptions(0, new AspectRatio("2:3", 30, 10))
+
                         .crop()
                         .imageLoader(ImageLoaderType.GLIDE)
                         .subscribe(new RxBusResultDisposable<ImageRadioResultEvent>() {

@@ -97,6 +97,11 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"  // 此处以JCore 1.1.9 版本为例。
 
     compile 'org.greenrobot:eventbus:3.1.1'
+
+    //retrofit 网络框架
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+
 }
 repositories {
     mavenCentral()

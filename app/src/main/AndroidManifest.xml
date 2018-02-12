@@ -57,13 +57,21 @@
         </activity>
 
         <activity android:name=".module.RsaActivity.RsaActivity">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+
+        <activity android:name=".module.net.NetActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+
         <activity android:name=".module.XalleActivity"></activity>
         <activity android:name=".module.video.VideoViewActivity"></activity>
         <activity
@@ -74,6 +82,11 @@
         </activity>
         <activity android:name="com.raqust.bluko.module.main.FirstActivity"></activity>
         <activity android:name="com.raqust.bluko.module.LoginActivity"></activity>
+
+        <activity android:name="com.raqust.bluko.module.Gallery.GalleryFinal">
+
+        </activity>
+
 
         <activity
             android:name="cn.finalteam.rxgalleryfinal.ui.activity.MediaActivity"
@@ -86,7 +99,9 @@
             />
 
 
-        <activity android:name=".module.ChooseView.ChooseActivity"></activity>
+        <activity android:name=".module.ChooseView.ChooseActivity">
+
+        </activity>
 
         <!--<provider-->
         <!--android:name="android.support.v4.content.FileProvider"-->
