@@ -24,6 +24,8 @@ android {
                 TENCENT_APPID : TENCENT_APPID//腾讯开放平台注册应用得到的 appId
         ]
 
+        multiDexEnabled true
+
     }
     buildTypes {
         release {
@@ -70,14 +72,7 @@ dependencies {
     compile 'com.google.dagger:dagger:2.4'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.4'
     compile 'org.glassfish:javax.annotation:10.0-b28'
-    //    根据需要支持去拓展，在jjdxm-ijkplayer中默认加入了armv7a的了
-    compile 'com.dou361.ijkplayer-armv7a:jjdxm-ijkplayer-armv7a:1.0.0'
-    compile 'com.dou361.ijkplayer-armv5:jjdxm-ijkplayer-armv5:1.0.0'
-    compile 'com.dou361.ijkplayer-arm64:jjdxm-ijkplayer-arm64:1.0.0'
-    compile 'com.dou361.ijkplayer-x86:jjdxm-ijkplayer-x86:1.0.0'
-    compile 'com.dou361.ijkplayer-x86_64:jjdxm-ijkplayer-x86_64:1.0.0'
-    //ijk
-    compile project(':jjdxm-ijkplayer')
+
     testCompile 'junit:junit:4.12'
     compile project(path: ':matisse')
     //    compile files('libs/commons-codec-1.10.jar')/
@@ -101,6 +96,12 @@ dependencies {
     //retrofit 网络框架
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+
+    //播放框架
+    compile 'com.shuyu:gsyVideoPlayer-java:4.0.0-beat1'
+    compile 'com.shuyu:gsyVideoPlayer-armv7a:4.0.0-beat1'
+
+    compile 'com.android.support:multidex:1.0.1'
 
 }
 repositories {

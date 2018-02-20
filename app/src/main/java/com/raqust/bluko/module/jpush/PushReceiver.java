@@ -1,21 +1,16 @@
 package com.raqust.bluko.module.jpush;
 
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.raqust.bluko.R;
 import com.raqust.bluko.module.ChooseView.ChooseActivity;
-import com.raqust.bluko.module.video.VideoViewActivity;
 
 import org.json.JSONObject;
 
 import cn.jiguang.share.android.utils.Logger;
-import cn.jpush.android.api.BasicPushNotificationBuilder;
-import cn.jpush.android.api.CustomPushNotificationBuilder;
 import cn.jpush.android.api.JPushInterface;
 
 /**
@@ -43,7 +38,7 @@ public class PushReceiver extends BroadcastReceiver {
 
         } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
             Logger.d(TAG, "接受到推送下来的自定义消息");
-            processCustomMessage(context,bundle);
+            processCustomMessage(context, bundle);
 
         } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
             Logger.d(TAG, "接受到推送下来的通知");
@@ -80,10 +75,6 @@ public class PushReceiver extends BroadcastReceiver {
             return;
         }
         if ("11".equals(myValue)) {
-            Intent mIntent = new Intent(context, VideoViewActivity.class);
-            mIntent.putExtras(bundle);
-            mIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(mIntent);
         } else if ("22".equals(myValue)) {
             Intent mIntent = new Intent(context, ChooseActivity.class);
             mIntent.putExtras(bundle);
@@ -94,9 +85,9 @@ public class PushReceiver extends BroadcastReceiver {
 
     //send msg to MainActivity
     private void processCustomMessage(Context context, Bundle bundle) {
-            String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
-            String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
-            Intent msgIntent = new Intent(context,ChooseActivity.class);
-            LocalBroadcastManager.getInstance(context).sendBroadcast(msgIntent);
+        String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
+        String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
+        Intent msgIntent = new Intent(context, ChooseActivity.class);
+        LocalBroadcastManager.getInstance(context).sendBroadcast(msgIntent);
     }
 }
