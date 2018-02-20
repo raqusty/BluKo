@@ -14,11 +14,14 @@ import com.raqust.bluko.common.activity.BaseActivity;
 import com.raqust.bluko.common.activity.ToolBarManager;
 import com.yalantis.ucrop.model.AspectRatio;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.finalteam.rxgalleryfinal.RxGalleryFinal;
+import cn.finalteam.rxgalleryfinal.RxGalleryFinalApi;
 import cn.finalteam.rxgalleryfinal.bean.MediaBean;
 import cn.finalteam.rxgalleryfinal.imageloader.ImageLoaderType;
 import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
@@ -41,7 +44,10 @@ public class GalleryFinal extends BaseActivity {
 
     @Override
     public void initViews() {
-
+        Log.i("linzehao",this.getCacheDir().toString());
+        File cache = new File(this.getCacheDir() + "/.crop");
+        if (!cache.exists()) cache.mkdirs();
+        RxGalleryFinalApi.setImgSaveRxCropDir(cache);
     }
 
     @Override

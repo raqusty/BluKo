@@ -65,11 +65,7 @@
         </activity>
 
         <activity android:name=".module.net.NetActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity android:name=".module.XalleActivity"></activity>
@@ -84,7 +80,11 @@
         <activity android:name="com.raqust.bluko.module.LoginActivity"></activity>
 
         <activity android:name="com.raqust.bluko.module.Gallery.GalleryFinal">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
 
