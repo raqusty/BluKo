@@ -7,8 +7,6 @@ import android.os.Handler
 import android.support.v4.view.ViewCompat
 import android.transition.Transition
 import android.view.View
-import android.widget.ImageView
-import butterknife.BindView
 import com.raqust.bluko.R
 import com.raqust.bluko.common.activity.BaseActivity
 import com.raqust.bluko.common.activity.ToolBarManager
@@ -31,7 +29,7 @@ class GSYVideoActivity : BaseActivity() {
 
     var videoPlayer: SampleVideo? = null
 
-    var orientationUtils: OrientationUtils? = null
+    private var orientationUtils: OrientationUtils? = null
 
 
     private var isTransition: Boolean = false
@@ -39,7 +37,7 @@ class GSYVideoActivity : BaseActivity() {
     private var transition: Transition? = null
 
     override fun initViews() {
-        videoPlayer = findViewById(R.id.video_player) as  SampleVideo
+        videoPlayer = findViewById(R.id.video_player) as SampleVideo
 
         val url = "https://res.exexm.com/cw_145225549855002"
 
@@ -52,36 +50,36 @@ class GSYVideoActivity : BaseActivity() {
         val name = "普通"
         val switchVideoModel = SwitchVideoModel(name, source1)
 
-        val source2 = "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f30.mp4"
-        val name2 = "清晰"
-        val switchVideoModel2 = SwitchVideoModel(name2, source2)
+//        val source2 = "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f30.mp4"
+//        val name2 = "清晰"
+//        val switchVideoModel2 = SwitchVideoModel(name2, source2)
 
         val list = mutableListOf<SwitchVideoModel>()
         list.add(switchVideoModel)
-        list.add(switchVideoModel2)
+//        list.add(switchVideoModel2)
 
         videoPlayer?.setUp(list, true, "测试视频")
 
         //增加封面
-        val imageView = ImageView(this)
-        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP)
-        imageView.setImageResource(R.mipmap.xxx1)
-        videoPlayer?.setThumbImageView(imageView)
+//        val imageView = ImageView(this)
+//        imageView.scaleType = ImageView.ScaleType.CENTER_CROP
+//        imageView.setImageResource(R.mipmap.xxx1)
+//        videoPlayer?.thumbImageView = imageView
 
         //增加title
-        videoPlayer?.getTitleTextView()?.setVisibility(View.VISIBLE)
+        videoPlayer?.titleTextView?.visibility = View.VISIBLE
         //videoPlayer.setShowPauseCover(false);
 
         //videoPlayer.setSpeed(2f);
 
         //设置返回键
-        videoPlayer?.getBackButton()?.setVisibility(View.VISIBLE)
+        videoPlayer?.backButton?.visibility = View.VISIBLE
 
         //设置旋转
         orientationUtils = OrientationUtils(this, videoPlayer)
 
         //设置全屏按键功能,这是使用的是选择屏幕，而不是全屏
-        videoPlayer?.getFullscreenButton()?.setOnClickListener { orientationUtils?.resolveByClick() }
+        videoPlayer?.fullscreenButton?.setOnClickListener { orientationUtils?.resolveByClick() }
 
         //videoPlayer.setBottomProgressBarDrawable(getResources().getDrawable(R.drawable.video_new_progress));
         //videoPlayer.setDialogVolumeProgressBar(getResources().getDrawable(R.drawable.video_new_volume_progress_bg));
@@ -94,7 +92,7 @@ class GSYVideoActivity : BaseActivity() {
         videoPlayer?.setIsTouchWiget(true)
 
         //设置返回按键功能
-        videoPlayer?.getBackButton()?.setOnClickListener(View.OnClickListener { onBackPressed() })
+        videoPlayer?.backButton?.setOnClickListener { onBackPressed() }
 
         //过渡动画
         initTransition()
@@ -133,8 +131,8 @@ class GSYVideoActivity : BaseActivity() {
 
     override fun onBackPressed() {
         //先返回正常状态
-        if (orientationUtils?.getScreenType() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
-            videoPlayer?.getFullscreenButton()?.performClick()
+        if (orientationUtils?.screenType == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+            videoPlayer?.fullscreenButton?.performClick()
             return
         }
         //释放所有

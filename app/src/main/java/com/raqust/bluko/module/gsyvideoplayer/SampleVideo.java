@@ -77,6 +77,11 @@ public class SampleVideo extends StandardGSYVideoPlayer {
         mChangeRotate = (TextView) findViewById(R.id.change_rotate);
         mChangeTransform = (TextView) findViewById(R.id.change_transform);
 
+        //暂时不需要 隐藏掉
+        mChangeRotate.setVisibility(View.GONE);
+        mChangeTransform.setVisibility(View.GONE);
+        mMoreScale.setVisibility(View.GONE);
+
         //切换清晰度
         mMoreScale.setOnClickListener(new OnClickListener() {
             @Override
