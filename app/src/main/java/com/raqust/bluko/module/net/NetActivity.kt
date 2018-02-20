@@ -11,6 +11,7 @@ import com.raqust.bluko.common.activity.ToolBarManager
 import com.raqust.bluko.common.extend.toBody
 import com.raqust.bluko.common.extend.toJsonString
 import com.raqust.bluko.common.utils.PhoneUtil
+import com.raqust.bluko.module.user.UserInfo
 import com.xingfeiinc.user.callback.RetrofitLoadCallBack
 import okhttp3.ResponseBody
 import org.json.JSONObject
@@ -69,10 +70,11 @@ class NetActivity : BaseActivity() {
         when (v.id) {
             R.id.text1 -> {
                 service.login(mapOf("type" to "1", "mobile" to "15989147263").toBody(),
-                        mapOf("encryptMap" to "{\"password\":\"123456\"}").toJsonString())
+                        mapOf("password" to "1234567").toJsonString())
                         .enqueue(object : RetrofitLoadCallBack<LoginEntity>(LoginEntity::class.java) {
                             override fun onSuccess(call: Call<ResponseBody>, rawJson: JSONObject, bean: LoginEntity?) {
                                 Log.i("linzehao",bean.toString());
+                                UserInfo.setUser(bean)
                             }
 
                             override fun onFailure(code: Int, call: Call<ResponseBody>, t: Throwable) {

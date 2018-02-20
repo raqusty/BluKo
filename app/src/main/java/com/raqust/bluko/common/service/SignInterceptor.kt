@@ -7,6 +7,7 @@ import com.raqust.bluko.common.utils.RSAEncryptUtil
 import com.raqust.bluko.common.utils.RSAEncryptUtil.publicKeyString
 import com.raqust.bluko.common.utils.RsaEncrypt
 import com.raqust.bluko.module.RsaActivity.RsaActivity
+import com.raqust.bluko.module.user.UserInfo
 import okhttp3.*
 import okio.Buffer
 import org.json.JSONObject
@@ -24,7 +25,7 @@ class SignInterceptor : Interceptor {
         var request = chain.request()
         //请求头添加token
         request = request.newBuilder().
-//                addHeader("user-token", UserInfo.token).
+                addHeader("user-token", UserInfo.token).
                 addHeader("Content-Type", "application/json;charset=utf-8").build()
         //追加加密数据
         var newRequest = encryptKey(request)
@@ -84,7 +85,7 @@ class SignInterceptor : Interceptor {
                 map?.put(it.key, RsaEncrypt.encryptByPublicKey(it.value,publicKeyString))
                 val key = RsaEncrypt.encryptByPublicKey(it.value,publicKeyString)
                 Log.i("linzehao", "pubkey " + key)
-                Log.i("linzehao", "   key " + RsaEncrypt.decryptByPrivateKey(key,RSAEncryptUtil.privateKeyStr))
+                Log.i("linzehao", "   key " + it.key)
             }
 
             val body = RequestBody.create(MediaType.parse("application/json"), Gson().toJson(map))

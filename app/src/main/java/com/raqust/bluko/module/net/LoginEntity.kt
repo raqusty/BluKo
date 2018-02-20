@@ -15,10 +15,10 @@ data class LoginEntity(
 data class UserInfoData(
         val appUser: AppUser = AppUser(), //移动端用户信息
         val authenticationDto: AuthenticationDto = AuthenticationDto(), //用户认证分类信息
-        val id: Int = 0, //0 用户id
+        val id: Long = 0, //0 用户id
         val sex: Int = 0, //0 用户性别：1、男；2、女
         val username: String = "", //string 手机号
-        val xfId: Long = 0 //0 星飞ID
+        val userId: Long = 0 //0 星飞ID
 )
 
 data class AppUser(

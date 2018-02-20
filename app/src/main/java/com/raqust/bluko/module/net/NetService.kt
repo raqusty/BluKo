@@ -30,7 +30,7 @@ interface NetService {
         }
 
         fun create(): NetService {
-            return retrofit.baseUrl("http://app.dev.gc.xf.io").build().create(NetService::class.java)
+            return retrofit.baseUrl("http://test.api.aihayou.com").build().create(NetService::class.java)
         }
     }
 

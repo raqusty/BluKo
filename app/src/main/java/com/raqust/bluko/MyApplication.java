@@ -8,7 +8,7 @@ import com.raqust.bluko.common.message.PushManager;
 import com.raqust.bluko.common.net.NetUtils;
 
 public class MyApplication extends Application {
-    private static MyApplication instance;
+    public static MyApplication instance;
 
 
     public static MyApplication getInstance() {
