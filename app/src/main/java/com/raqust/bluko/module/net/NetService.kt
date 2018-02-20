@@ -41,4 +41,8 @@ interface NetService {
     @POST("login/v2")
     fun login(@Body map: RequestBody,@Query("encryptMap") pubKey:String = "" ): Call<ResponseBody>
 
+    @POST("feed/v1/latest")
+    fun latest(@Body map: RequestBody ): Call<ResponseBody>
+
+
 }

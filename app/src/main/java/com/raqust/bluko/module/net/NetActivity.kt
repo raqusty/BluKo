@@ -42,6 +42,7 @@ class NetActivity : BaseActivity() {
     internal var WeiXinShare: TextView? = null
 
     internal var TAG = "linzehao"
+    var page = 1
 
     private val service by lazy { NetService.create() }
 
@@ -85,27 +86,17 @@ class NetActivity : BaseActivity() {
                 //mapOf("encryptMap","{\"password\":\"123456\"}")
             }
             R.id.text2 -> {
-//                isKey = false
-//
-//                val body = RequestBody.create(MediaType.parse("application/json"), "{\"type\":1,\"password\":\"1234567\",\"mobile\":\"15989147263\"}")
-//                val request = Request.Builder()
-//                        .url("http://app.dev.gc.xf.io//login/v2?encryptMap={\"password\":\"123456\"}")
-//                        .post(body)
-//                        .build()
-//
-//                okHttpClient.newCall(request).enqueue(object : Callback {
-//                    override fun onFailure(call: Call, e: IOException) {
-//                        e.printStackTrace()
-//                        Log.d(TAG, "123  " + 123)
-//                    }
-//
-//                    @Throws(IOException::class)
-//                    override fun onResponse(call: Call, response: Response) {
-//                        val body = response.body().string()
-//                        Log.d(TAG, "312" + body)
-//
-//                    }
-//                })
+               service.latest(mapOf("pageSize" to "20", "page" to page.toString()).toBody())
+                .enqueue(object : RetrofitLoadCallBack<IndexEntity>(IndexEntity::class.java) {
+                    override fun onSuccess(call: Call<ResponseBody>, rawJson: JSONObject, bean: IndexEntity?) {
+                        Log.i("linzehao",bean.toString())
+                        page ++
+                    }
+
+                    override fun onFailure(code: Int, call: Call<ResponseBody>, t: Throwable) {
+                        Log.i("linzehao",code.toString());
+                    }
+                })
             }
             R.id.text3 -> {
                 Log.i("linzehao",PhoneUtil.isWifi(this).toString())
