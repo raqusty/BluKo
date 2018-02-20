@@ -51,21 +51,34 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        >
+        android:theme="@style/AppTheme">
 
-        <activity android:name=".module.jpush.PushActivity">
-        </activity>
+        <activity android:name=".module.jpush.PushActivity"></activity>
 
         <activity android:name=".module.RsaActivity.RsaActivity">
             <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>
 
         <activity android:name=".module.video.GSYVideoActivity">
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
+
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+
+        <activity android:name=".module.net.NetActivity">
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
+
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+        <activity android:name=".module.photo.PhotoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -73,39 +86,27 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".module.net.NetActivity">
-
-        </activity>
 
         <activity android:name=".module.XalleActivity"></activity>
-        <activity android:name=".module.video.VideoViewActivity"></activity>
-        <activity
-            android:name=".module.video.ijkActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait">
-
-        </activity>
         <activity android:name="com.raqust.bluko.module.main.FirstActivity"></activity>
         <activity android:name="com.raqust.bluko.module.LoginActivity"></activity>
 
         <activity android:name="com.raqust.bluko.module.Gallery.GalleryFinal">
             <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>
 
 
         <activity
             android:name="cn.finalteam.rxgalleryfinal.ui.activity.MediaActivity"
-            android:screenOrientation="portrait"
             android:exported="true"
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
 
 
         <activity android:name=".module.ChooseView.ChooseActivity">
@@ -169,9 +170,10 @@
         <!--android:name="JPUSH_APPKEY"-->
         <!--android:value="EkezsGDdtJzp99pC" />-->
 
-        <service android:name="cn.jpush.android.service.PushService"
+        <service
+            android:name="cn.jpush.android.service.PushService"
             android:process=":multiprocess"
-            tools:node="replace" >
+            tools:node="replace">
 
         </service>
 
@@ -185,6 +187,7 @@
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_CLICK_ACTION" />
                 <action android:name="cn.jpush.android.intent.CONNECTION" />
+
                 <category android:name="com.raqust.bluko" />
             </intent-filter>
         </receiver>

@@ -10,6 +10,7 @@ import com.raqust.bluko.common.activity.BaseActivity
 import com.raqust.bluko.common.activity.ToolBarManager
 import com.raqust.bluko.common.extend.toBody
 import com.raqust.bluko.common.extend.toJsonString
+import com.raqust.bluko.common.utils.PhoneUtil
 import com.xingfeiinc.user.callback.RetrofitLoadCallBack
 import okhttp3.ResponseBody
 import org.json.JSONObject
@@ -64,8 +65,7 @@ class NetActivity : BaseActivity() {
         return R.layout.activity_login
     }
 
-    @OnClick(R.id.text1, R.id.text2, R.id.text3, R.id.text4, R.id.text5, R.id.text6)
-    fun Click(v: View) {
+    fun click(v: View) {
         when (v.id) {
             R.id.text1 -> {
                 service.login(mapOf("type" to "1", "mobile" to "15989147263").toBody(),
@@ -106,6 +106,7 @@ class NetActivity : BaseActivity() {
 //                })
             }
             R.id.text3 -> {
+                Log.i("linzehao",PhoneUtil.isWifi(this).toString())
             }
             R.id.text4 -> {
             }

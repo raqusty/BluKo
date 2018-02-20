@@ -2,6 +2,10 @@ package com.raqust.bluko.common.utils
 
 import android.content.Context
 import android.content.pm.ApplicationInfo
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
+
+
 
 /**
  * Created by linzehao
@@ -23,5 +27,12 @@ object PhoneUtil {
         }
 
         return false
+    }
+
+     fun isWifi(mContext: Context): Boolean {
+        val connectivityManager = mContext
+                .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetInfo = connectivityManager.activeNetworkInfo
+        return activeNetInfo != null && activeNetInfo.type == ConnectivityManager.TYPE_WIFI
     }
 }

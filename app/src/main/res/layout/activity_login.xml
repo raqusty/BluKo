@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="20dp"
+        android:onClick="click"
         android:text="登录QQ" />
 
     <TextView
@@ -18,6 +19,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="20dp"
+        android:onClick="click"
         android:text="获取信息" />
 
     <TextView
@@ -26,6 +28,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="20dp"
+        android:onClick="click"
         android:text="登录微信" />
 
     <TextView
@@ -34,6 +37,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="20dp"
+        android:onClick="click"
         android:text="分享QQ" />
 
     <TextView
@@ -42,6 +46,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="20dp"
+        android:onClick="click"
         android:text="分享weibo" />
 
     <TextView
@@ -50,6 +55,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="20dp"
+        android:onClick="click"
         android:text="分享微信" />
 
 </LinearLayout>
