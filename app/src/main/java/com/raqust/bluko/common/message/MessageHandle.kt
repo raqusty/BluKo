@@ -44,7 +44,11 @@ object MessageHandle {
         val msgEntity = getMsgEntity(extrasJson)
         when(msgEntity.notify){
             0 ->{//0 ：隐藏通知栏
-
+                if (AppUtil.isBackground1()){
+                    EventBus.getDefault().post(MessageEvent(3,msgEntity.msgCode))
+                }else{
+                    EventBus.getDefault().post(MessageEvent(4,msgEntity.msgCode))
+                }
             }
             1 ->{//1 ：显示通知栏
                 var msgIntent = handleIntent(msgEntity.msgCode)

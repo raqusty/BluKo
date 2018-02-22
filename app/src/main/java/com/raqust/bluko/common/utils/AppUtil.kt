@@ -18,6 +18,37 @@ import java.util.*
 
 object AppUtil {
 
+
+    /**
+     * app activity运行中的数量
+     */
+    private var isRunActivityCount = 0
+
+    /**
+     * app activity 增加 1
+     */
+    fun addRunActivityCount(){
+        isRunActivityCount++
+    }
+
+    /**
+     * app activity 减少 1
+     */
+    fun reduceRunActivityCount(){
+        isRunActivityCount--
+    }
+
+
+    /**
+     * 判断app是不是在前台
+     */
+    fun isBackground1(): Boolean {
+        if(isRunActivityCount == 0 ){
+            return true
+        }
+        return false
+    }
+
     /**
      * 判断app是不是在前台
      */
@@ -36,6 +67,7 @@ object AppUtil {
         }
         return false
     }
+
 
     /* 获得栈中最顶层的Activity
     *

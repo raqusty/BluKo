@@ -37,7 +37,7 @@ class GSYVideoActivity : BaseActivity() {
     private var transition: Transition? = null
 
     override fun initViews() {
-
+        videoPlayer = findViewById(R.id.video_player) as SampleVideo
 
         val url = "https://res.exexm.com/cw_145225549855002"
 
