@@ -1,5 +1,7 @@
 package com.raqust.bluko.module.net
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.View
 import android.widget.TextView
@@ -16,13 +18,17 @@ import com.xingfeiinc.user.callback.RetrofitLoadCallBack
 import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.Call
+import android.content.Context.TELEPHONY_SERVICE
+import android.telephony.TelephonyManager
+import pub.devrel.easypermissions.EasyPermissions
+
 
 /**
  * Created by linzehao
  * time: 2018/2/9.
  * info:
  */
-class NetActivity : BaseActivity() {
+class NetActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
     @BindView(R.id.text1)
     internal var QQLogin: TextView? = null
 
@@ -67,6 +73,7 @@ class NetActivity : BaseActivity() {
         return R.layout.activity_login
     }
 
+    @SuppressLint("MissingPermission")
     fun click(v: View) {
         when (v.id) {
             R.id.text1 -> {
@@ -106,10 +113,38 @@ class NetActivity : BaseActivity() {
             R.id.text5 -> {
             }
             R.id.text6 -> {
+                if (!EasyPermissions.hasPermissions(this, Manifest.permission.READ_PHONE_STATE)) {
+                    EasyPermissions.requestPermissions(this, "需要获取权限，请点确定",
+                            123, Manifest.permission.READ_PHONE_STATE)
+                } else {
+                    val telephonyManager = this.getSystemService(TELEPHONY_SERVICE) as TelephonyManager
+                    val imei = telephonyManager.deviceId
+                    Log.i("linzehao","imei  "+imei)
+                }
+
+
             }
             else -> {
             }
         }
+    }
+
+    //失败
+    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>?) {
+        Log.i("linzehao","imei  "+456)
+    }
+    //成功
+    @SuppressLint("MissingPermission")
+    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>?) {
+        val telephonyManager = this.getSystemService(TELEPHONY_SERVICE) as TelephonyManager
+        val imei = telephonyManager.deviceId
+        Log.i("linzehao","imei  "+imei)
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        Log.i("linzehao","imei  "+123)
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
+        Log.i("linzehao","imei  "+234)
     }
 
 }

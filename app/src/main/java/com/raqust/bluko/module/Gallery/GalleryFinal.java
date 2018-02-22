@@ -27,6 +27,8 @@ import cn.finalteam.rxgalleryfinal.imageloader.ImageLoaderType;
 import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultDisposable;
 import cn.finalteam.rxgalleryfinal.rxbus.event.ImageMultipleResultEvent;
 import cn.finalteam.rxgalleryfinal.rxbus.event.ImageRadioResultEvent;
+import cn.finalteam.rxgalleryfinal.ui.RxGalleryListener;
+import cn.finalteam.rxgalleryfinal.ui.base.IRadioImageCheckedListener;
 
 /**
  * Created by linzehao
@@ -45,14 +47,31 @@ public class GalleryFinal extends BaseActivity {
     @Override
     public void initViews() {
         Log.i("linzehao",this.getCacheDir().toString());
-        File cache = new File(this.getCacheDir() + "/.crop");
+        File cache = new File(this.getCacheDir() + "/crop");
         if (!cache.exists()) cache.mkdirs();
+        RxGalleryFinalApi.setImgSaveRxDir(cache);
         RxGalleryFinalApi.setImgSaveRxCropDir(cache);
+
+        Log.i("linzehao","123   "+RxGalleryFinalApi.getImgSaveRxCropDirByStr());
     }
 
     @Override
     public void setListener() {
+        //裁剪图片的回调
+        RxGalleryListener
+                .getInstance()
+                .setRadioImageCheckedListener(new IRadioImageCheckedListener() {
+                    @Override
+                    public void cropAfter(Object t) {
+                        Log.i("linzehao",t.toString());
+                    }
 
+                    @Override
+                    public boolean isActivityFinish() {
+                        return true;
+                    }
+                }
+        );
     }
 
     @Override
