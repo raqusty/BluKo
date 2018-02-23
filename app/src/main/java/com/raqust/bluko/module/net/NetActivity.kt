@@ -20,6 +20,7 @@ import org.json.JSONObject
 import retrofit2.Call
 import android.content.Context.TELEPHONY_SERVICE
 import android.telephony.TelephonyManager
+import com.eagle.mixsdk.sdk.DID
 import pub.devrel.easypermissions.EasyPermissions
 
 
@@ -111,11 +112,12 @@ class NetActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
             R.id.text4 -> {
             }
             R.id.text5 -> {
+                Log.i("linzehao",DID.getInstance().obtianUUID(this))
             }
             R.id.text6 -> {
-                if (!EasyPermissions.hasPermissions(this, Manifest.permission.READ_PHONE_STATE)) {
+                if (!EasyPermissions.hasPermissions(this, Manifest.permission.READ_PHONE_STATE,Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                     EasyPermissions.requestPermissions(this, "需要获取权限，请点确定",
-                            123, Manifest.permission.READ_PHONE_STATE)
+                            123, Manifest.permission.READ_PHONE_STATE,Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 } else {
                     val telephonyManager = this.getSystemService(TELEPHONY_SERVICE) as TelephonyManager
                     val imei = telephonyManager.deviceId
