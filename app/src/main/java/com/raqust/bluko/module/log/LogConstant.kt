@@ -9,12 +9,14 @@ object LogConstant{
 
     //一级缓存条数
     val FIRST_CACHE = 5
+    //二级缓存条数
+    val SECOND_CACHE = 40
 
     //滑动一级缓存条数
     val FIRST_SLIDE_CACHE = 40
+    //滑动二级缓存条数
+    val SECOND_SLIDE_CACHE = 100
 
-    //二级缓存条数
-    val SECOND_CACHE = 40
 
     val TAG = "LogManager"
 
