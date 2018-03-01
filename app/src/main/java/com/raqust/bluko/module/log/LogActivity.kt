@@ -1,5 +1,6 @@
 package com.raqust.bluko.module.log
 
+import android.util.Log
 import android.view.View
 import com.raqust.bluko.R
 import com.raqust.bluko.common.activity.BaseActivity
@@ -15,7 +16,18 @@ class LogActivity : BaseActivity() {
 
     internal var TAG = "linzehao"
 
+    var list = mutableListOf<String>()
+
     override fun initViews() {
+
+        for (i in 0 until 39) {
+            list.add("" + i)
+        }
+
+        list = list.subList(0,3)
+        list.forEach{
+            Log.i("linzehao","11  "+it)
+        }
     }
 
     override fun setListener() {
@@ -34,13 +46,15 @@ class LogActivity : BaseActivity() {
         return R.layout.activity_login
     }
 
+    var index = 0
+
     fun click(v: View) {
         when (v.id) {
             R.id.text1 -> {
 
-                LogManager.logClickAction("11")
-                LogManager.logClickAction("22")
-                LogManager.logClickAction("33")
+                LogManager.logClickAction(" " +index ++ )
+                LogManager.logClickAction(" " +index ++)
+                LogManager.logClickAction(" " +index ++)
             }
             R.id.text2 -> {
                 for (i in 0 until 39) {
