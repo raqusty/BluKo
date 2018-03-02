@@ -53,4 +53,32 @@ object LogManager{
     fun logStopSlideAction(value :String){
         slideImpl.logAction(value,true)
     }
+
+    /**
+     * 退到后台需要上传数据
+     */
+    fun logUpdataInHome(){
+        UpdataManager.logUpdataInHome()
+    }
+
+    /**
+     * 更新数据数通过定时器
+     */
+    fun logUpdataInTime(){
+        UpdataManager.logUpdataInTime()
+    }
+
+    /**
+     * 更新数据数通过推送
+     */
+    fun logUpdataByPush(){
+        UpdataManager.logUpdataByPush()
+    }
+
+    /**
+     * 更新数据数通过数量
+     */
+    fun logUpdataByCount(){
+        UpdataManager.logUpdataByCount()
+    }
 }
