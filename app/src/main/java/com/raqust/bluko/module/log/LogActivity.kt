@@ -68,8 +68,11 @@ class LogActivity : BaseActivity() {
                 LogManager.logStartTimeAction("33")
             }
             R.id.text4 -> {
-                for (i in 0 until 39) {
-                    LogManager.logStartTimeAction("" + i)
+                for (i in 0 until 10) {
+                    LogManager.logStartSlideAction("" + index++)
+                    if (i == 9){
+                        LogManager.logStopSlideAction("" + index++)
+                    }
                 }
 
             }

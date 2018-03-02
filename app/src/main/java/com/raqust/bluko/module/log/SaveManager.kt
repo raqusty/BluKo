@@ -2,12 +2,8 @@ package com.raqust.bluko.module.log
 
 import android.util.Log
 import com.raqust.bluko.module.log.LogConstant.FIRST_CACHE
-import com.raqust.bluko.module.log.LogConstant.FIRST_SLIDE_CACHE
-import com.raqust.bluko.module.log.LogConstant.SECOND_CACHE
 import com.raqust.bluko.module.log.LogConstant.SECOND_SLIDE_CACHE
 import com.raqust.bluko.module.log.LogConstant.TAG
-import java.util.concurrent.ConcurrentLinkedQueue
-import java.util.concurrent.LinkedBlockingQueue
 import kotlin.concurrent.thread
 
 
@@ -20,27 +16,24 @@ object SaveManager {
 
     //loop是否存在
     private var isLoop = false
+    private var isLoopSlide = false
 
     //一级缓存
-    private var firstCache =mutableListOf <String>()
-
-    //二级缓存
-    private var secondCache = mutableListOf<String>()
+    private var firstCache = mutableListOf<String>()
 
     private var queue = mutableListOf<String>()
 
-    //一级缓存
-    private var firstSlideCache = ConcurrentLinkedQueue<String>()
     //滑动一级缓存
-    private var secondSlideCache = ConcurrentLinkedQueue<String>()
+    private var firstSlideCache = mutableListOf<String>()
 
+    private var slideQueue = mutableListOf<String>()
 
 
     /**
      * 保存点击数据到一级缓存
      */
     fun saveClickAction(value: String) {
-//        Log.i(TAG, "点击事件： " + value)
+//        Log.i(TAG, "存事件： " + value)
         firstCache.add(value)
         firToSecCache()
     }
@@ -49,15 +42,8 @@ object SaveManager {
      * 保存时间数据到一级缓存
      */
     fun saveTimeAction(value: String) {
-    }
-
-
-    /**
-     * 保存滑动数据到一级缓存
-     */
-    fun saveSlideAction(value: String) {
-        firstSlideCache.add(value)
-        firToSecCachebySlide()
+        firstCache.add(value)
+        firToSecCache()
     }
 
 
@@ -67,40 +53,47 @@ object SaveManager {
 
     private fun firToSecCache() {
         if (firstCache.size > FIRST_CACHE) {
-            secondCache.addAll(firstCache)
-//            Log.i(TAG, "二级缓存   " + secondCache.size)
-            firstCache.clear()
-            
-        }
-        if (secondCache.size > SECOND_CACHE ) {
-            Log.i(TAG,"132423  "+isLoop)
-            if(!isLoop){
-                queue.addAll(secondCache)
-                secondCache.clear()
-                startLoop()    
-            }else{
-                Log.i(TAG,"333  "+secondCache.size)
-                secondCache = secondCache.subList(secondCache.size - SECOND_CACHE,SECOND_CACHE)
-                Log.i(TAG,"444  "+secondCache.size)
-                secondCache.forEach{
-                    Log.i(TAG,"secondCache  "+it)
+            if (!isLoop) {
+                queue.addAll(firstCache)
+                firstCache.clear()
+                startLoop()
+            } else {
+                firstCache = firstCache.subList(1, FIRST_CACHE + 1)
+
+                var str = ""
+                firstCache.forEach {
+                    str = str + it + " "
                 }
+                Log.i(TAG, "数据  " + str)
             }
-            
+
         }
+    }
+
+    /**
+     * 保存滑动数据到一级缓存
+     * 如果数据
+     */
+    fun saveSlideAction(list: List<String>) {
+        firstSlideCache.addAll(list)
+        firToSecCacheBySlide()
     }
 
     /**
      * 一级缓存 存 到二级缓存
      */
     @Synchronized
-    private fun firToSecCachebySlide() {
-        if (firstSlideCache.size > FIRST_SLIDE_CACHE) {
-            secondSlideCache.addAll(firstSlideCache)
-            firstSlideCache.clear()
-        }
-        if (secondSlideCache.size > SECOND_SLIDE_CACHE && !isLoop) {
-            startLoop()
+    private fun firToSecCacheBySlide() {
+        val secondSize = firstSlideCache.size
+        if (secondSize > SECOND_SLIDE_CACHE) {
+            if (!isLoopSlide) {
+                slideQueue.addAll(firstSlideCache)
+                firstSlideCache.clear()
+                startSlideLoop()
+            } else {
+                Log.i(TAG, "secondSize " + secondSize + " size " + (secondSize - SECOND_SLIDE_CACHE) + "  size " + SECOND_SLIDE_CACHE + 1)
+                firstSlideCache = firstSlideCache.subList(secondSize - SECOND_SLIDE_CACHE, secondSize)
+            }
         }
     }
 
@@ -113,9 +106,25 @@ object SaveManager {
             while (queue.size > 0) {
                 val s = queue.removeAt(0)
                 Log.i(TAG, "取出数据： " + s)
-                Thread.sleep(1000)
+                Thread.sleep(100)
             }
             isLoop = false
+        }
+
+    }
+
+    /**
+     * 开启一个循环
+     */
+    private fun startSlideLoop() {
+        isLoopSlide = true
+        thread(start = true) {
+            while (slideQueue.size > 0) {
+                val s = slideQueue.removeAt(0)
+                Log.i(TAG, "取出数据： " + s)
+                Thread.sleep(100)
+            }
+            isLoopSlide = false
         }
 
     }

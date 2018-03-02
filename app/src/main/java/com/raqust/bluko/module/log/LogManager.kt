@@ -43,7 +43,14 @@ object LogManager{
     /**
      * 滑动事件统计
      */
-    fun logSlideAction(value :String){
+    fun logStartSlideAction(value :String){
         slideImpl.logAction(value)
+    }
+
+    /**
+     * 滑动事件统计
+     */
+    fun logStopSlideAction(value :String){
+        slideImpl.logAction(value,true)
     }
 }

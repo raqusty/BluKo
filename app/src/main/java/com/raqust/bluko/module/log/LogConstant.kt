@@ -8,14 +8,12 @@ package com.raqust.bluko.module.log
 object LogConstant{
 
     //一级缓存条数
-    val FIRST_CACHE = 3
-    //二级缓存条数
-    val SECOND_CACHE = 5
+    val FIRST_CACHE = 5
 
     //滑动一级缓存条数
-    val FIRST_SLIDE_CACHE = 40
+    val FIRST_SLIDE_CACHE = 15
     //滑动二级缓存条数
-    val SECOND_SLIDE_CACHE = 100
+    val SECOND_SLIDE_CACHE = 20
 
 
     val TAG = "LogManager"
