@@ -54,7 +54,6 @@ public class OssActivity extends BaseActivity {
         conf.setMaxErrorRetry(2); // 失败后最大重试次数，默认2次
         oss = new OSSClient(getApplicationContext(), endpoint, credentialProvider);
 
-        Log.i("linzehao","host  "+API_HOST);
 
     }
 

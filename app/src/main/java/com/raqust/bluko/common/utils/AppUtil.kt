@@ -36,7 +36,6 @@ object AppUtil {
      */
     fun reduceRunActivityCount(){
         isRunActivityCount--
-
     }
 
 

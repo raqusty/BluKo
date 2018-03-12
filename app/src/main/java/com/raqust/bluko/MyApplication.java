@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.multidex.MultiDex;
+import android.util.Log;
 
 import com.raqust.bluko.common.message.PushManager;
 import com.raqust.bluko.common.net.NetUtils;
@@ -33,6 +34,8 @@ public class MyApplication extends Application implements Application.ActivityLi
         registerActivityLifecycleCallbacks(this);
         NetUtils.init(instance);
         PushManager.INSTANCE.init(this);
+
+        Log.i("linzehao","11111");
     }
 
     @Override

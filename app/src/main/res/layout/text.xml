@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="32dp"
+    android:id="@+id/layout_app"
+    android:layout_marginRight="32dp">
+
+    <ImageView
+        android:id="@+id/user_icon"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/colorPrimaryDark" />
+
+    <ImageView
+        android:layout_width="23dp"
+        android:layout_height="23dp"
+        android:layout_alignBottom="@id/user_icon"
+        android:layout_alignRight="@id/user_icon"
+        android:background="#343434" />
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/user_icon"
+        android:layout_toRightOf="@id/user_icon"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="#1d1d1d"
+        android:textStyle="bold"
+        tools:text="我是谁" />
+
+    <ImageView
+        android:id="@+id/user_sex"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_toEndOf="@id/user_name"
+        android:layout_toRightOf="@id/user_name"
+        android:background="@color/colorPrimaryDark" />
+
+
+    <TextView
+        android:id="@+id/user_job"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_name"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@id/user_icon"
+        android:layout_toRightOf="@id/user_icon"
+        android:textColor="#9c9c9c"
+        tools:text="浙江星飞游戏开发" />
+
+    <TextView
+        android:id="@+id/user_watch_count"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_job"
+        android:layout_marginTop="2dp"
+        android:layout_toEndOf="@id/user_icon"
+        android:layout_toRightOf="@id/user_icon"
+        android:textColor="#9c9c9c"
+        tools:text="5999" />
+
+    <TextView
+        android:id="@+id/user_watch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_watch_count"
+        android:layout_marginTop="2dp"
+        android:layout_toEndOf="@id/user_icon"
+        android:layout_toRightOf="@id/user_icon"
+        android:text="关注"
+        android:textColor="#9c9c9c" />
+
+
+    <TextView
+        android:id="@+id/user_fan_count"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_job"
+        android:layout_marginTop="2dp"
+        android:layout_toEndOf="@id/user_watch_count"
+        android:layout_toRightOf="@id/user_watch_count"
+        android:textColor="#9c9c9c"
+        tools:text="5999" />
+
+    <TextView
+        android:id="@+id/user_fan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_watch_count"
+        android:layout_marginTop="2dp"
+        android:layout_toEndOf="@id/user_watch_count"
+        android:layout_toRightOf="@id/user_watch_count"
+        android:text="粉丝"
+        android:textColor="#9c9c9c" />
+
+    <TextView
+        android:id="@+id/user_topic_count"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_job"
+        android:layout_marginTop="2dp"
+        android:layout_toEndOf="@id/user_fan_count"
+        android:layout_toRightOf="@id/user_fan_count"
+        android:textColor="#9c9c9c"
+        tools:text="5999" />
+
+    <TextView
+        android:id="@+id/user_topic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_watch_count"
+        android:layout_marginTop="2dp"
+        android:layout_toEndOf="@id/user_fan_count"
+        android:layout_toRightOf="@id/user_fan_count"
+        android:text="话题"
+        android:textColor="#9c9c9c" />
+
+    <LinearLayout
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/user_topic_count"
+        android:layout_alignBottom="@id/user_topic"
+        android:background="@color/colorPrimary">
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/user_topic"
+        android:background="#f4f4f4" />
+
+</RelativeLayout>
