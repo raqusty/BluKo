@@ -24,6 +24,7 @@ import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -86,7 +87,6 @@ public class RsaActivity extends BaseActivity {
 
     @Override
     public void setListener() {
-
     }
 
     @Override

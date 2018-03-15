@@ -6,6 +6,7 @@ import com.raqust.bluko.R
 import com.raqust.bluko.common.activity.BaseActivity
 import com.raqust.bluko.common.activity.ToolBarManager
 import com.raqust.bluko.common.utils.VersionUtil
+import java.sql.Date
 
 /**
  * Created by linzehao
@@ -20,7 +21,6 @@ class PictureActivity : BaseActivity() {
     val version4="2.3.1.33"
 
     override fun initViews() {
-
 
     }
 
