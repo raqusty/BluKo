@@ -35,8 +35,19 @@ class LogActivity : BaseActivity() {
     @BindView(R.id.myimage)
     internal var myImage: ImageView? = null
 
+    val  dataList by lazy {  mutableListOf<Int>() }
+
 
     override fun initViews() {
+
+
+        dataList.add(1)
+        dataList.add(2)
+        dataList.add(3)
+        dataList.add(4)
+        dataList.add(5)
+        dataList.add(6)
+
     }
 
     override fun setListener() {
@@ -60,10 +71,23 @@ class LogActivity : BaseActivity() {
     fun click(v: View) {
         when (v.id) {
             R.id.text1 -> {
+                val lis = mutableListOf<Int>()
+                lis.addAll(dataList.subList(3,4))
+                dataList.clear()
+                dataList.addAll(lis)
+                dataList.forEach {
+//                    Log.i("linzehao",it.toString())
+                }
 
-                LogManager.logClickAction(" " +index ++ )
-                LogManager.logClickAction(" " +index ++)
-                LogManager.logClickAction(" " +index ++)
+                (0 until dataList.size)
+                        .map { dataList[it] }
+                        .forEach {
+                            Log.i("linzehao",it.toString())
+                        }
+
+//                LogManager.logClickAction(" " +index ++ )
+//                LogManager.logClickAction(" " +index ++)
+//                LogManager.logClickAction(" " +index ++)
             }
             R.id.text2 -> {
                 for (i in 0 until 39) {

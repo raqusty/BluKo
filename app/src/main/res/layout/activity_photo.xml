@@ -4,15 +4,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--<uk.co.senab.photoview.PhotoView-->
-        <!--android:id="@+id/photo_view"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:background="#232323"-->
-        <!--android:layout_height="wrap_content"/>-->
-
-    <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
-        android:id="@+id/photo_view1"
+    <uk.co.senab.photoview.PhotoView
+        android:id="@+id/photo_view"
         android:layout_width="match_parent"
+        android:background="#232323"
         android:layout_height="match_parent"/>
+
+    <!--<com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView-->
+        <!--android:id="@+id/photo_view1"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"/>-->
 
 </LinearLayout>

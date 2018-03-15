@@ -49,7 +49,9 @@ public class GalleryFinal extends BaseActivity {
         Log.i("linzehao",this.getCacheDir().toString());
         File cache = new File(this.getCacheDir() + "/crop");
         if (!cache.exists()) cache.mkdirs();
-        RxGalleryFinalApi.setImgSaveRxDir(cache);
+
+        RxGalleryFinalApi.setImgSaveRxSDCard("wanbei/gallery");
+//        RxGalleryFinalApi.setImgSaveRxDir(cache);
         RxGalleryFinalApi.setImgSaveRxCropDir(cache);
 
         Log.i("linzehao","123   "+RxGalleryFinalApi.getImgSaveRxCropDirByStr());
