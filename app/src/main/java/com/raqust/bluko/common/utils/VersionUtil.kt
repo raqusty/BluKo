@@ -4,6 +4,8 @@ package com.raqust.bluko.common.utils
  * Created by linzehao
  * time: 2018/3/14.
  * info:
+ * eg:    val version1 = "1.0.0"    val version2 = "1.1.1"
+ * eg:VersionUtil.compareVersion(version1, version2).toString())
  */
 object VersionUtil{
 
