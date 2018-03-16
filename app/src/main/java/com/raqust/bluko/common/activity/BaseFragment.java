@@ -3,8 +3,10 @@ package com.raqust.bluko.common.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +20,15 @@ import butterknife.ButterKnife;
 
 
 public abstract class BaseFragment extends Fragment implements
-        IBasePageOperations {
+        IBasePageOperations1 {
 
     // 自身所属Activity实例
     protected Activity mContext;
     // 根视图实例
     protected View mRootView;
+
+    // 第一次可见时的状态
+    private boolean firstVisible = true;
 
     /**
      * 获取ContentView的资源ID
@@ -41,6 +46,31 @@ public abstract class BaseFragment extends Fragment implements
 
     }
 
+    public boolean isFirstVisible() {
+        return firstVisible;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if (isVisibleToUser) {
+            // 可见时执行的操作
+            if (firstVisible) {
+                firstVisibleInitData();
+                firstVisible = false;
+            }
+        } else {
+            // 不可见的时候执行操作
+        }
+    }
+
+
+    /**
+     * 第一次可见状态下加载数据的方法(且只会加载一次)
+     */
+    public abstract void firstVisibleInitData();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (getContentViewResId() > 0) {
@@ -55,13 +85,15 @@ public abstract class BaseFragment extends Fragment implements
             if (mRootView == null) {
                 mRootView = view;
                 // 初始化界面
-                initViews();
+                initViews(mRootView);
                 // 设置监听器
                 setListener();
             }
         }
         return mRootView;
     }
+
+
 
     @Override
     public void onResume() {

@@ -2,13 +2,13 @@ package com.raqust.bluko.common.activity;
 
 import android.view.View;
 
-public interface IBasePageOperations {
+public interface IBasePageOperations1 {
     /**
      * 初始化界面
      * 仅在某些不能使用注解方式获得控件实例的情况才需要实现该方法，
      * 否则可以不实现任何代码。
      */
-    void initViews();
+    void initViews(View view);
 
     /**
      * 设置监听器
