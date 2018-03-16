@@ -87,19 +87,22 @@
         </activity>
 
         <activity android:name=".module.log.LogActivity">
-            <!--<intent-filter>-->
+            <intent-filter>
                 <!--<action android:name="android.intent.action.MAIN" />-->
                 <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="LogActivity" />
+            </intent-filter>
         </activity>
 
         <activity android:name=".module.lazyFragment.LazyActivity">
             <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
+                <!--<action android:name="android.intent.action.MAIN" />-->
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="LazyActivity" />
             </intent-filter>
         </activity>
-
 
 
         <activity android:name=".module.XalleActivity"></activity>

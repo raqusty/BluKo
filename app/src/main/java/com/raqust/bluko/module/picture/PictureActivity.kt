@@ -47,13 +47,20 @@ class PictureActivity : BaseActivity() {
     fun click(v: View) {
         when (v.id) {
             R.id.text1 -> {
-                var msgIntent = Intent(MsgConstants.INTENT_WEBVIEW)
-                handleNotification(this, "测试", "我是谁", (msgid++).toString(), msgIntent)
+                var msgIntent = Intent("LogActivity")
+                msgIntent.putExtra("test","11111")
+                handleNotification(this, "测试", "LazyActivity", (msgid++).toString(), msgIntent)
             }
             R.id.text2 -> {
+                var msgIntent = Intent("LogActivity")
+                msgIntent.putExtra("test","22222")
+                handleNotification(this, "测试", "LogActivity", (msgid++).toString(), msgIntent)
 
             }
             R.id.text3 -> {
+                var msgIntent = Intent("LogActivity")
+                msgIntent.putExtra("test","33333")
+                handleNotification(this, "测试", "LogActivity", (msgid++).toString(), msgIntent)
             }
             R.id.text4 -> {
 
@@ -71,7 +78,7 @@ class PictureActivity : BaseActivity() {
     private fun handleNotification(context: Context, title: String, message: String, msgId: String, msgIntent: Intent) {
         val notifyManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val builder = NotificationCompat.Builder(context)
-        val pendingIntent = PendingIntent.getActivity(context, 0, msgIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val pendingIntent = PendingIntent.getActivity(context, System.currentTimeMillis().toInt(), msgIntent, PendingIntent.FLAG_UPDATE_CURRENT)
         //如果是大于16的，就用自定义的类型
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             val remoteViews = RemoteViews(context.packageName, R.layout.layout_notification)
@@ -88,7 +95,7 @@ class PictureActivity : BaseActivity() {
                 .setContentTitle(title)
                 .setContentText(message)
                 .setAutoCancel(true)
-        notifyManager.notify(msgId, 0, builder.build())
+        notifyManager.notify(msgId,  0, builder.build())
     }
 
 }

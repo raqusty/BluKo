@@ -107,7 +107,8 @@ object MessageHandle {
     private fun handleNotification(context: Context, title: String, message: String, msgId: String, msgIntent: Intent) {
         val notifyManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val builder = NotificationCompat.Builder(context)
-        val pendingIntent = PendingIntent.getActivity(context, 0, msgIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        //http://blog.csdn.net/moguivstianshi/article/details/52368175
+        val pendingIntent = PendingIntent.getActivity(context, System.currentTimeMillis().toInt(), msgIntent, PendingIntent.FLAG_UPDATE_CURRENT)
         //如果是大于16的，就用自定义的类型
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             val remoteViews = RemoteViews(context.packageName, R.layout.layout_notification)

@@ -15,6 +15,7 @@ import com.bumptech.glide.request.target.Target
 import java.util.*
 import android.os.AsyncTask
 import com.raqust.bluko.common.utils.PathUtils
+import kotlinx.android.synthetic.main.activity_login.*
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
@@ -39,7 +40,7 @@ class LogActivity : BaseActivity() {
 
 
     override fun initViews() {
-
+        text1.text = intent.getStringExtra("test")
 
         dataList.add(1)
         dataList.add(2)
@@ -70,7 +71,7 @@ class LogActivity : BaseActivity() {
 
     fun click(v: View) {
         when (v.id) {
-            R.id.text1 -> {
+            R.id. text-> {
                 val lis = mutableListOf<Int>()
                 lis.addAll(dataList.subList(3,4))
                 dataList.clear()
