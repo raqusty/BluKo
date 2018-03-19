@@ -25,28 +25,37 @@ android {
                 JPUSH_CHANNEL : JPUSH_CHANNEL, //暂时填写默认值即可.
                 TENCENT_APPID : TENCENT_APPID//腾讯开放平台注册应用得到的 appId
         ]
+        buildConfigField("String", "API_HOST", "\"http://app.dev.gc.xf.io/\"")
 
         multiDexEnabled true
 
     }
+
+    signingConfigs {
+        config {
+            storeFile file(RELEASE_STORE_FILE)
+            storePassword RELEASE_STORE_PASSWORD
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
+            //配置应用签名
+            signingConfig signingConfigs.config
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            //关闭混淆
+            minifyEnabled false
+            //混淆配置文件
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
-    flavorDimensions "tier"
-    productFlavors {
-        pro {
-            dimension "tier"
-            buildConfigField("String", "API_HOST", "\"http://app.dev.gc.xf.io/\"")
-        }
-        free {
-            dimension "tier"
-            buildConfigField("String", "API_HOST", "\"http://app.test.gc.xf.io/\"")
-        }
-    }
 }
 
 dependencies {
