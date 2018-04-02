@@ -66,17 +66,25 @@
             <!--</intent-filter>-->
         </activity>
 
-        <activity android:name=".module.video.GSYVideoActivity">
+        <activity android:name=".module.video.GSYVideoActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize">
+            <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".module.queue.QueueActivity">
             <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>
 
         <activity android:name=".module.net.NetActivity">
             <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>
         <activity android:name=".module.photo.PhotoActivity">
@@ -87,12 +95,14 @@
         </activity>
 
         <activity android:name=".module.log.LogActivity">
-            <intent-filter>
+            <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
+
                 <!--<category android:name="android.intent.category.LAUNCHER" />-->
-                <category android:name="android.intent.category.DEFAULT" />
-                <action android:name="LogActivity" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.DEFAULT" />-->
+
+                <!--<action android:name="LogActivity" />-->
+            <!--</intent-filter>-->
         </activity>
 
         <activity android:name=".module.lazyFragment.LazyActivity">
