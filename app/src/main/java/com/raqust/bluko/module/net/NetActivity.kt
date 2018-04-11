@@ -20,6 +20,9 @@ import okhttp3.ResponseBody
 import org.json.JSONObject
 import pub.devrel.easypermissions.EasyPermissions
 import retrofit2.Call
+import android.graphics.drawable.Drawable
+
+
 
 
 /**
@@ -63,7 +66,6 @@ class NetActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
     }
 
     override fun initToolBar(navigationBarMgr: ToolBarManager) {
-
     }
 
     private var isKey: Boolean? = false

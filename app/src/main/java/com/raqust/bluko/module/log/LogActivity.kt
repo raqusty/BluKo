@@ -49,6 +49,11 @@ class LogActivity : BaseActivity() {
         dataList.add(5)
         dataList.add(6)
 
+       var dataList1 = dataList.subList(1,  1)
+        dataList1.forEach {
+            Log.i("linzehao","32  "+it)
+        }
+
     }
 
     override fun setListener() {

@@ -4,14 +4,19 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Build
 import android.support.v4.app.NotificationCompat
+import android.util.Log
 import android.view.View
 import android.widget.RemoteViews
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.raqust.bluko.R
 import com.raqust.bluko.common.activity.BaseActivity
 import com.raqust.bluko.common.activity.ToolBarManager
-import com.raqust.bluko.common.message.MsgConstants
+import kotlinx.android.synthetic.main.activity_login.*
 
 /**
  * Created by linzehao
@@ -47,55 +52,66 @@ class PictureActivity : BaseActivity() {
     fun click(v: View) {
         when (v.id) {
             R.id.text1 -> {
-                var msgIntent = Intent("LogActivity")
-                msgIntent.putExtra("test","11111")
-                handleNotification(this, "测试", "LazyActivity", (msgid++).toString(), msgIntent)
-            }
-            R.id.text2 -> {
-                var msgIntent = Intent("LogActivity")
-                msgIntent.putExtra("test","22222")
-                handleNotification(this, "测试", "LogActivity", (msgid++).toString(), msgIntent)
+
+                Glide.with(mContext).load("http://image-demo.oss-cn-hangzhou.aliyuncs.com/example.jpg")
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .dontAnimate()
+                        .thumbnail(0.5f)
+                        .placeholder(R.mipmap.no_data_image)
+                        .error(R.mipmap.no_net_image)
+                        .into(myimage)
 
             }
+            R.id.text2 -> {
+                Glide.with(mContext).load("http://xf-gc-test-oss.oss-cn-hangzhou.aliyuncs.com/jpg/201802/12/151842226050379936.jpg")
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .dontAnimate()
+                        .thumbnail(0.5f)
+                        .placeholder(R.mipmap.no_data_image)
+                        .error(R.mipmap.no_net_image)
+                        .into(myimage)
+            }
             R.id.text3 -> {
-                var msgIntent = Intent("LogActivity")
-                msgIntent.putExtra("test","33333")
-                handleNotification(this, "测试", "LogActivity", (msgid++).toString(), msgIntent)
+                Glide.with(mContext).load("http://xf-gc-test-oss.oss-cn-hangzhou.aliyuncs.com/jpg/201803/23/152179050831779362493.jpg")
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .dontAnimate()
+                        .thumbnail(0.5f)
+                        .placeholder(R.mipmap.no_data_image)
+                        .error(R.mipmap.no_net_image)
+                        .into(myimage)
             }
             R.id.text4 -> {
+                Glide.with(mContext).load("http://xf-gc-test-oss.oss-cn-hangzhou.aliyuncs.com/jpg/201803/23/152179050831979824288.jpg")
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .dontAnimate()
+                        .thumbnail(0.5f)
+                        .placeholder(R.mipmap.no_data_image)
+                        .error(R.mipmap.no_net_image)
+                        .into(myimage)
 
             }
             R.id.text5 -> {
+                Glide.with(mContext).load("http://xf-gc-test-oss.oss-cn-hangzhou.aliyuncs.com/jpg/201803/23/152179050831779362493.jpg")
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .dontAnimate()
+                        .thumbnail(0.5f)
+                        .placeholder(R.mipmap.no_data_image)
+                        .error(R.mipmap.no_net_image)
+                        .into(myimage)
             }
             R.id.text6 -> {
+                Glide.with(mContext).load("http://xf-gc-test-oss.oss-cn-hangzhou.aliyuncs.com/jpg/201803/23/152179050831779362493.jpg")
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .dontAnimate()
+                        .thumbnail(0.5f)
+                        .placeholder(R.mipmap.no_data_image)
+                        .error(R.mipmap.no_net_image)
+                        .into(myimage)
             }
             else -> {
             }
         }
     }
 
-
-    private fun handleNotification(context: Context, title: String, message: String, msgId: String, msgIntent: Intent) {
-        val notifyManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        val builder = NotificationCompat.Builder(context)
-        val pendingIntent = PendingIntent.getActivity(context, System.currentTimeMillis().toInt(), msgIntent, PendingIntent.FLAG_UPDATE_CURRENT)
-        //如果是大于16的，就用自定义的类型
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            val remoteViews = RemoteViews(context.packageName, R.layout.layout_notification)
-            remoteViews.setTextViewText(R.id.layout_app, context.packageName)
-            remoteViews.setTextViewText(R.id.layout_text, title)
-            remoteViews.setImageViewResource(R.id.layout_image, R.mipmap.ic_launcher_round)
-            remoteViews.setTextViewText(R.id.layout_text1, message)
-            builder.setCustomBigContentView(remoteViews)
-        }
-        builder.setDefaults(NotificationCompat.DEFAULT_ALL)
-//        builder.setFullScreenIntent(pendingIntent, true);
-        builder.setContentIntent(pendingIntent)
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle(title)
-                .setContentText(message)
-                .setAutoCancel(true)
-        notifyManager.notify(msgId,  0, builder.build())
-    }
 
 }
