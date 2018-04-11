@@ -123,6 +123,10 @@ dependencies {
     //FlexboxLayout
     compile 'com.google.android:flexbox:0.2.5'
 
+    //华为推送
+    String HMSSDKVer ='2.6.0.301'
+    compile 'com.huawei.android.hms:push:'+HMSSDKVer
+
 }
 repositories {
     mavenCentral()
