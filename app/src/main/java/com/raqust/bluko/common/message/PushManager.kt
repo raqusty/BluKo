@@ -4,6 +4,7 @@ import android.app.Application
 import com.raqust.bluko.common.message.push.HuapushImpl
 import com.raqust.bluko.common.message.push.IPushProvider
 import com.raqust.bluko.common.message.push.JpushImpl
+import com.raqust.bluko.common.message.push.MipushImpl
 
 /**
  * Created by linzehao
@@ -17,6 +18,7 @@ object PushManager : IPushProvider {
         //todo 这里通过判断是什么机子，来决定用sdk
 //        JpushImpl()
         HuapushImpl()
+//        MipushImpl()
     }
 
     override fun init(application: Application) {
