@@ -1,10 +1,8 @@
 package com.raqust.bluko.common.message
 
 import android.app.Application
-import com.raqust.bluko.common.message.push.HuapushImpl
-import com.raqust.bluko.common.message.push.IPushProvider
-import com.raqust.bluko.common.message.push.JpushImpl
-import com.raqust.bluko.common.message.push.MipushImpl
+import com.meizu.cloud.pushsdk.util.MzSystemUtils
+import com.raqust.bluko.common.message.push.*
 
 /**
  * Created by linzehao
@@ -17,8 +15,10 @@ object PushManager : IPushProvider {
     private val pushImpl: IPushProvider by lazy {
         //todo 这里通过判断是什么机子，来决定用sdk
 //        JpushImpl()
-        HuapushImpl()
-//        MipushImpl()
+//        HuapushImpl()
+        MipushImpl()
+
+//        MeizuPushImpl()
     }
 
     override fun init(application: Application) {

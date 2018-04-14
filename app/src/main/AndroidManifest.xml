@@ -33,24 +33,42 @@
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.GET_TASKS" />
-    <!-- jpush                                    -->
 
+    <!--                             jpush                                    -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
 
     <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
 
-
-    <!-- MIpush   the following 2 com.xiaomi.mipushdemo should be changed to your package name -->
+    <!--                             小米                                 -->
     <permission
         android:name="com.raqust.bluko.permission.MIPUSH_RECEIVE"
         android:protectionLevel="signature" />
 
     <uses-permission android:name="com.raqust.bluko.permission.MIPUSH_RECEIVE" />
     <uses-permission android:name="android.permission.VIBRATE" />
+
+
+    <!--                             魅族                                     -->
+    <uses-permission android:name="com.meizu.flyme.push.permission.RECEIVE" />
+    <permission
+        android:name="com.raqust.bluko.push.permission.MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.raqust.bluko.push.permission.MESSAGE" />
+    <uses-permission android:name="com.meizu.c2dm.permission.RECEIVE" />
+
+    <uses-permission
+        android:name="com.raqust.bluko.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <!-- 兼容flyme5.0以下版本，魅族内部集成pushSDK必填，不然无法收到消息-->
+    <uses-permission android:name="com.meizu.flyme.push.permission.RECEIVE" />
+
+    <!--  兼容flyme3.0配置权限-->
+    <uses-permission android:name="com.meizu.c2dm.permission.RECEIVE" />
 
     <application
         android:name=".MyApplication"
@@ -62,10 +80,10 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".module.jpush.PushActivity">
-            <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
 
         <activity android:name=".module.RsaActivity.RsaActivity">
@@ -73,6 +91,13 @@
             <!--<action android:name="android.intent.action.MAIN" />-->
             <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
+        </activity>
+
+        <activity android:name=".module.smart.SmartActivity">
+            <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity
@@ -86,8 +111,8 @@
 
         <activity android:name=".module.wanbeiActivity.InviteActivity">
             <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>
 
@@ -160,8 +185,8 @@
 
         <activity android:name=".module.picture.PictureActivity">
             <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>
 
@@ -239,6 +264,7 @@
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_CLICK_ACTION" />
                 <action android:name="cn.jpush.android.intent.CONNECTION" />
+
                 <category android:name="com.raqust.bluko" />
             </intent-filter>
         </receiver>
@@ -251,7 +277,7 @@
                    Format android:value= "appid=xxxxxx"-->
         <meta-data
             android:name="com.huawei.hms.client.appid"
-            android:value="appid=100250199"/>
+            android:value="appid=100250199" />
 
 
         <!-- 接入HMSSDK 需要注册的provider，authorities 一定不能与其他应用一样，所以这边 com.raqust.bluko 要替换上您应用的包名
@@ -260,7 +286,7 @@
             android:name="com.huawei.hms.update.provider.UpdateProvider"
             android:authorities="com.raqust.bluko.hms.update.provider"
             android:exported="false"
-            android:grantUriPermissions="true"/>
+            android:grantUriPermissions="true" />
 
         <!-- 接入HMSSDK 需要注册的provider，authorities 一定不能与其他应用一样，所以这边 com.raqust.bluko 要替换上您应用的包名
             Access HMSSDK need to register provider,authorities must not be the same as other applications, so this side ${package_name} to replace the package name you applied-->
@@ -268,8 +294,7 @@
             android:name="com.huawei.updatesdk.fileprovider.UpdateSdkFileProvider"
             android:authorities="com.raqust.bluko.updateSdk.fileProvider"
             android:exported="false"
-            android:grantUriPermissions="true">
-        </provider>
+            android:grantUriPermissions="true"></provider>
 
 
         <!-- 使用 HMSAgent 代码接入HMSSDK 需要注册的activity | Use hmsagent code to access HMSSDK activity that requires registration-->
@@ -279,7 +304,7 @@
             android:excludeFromRecents="true"
             android:exported="false"
             android:hardwareAccelerated="true"
-            android:theme="@android:style/Theme.Translucent" >
+            android:theme="@android:style/Theme.Translucent">
             <meta-data
                 android:name="hwc-theme"
                 android:value="androidhwext:style/Theme.Emui.Translucent" />
@@ -293,7 +318,7 @@
             android:excludeFromRecents="true"
             android:exported="false"
             android:hardwareAccelerated="true"
-            android:theme="@android:style/Theme.Translucent" >
+            android:theme="@android:style/Theme.Translucent">
             <meta-data
                 android:name="hwc-theme"
                 android:value="androidhwext:style/Theme.Emui.Translucent" />
@@ -304,7 +329,7 @@
             android:name="com.huawei.updatesdk.service.otaupdate.AppUpdateActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false"
-            android:theme="@style/upsdkDlDialog" >
+            android:theme="@style/upsdkDlDialog">
             <meta-data
                 android:name="hwc-theme"
                 android:value="androidhwext:style/Theme.Emui.Translucent.NoTitleBar" />
@@ -315,22 +340,23 @@
             android:name="com.huawei.updatesdk.support.pm.PackageInstallerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"
-            android:theme="@style/upsdkDlDialog" >
+            android:theme="@style/upsdkDlDialog">
             <meta-data
                 android:name="hwc-theme"
                 android:value="androidhwext:style/Theme.Emui.Translucent" />
         </activity>
 
         <!-- 接入HMSSDK PUSH模块需要注册 :接收通道发来的通知栏消息 | The access HMSSDK push module needs to be registered: the notification bar message sent from the receiving channel -->
-        <receiver android:name="com.huawei.hms.support.api.push.PushEventReceiver" >
+        <receiver android:name="com.huawei.hms.support.api.push.PushEventReceiver">
             <intent-filter>
                 <action android:name="com.huawei.intent.action.PUSH" />
             </intent-filter>
         </receiver>
 
         <!-- 接入HMSSDK 需要注册的应用下载服务 | Access HMSSDK need to register app download service-->
-        <service android:name="com.huawei.updatesdk.service.deamon.download.DownloadService"
-            android:exported="false"/>
+        <service
+            android:name="com.huawei.updatesdk.service.deamon.download.DownloadService"
+            android:exported="false" />
 
         <!-- 接入HMSSDK PUSH模块需要注册，第三方相关 :接收Push消息（注册、Push消息、Push连接状态）广播，
                 此receiver类需要开发者自己创建并继承com.huawei.hms.support.api.push.PushReceiver类，
@@ -339,7 +365,7 @@
 	            Receive push message (registration, push message, push connection state) broadcast.
 	            This receiver class requires the developer to create and inherit the com.huawei.hms.support.api.push.PushReceiver class.
 	            Reference to class in sample code: Com.huawei.hmsagent.HuaweiPushRevicer-->
-        <receiver android:name="com.raqust.bluko.common.message.receiver.HuaweiImplReceiver" >
+        <receiver android:name="com.raqust.bluko.common.message.receiver.HuaweiImplReceiver">
             <intent-filter>
                 <!-- 必须,用于接收token | Must， for receiving token -->
                 <action android:name="com.huawei.android.push.intent.REGISTRATION" />
@@ -405,6 +431,26 @@
             </intent-filter>
         </receiver>
         <!--                                       小米的推送                                            -->
+
+        <!--                                       魅族的推送                                            -->
+        <receiver android:name="com.raqust.bluko.common.message.receiver.MeizuImplReceiver">
+            <intent-filter>
+                <!-- 接收push消息 -->
+                <action android:name="com.meizu.flyme.push.intent.MESSAGE" />
+                <!-- 接收register消息 -->
+                <action android:name="com.meizu.flyme.push.intent.REGISTER.FEEDBACK" />
+                <!-- 接收unregister消息-->
+                <action android:name="com.meizu.flyme.push.intent.UNREGISTER.FEEDBACK" />
+                <!-- 兼容低版本Flyme3推送服务配置 -->
+                <action android:name="com.meizu.c2dm.intent.REGISTRATION" />
+                <action android:name="com.meizu.c2dm.intent.RECEIVE" />
+
+                <category android:name="com.raqust.bluko"></category>
+            </intent-filter>
+        </receiver>
+        <!--                                       魅族的推送                                            -->
+
+
     </application>
 
 </manifest>

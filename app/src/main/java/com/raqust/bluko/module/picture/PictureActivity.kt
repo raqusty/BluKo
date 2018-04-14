@@ -52,7 +52,7 @@ class PictureActivity : BaseActivity() {
     fun click(v: View) {
         when (v.id) {
             R.id.text1 -> {
-
+                cardView.radius = 50f
                 Glide.with(mContext).load("http://image-demo.oss-cn-hangzhou.aliyuncs.com/example.jpg")
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .dontAnimate()
