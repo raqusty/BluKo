@@ -16,7 +16,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         app:flexWrap="wrap"
-        app:justifyContent="flex_start" />
+        app:justifyContent="space_between" />
 
     <TextView
         android:id="@+id/finish"

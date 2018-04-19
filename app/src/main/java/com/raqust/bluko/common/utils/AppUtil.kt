@@ -147,4 +147,42 @@ object AppUtil {
         return topPackageName
     }
 
+
+    fun isProessRunning(context: Context): Boolean {
+
+        var isRunning = false
+        val am = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+
+        val lists = am.runningAppProcesses
+        val processName = getProcessName(context)
+        for (info in lists) {
+            if (info.processName == processName) {
+                Log.i("linzehao", "processName "+processName+"  processName "+info.processName);
+                isRunning = true
+            }
+        }
+
+        return isRunning
+    }
+
+    fun getProcessName(context: Context): String? {
+        val pid = android.os.Process.myPid() // Returns the identifier of this process
+        val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        val list = activityManager.runningAppProcesses
+        val i = list.iterator()
+        while (i.hasNext()) {
+            val info = i.next() as ActivityManager.RunningAppProcessInfo
+            try {
+                if (info.pid == pid) {
+                    // 根据进程的信息获取当前进程的名字
+                    return info.processName
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
+        }
+        // 没有匹配的项，返回为null
+        return null
+    }
 }

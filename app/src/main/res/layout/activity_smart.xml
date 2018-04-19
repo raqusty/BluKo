@@ -50,7 +50,6 @@
                         app:titleEnabled="false"
                         app:contentScrim="?attr/colorPrimary"
                         app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
                         <RelativeLayout
                             android:id="@+id/panel_lyt"
                             android:layout_width="match_parent"
@@ -59,50 +58,19 @@
                             android:orientation="vertical"
                             android:layout_gravity="bottom">
 
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="300dp"
-                                android:background="#333333"/>
 
                         </RelativeLayout>
 
                     </android.support.design.widget.CollapsingToolbarLayout>
 
                 </LinearLayout>
-                <LinearLayout
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerview"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#111222"
-                    android:orientation="vertical"
-                    android:paddingBottom="0dp"
-                    app:layout_scrollFlags="scroll">
+                    android:layout_height="match_parent">
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="300dp"
-                        android:background="#ff11ff" />
+                </android.support.v7.widget.RecyclerView>
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="300dp"
-                        android:background="#ff11ff" />
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="300dp"
-                        android:background="#ff11ff" />
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="300dp"
-                        android:background="#ff11ff" />
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="300dp"
-                        android:background="#ff11ff" />
-
-                </LinearLayout>
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
 

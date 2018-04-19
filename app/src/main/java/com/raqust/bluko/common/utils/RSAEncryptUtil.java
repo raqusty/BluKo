@@ -86,9 +86,9 @@ public class RSAEncryptUtil {
 
     public static void main(String[] args) {
         /*String device = encryptByPublicKey(RSAKey.publicKeyString, "123");
-		System.out.println("加密后：" + device);
+		SystemRom.out.println("加密后：" + device);
 		String decrypt = decryptByPrivateKey(RSAKey.privateKeyString, device);
-		System.out.println("解密后：" + decrypt);*/
+		SystemRom.out.println("解密后：" + decrypt);*/
         //byte[] encrypt = encrypt(decodeBase64PublicKey(RSAKey.publicKeyString),"123455sdcsdcasdcasdcsdsfsfadasdfasffffffffffffffffffffffdsfhlskhffffffffffffffffffffffffff5".getBytes());
 
     }

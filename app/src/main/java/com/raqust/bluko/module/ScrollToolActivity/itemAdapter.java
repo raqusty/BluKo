@@ -23,7 +23,7 @@ public class itemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     LayoutInflater mLayoutInflater ;
     Context mContext;
 
-    itemAdapter( List<String> l ,Context context){
+    public itemAdapter( List<String> l ,Context context){
         mlist = l;
         mContext= context;
         mLayoutInflater = LayoutInflater.from(context);

@@ -1,9 +1,11 @@
 package com.raqust.bluko.module.wanbeiActivity
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.RotateDrawable
+import android.net.Uri
 import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,7 +14,13 @@ import android.widget.TextView
 import com.raqust.bluko.R
 import com.raqust.bluko.common.activity.BaseActivity
 import com.raqust.bluko.common.activity.ToolBarManager
+import com.raqust.bluko.common.utils.AppUtil
+import com.raqust.bluko.common.utils.NotificationsUtils
+import com.raqust.bluko.common.wrapper1.WhiteIntentWrapper
+import com.raqust.bluko.module.main.FirstActivity
 import kotlinx.android.synthetic.main.activity_invite.*
+import java.net.URI
+import java.util.LinkedHashMap
 
 /**
  * Created by linzehao
@@ -35,7 +43,15 @@ class InviteActivity : BaseActivity() {
         layers[1] = ContextCompat.getDrawable(this, R.mipmap.nav_back_btn)
         layerDrawable = LayerDrawable(layers)
         image.setImageDrawable(layerDrawable)
+
+
+        if (!NotificationsUtils.isNotificationEnabled(this)){
+            NotificationsUtils. goToSetNotification(this)
+        }
+
+        activities!![FirstActivity::class.java]
     }
+    private var activities: LinkedHashMap<Class<*>, Activity>? = LinkedHashMap()
 
     private fun getText(value: String): View {
         val rootView = inflater.inflate(R.layout.item_tag_property, null)  as View

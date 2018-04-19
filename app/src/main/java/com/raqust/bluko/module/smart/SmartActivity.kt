@@ -2,18 +2,19 @@ package com.raqust.bluko.module.smart
 
 import android.support.v4.content.ContextCompat
 import android.support.v4.widget.NestedScrollView
+import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
+import android.widget.LinearLayout
 import com.raqust.bluko.R
 import com.raqust.bluko.common.activity.BaseActivity
 import com.raqust.bluko.common.activity.ToolBarManager
-import com.scwang.smartrefresh.header.BezierCircleHeader
-import com.scwang.smartrefresh.header.MaterialHeader
-import com.scwang.smartrefresh.header.PhoenixHeader
+import com.raqust.bluko.module.ScrollToolActivity.itemAdapter
 import com.scwang.smartrefresh.layout.api.RefreshHeader
 import com.scwang.smartrefresh.layout.api.RefreshLayout
-import com.scwang.smartrefresh.layout.header.BezierRadarHeader
 import com.scwang.smartrefresh.layout.listener.SimpleMultiPurposeListener
 import com.scwang.smartrefresh.layout.util.DensityUtil
 import kotlinx.android.synthetic.main.activity_smart.*
+import java.util.ArrayList
 
 /**
  * Created by linzehao
@@ -25,7 +26,19 @@ class SmartActivity : BaseActivity() {
     private var mOffset = 0
     private var mScrollY = 0
 
+     val list: MutableList<String> = ArrayList()
+
+     val adapter by lazy { itemAdapter(list, this) }
+
+    val manager: LinearLayoutManager  by lazy {  LinearLayoutManager(this, LinearLayout.VERTICAL, false) }
+
     override fun initViews() {
+        for (i in 0..19) {
+            list.add("" + i)
+        }
+        recyclerview.layoutManager = manager
+        recyclerview.adapter = adapter
+        recyclerview.setNestedScrollingEnabled(false);
     }
 
 
@@ -40,22 +53,11 @@ class SmartActivity : BaseActivity() {
             }
 
             override fun onHeaderMoving(header: RefreshHeader?, isDragging: Boolean, percent: Float, offset: Int, headerHeight: Int, maxDragHeight: Int) {
+                Log.i("linzehao","offset  "+offset)
                 mOffset = offset / 2
                 parallax.translationY = (mOffset - mScrollY).toFloat()
                 toolbar.alpha = 1 - Math.min(percent, 1f)
             }
-            //            @Override
-            //            public void onHeaderPulling(@NonNull RefreshHeader header, float percent, int offset, int bottomHeight, int maxDragHeight) {
-            //                mOffset = offset / 2;
-            //                parallax.setTranslationY(mOffset - mScrollY);
-            //                toolbar.setAlpha(1 - Math.min(percent, 1));
-            //            }
-            //            @Override
-            //            public void onHeaderReleasing(@NonNull RefreshHeader header, float percent, int offset, int bottomHeight, int maxDragHeight) {
-            //                mOffset = offset / 2;
-            //                parallax.setTranslationY(mOffset - mScrollY);
-            //                toolbar.setAlpha(1 - Math.min(percent, 1));
-            //            }
         })
 
         scrollView.setOnScrollChangeListener(object : NestedScrollView.OnScrollChangeListener {

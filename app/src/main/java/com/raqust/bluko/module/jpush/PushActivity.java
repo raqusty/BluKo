@@ -99,7 +99,7 @@ public class PushActivity extends BaseActivity {
                         //设置通知内容
                         .setContentText("只有小图标、标题、内容戊二醛翁热气二群翁热气球内容戊二醛翁热气二群翁热气球内容戊二醛翁热气二群翁热气球内容戊二醛翁热气二群翁热气球内容戊二醛翁热气二群翁热气球内容戊二醛翁热气二群翁热气球内容戊二醛翁热气二群翁热气球");
                 //设置通知时间，默认为系统发出通知的时间，通常不用设置
-//                .setWhen(System.currentTimeMillis());
+//                .setWhen(SystemRom.currentTimeMillis());
                 //通过builder.build()方法生成Notification对象,并发送通知,id=1
                 notifyManager.notify(1, builder.build());
                 break;

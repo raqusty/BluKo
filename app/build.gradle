@@ -31,6 +31,19 @@ android {
 
     }
 
+    flavorDimensions "myflavor"
+    productFlavors {
+        allchannel {
+            dimension "myflavor"
+            manifestPlaceholders = [app_icon: "@mipmap/ic_launcher"]
+        }
+
+        yingyongbao {
+            dimension "myflavor"
+            manifestPlaceholders = [app_icon: "@mipmap/ic_launcher2"]
+        }
+    }
+
     signingConfigs {
         config {
             storeFile file(RELEASE_STORE_FILE)
