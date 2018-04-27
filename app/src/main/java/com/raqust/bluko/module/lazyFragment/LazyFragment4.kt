@@ -12,7 +12,7 @@ import com.raqust.bluko.common.activity.BaseFragment
  */
 class LazyFragment4 : BaseFragment(){
     override fun initViews(view: View) {
-        Log.i("linzehao","4")
+        Log.i("linzehao","initViews 4")
     }
 
     override fun setListener() {
@@ -21,6 +21,11 @@ class LazyFragment4 : BaseFragment(){
     override fun getContentViewResId() = R.layout.fragment_lazy2
 
     override fun firstVisibleInitData() {
-        Log.i("linzehao","4 pullData")
+        Log.i("linzehao","pullData 4 ")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.i("linzehao","onDestroy 4" )
     }
 }

@@ -3,16 +3,14 @@ package com.raqust.bluko.common.wrapper.impl
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.PowerManager
 import android.provider.Settings
-import android.support.annotation.RequiresApi
 import android.util.Log
 import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
-import android.content.DialogInterface
-import com.raqust.bluko.common.wrapper.WhiteIntentWrapper.Companion.getApplicationName
 
 
 /**
@@ -20,48 +18,75 @@ import com.raqust.bluko.common.wrapper.WhiteIntentWrapper.Companion.getApplicati
  * time: 2018/4/17.
  * info:
  */
-class SystemRom : IRom {
+open class SystemRom : IRom {
 
-    val tag = "ZTERom"
+    protected open val tag = "SystemRom"
 
-    @RequiresApi(Build.VERSION_CODES.M)
-    override  fun getIntent(context: Context, sIntentWrapperList: MutableList<WhiteIntentWrapper>) {
+    //Android 7.0+ Doze 模式
+    val SYSTEM = 0x00
+    val DOZE = 0x01
+
+    override fun getIntent(context: Context, sIntentWrapperList: MutableList<WhiteIntentWrapper>) {
         val pm = context.getSystemService(Context.POWER_SERVICE) as PowerManager
-        val ignoringBatteryOptimizations = pm.isIgnoringBatteryOptimizations(context.packageName)
+        val ignoringBatteryOptimizations = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            pm.isIgnoringBatteryOptimizations(context.packageName)
+        } else {
+            TODO("VERSION.SDK_INT < M")
+        }
         if (!ignoringBatteryOptimizations) {
             Log.d("WhiteIntent", "在电池优化白名单中")
-            val dozeIntent = Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS)
-            dozeIntent.data = Uri.parse("package:" + context.packageName)
-            if (WhiteIntentWrapper.doesActivityExists(context, dozeIntent)) {
-                Log.d("WhiteIntent", "可以跳转到电池优化白名单设置页面")
-                sIntentWrapperList.add(WhiteIntentWrapper(dozeIntent, WhiteIntentWrapper.DOZE))
-            } else {
-                Log.e("WhiteIntent", "不可跳转到电池优化白名单设置页面")
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                val dozeIntent = Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS)
+                dozeIntent.data = Uri.parse("package:" + context.packageName)
+                if (WhiteIntentWrapper.doesActivityExists(context, dozeIntent)) {
+                    Log.d("WhiteIntent", "可以跳转到电池优化白名单设置页面")
+                    sIntentWrapperList.add(WhiteIntentWrapper(dozeIntent, DOZE))
+                } else {
+                    Log.e("WhiteIntent", "不可跳转到电池优化白名单设置页面")
+                }
             }
         } else {
             Log.d("WhiteIntent", "不在电池优化白名单中")
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
-    override fun showDilog( a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
-        val pm = a.getSystemService(Context.POWER_SERVICE) as PowerManager
-        if (pm.isIgnoringBatteryOptimizations(a.getPackageName())) {
-            return
+    override fun showDilog(reason: String, a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
+        when (intent.type) {
+            DOZE -> {
+                val pm = a.getSystemService(Context.POWER_SERVICE) as PowerManager
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    pm.isIgnoringBatteryOptimizations(a.packageName)
+                    try {
+                        AlertDialog.Builder(a)
+                                .setCancelable(false)
+                                .setTitle(WhiteIntentWrapper.getString(a, "reason_doze_title", WhiteIntentWrapper.getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper.getString(a, "reason_doze_content", "", WhiteIntentWrapper.getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), { d, w -> intent.startActivitySafely(a) })
+                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                                .show()
+                        wrapperList.add(intent)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+            }
+            SYSTEM -> {
+                try {
+                    AlertDialog.Builder(a)
+                            .setCancelable(false)
+                            .setTitle(WhiteIntentWrapper.getString(a, "reason_system_title", WhiteIntentWrapper.getApplicationName(a)))
+                            .setMessage(WhiteIntentWrapper.getString(a, "reason_system_content", reason, WhiteIntentWrapper.getApplicationName(a)))
+                            .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), DialogInterface.OnClickListener { d, w -> intent.startActivitySafely(a) })
+                            .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                            .show()
+                    wrapperList.add(intent)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+
+            }
         }
 
-        try {
-            AlertDialog.Builder(a)
-                    .setCancelable(false)
-                    .setTitle(WhiteIntentWrapper.getString(a, "reason_doze_title", WhiteIntentWrapper.getApplicationName(a)))
-                    .setMessage(WhiteIntentWrapper.getString(a, "reason_doze_content", "", WhiteIntentWrapper.getApplicationName(a)))
-                    .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), DialogInterface.OnClickListener { d, w -> intent.startActivitySafely(a) })
-                    .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
-                    .show()
-            wrapperList.add(intent)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
 
     }
 }

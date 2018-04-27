@@ -1,11 +1,15 @@
 package com.raqust.bluko.common.wrapper.impl
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.util.Log
 import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
+import android.content.DialogInterface
+
+
 
 
 /**
@@ -13,9 +17,9 @@ import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
  * time: 2018/4/17.
  * info:
  */
-class OppoRom : IRom {
+class OppoRom : SystemRom() {
 
-    val tag = "OppoRom"
+    override val tag = "OppoRom"
 
     //Oppo 自启动管理
     private val OPPO_PM = 0x50//权限管理
@@ -23,6 +27,7 @@ class OppoRom : IRom {
     private val OPPO_GOD = 0x52
 
     override fun getIntent(context: Context, sIntentWrapperList: MutableList<WhiteIntentWrapper>) {
+        super.getIntent(context, sIntentWrapperList)
         //小米 自启动管理
         //Oppo 自启动管理
         Log.d("WhiteIntent", "Oppo手机")
@@ -116,6 +121,54 @@ class OppoRom : IRom {
             }
         }
     }
-    override fun showDilog(a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
+    override fun showDilog(reason:String,a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
+        super.showDilog(reason,a, intent, wrapperList)
+        when (intent.type) {
+            OPPO_SM -> {
+                try {
+                    AlertDialog.Builder(a)
+                            .setCancelable(false)
+                            .setTitle(WhiteIntentWrapper.getString(a, "reason_oppo_sm_title",WhiteIntentWrapper.getApplicationName(a)))
+                            .setMessage(WhiteIntentWrapper.getString(a, "reason_oppo_sm_content", reason,WhiteIntentWrapper.getApplicationName(a),WhiteIntentWrapper.getApplicationName(a)))
+                            .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), DialogInterface.OnClickListener { d, w -> intent.startActivitySafely(a) })
+                            .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                            .show()
+                    wrapperList.add(intent)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+
+            }
+            OPPO_PM -> {
+                try {
+                    AlertDialog.Builder(a)
+                            .setCancelable(false)
+                            .setTitle(WhiteIntentWrapper.getString(a, "reason_oppo_pm_title",WhiteIntentWrapper.getApplicationName(a)))
+                            .setMessage(WhiteIntentWrapper.getString(a, "reason_oppo_pm_content", reason,WhiteIntentWrapper.getApplicationName(a),WhiteIntentWrapper.getApplicationName(a)))
+                            .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), DialogInterface.OnClickListener { d, w -> intent.startActivitySafely(a) })
+                            .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                            .show()
+                    wrapperList.add(intent)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+
+            }
+            OPPO_GOD -> {
+                try {
+                    AlertDialog.Builder(a)
+                            .setCancelable(false)
+                            .setTitle(WhiteIntentWrapper.getString(a, "reason_oppo_god_title",WhiteIntentWrapper.getApplicationName(a)))
+                            .setMessage(WhiteIntentWrapper.getString(a, "reason_oppo_god_content", reason,WhiteIntentWrapper.getApplicationName(a),WhiteIntentWrapper.getApplicationName(a)))
+                            .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), DialogInterface.OnClickListener { d, w -> intent.startActivitySafely(a) })
+                            .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                            .show()
+                    wrapperList.add(intent)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+
+            }
+        }
     }
 }

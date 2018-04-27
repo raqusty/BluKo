@@ -93,10 +93,7 @@
         </activity>
 
         <activity android:name=".module.smart.SmartActivity">
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+
         </activity>
 
         <activity
@@ -109,10 +106,10 @@
         </activity>
 
         <activity android:name=".module.wanbeiActivity.InviteActivity">
-            <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
 
         <activity android:name=".module.queue.QueueActivity">
@@ -148,8 +145,8 @@
 
         <activity android:name=".module.lazyFragment.LazyActivity">
             <intent-filter>
-                <!--<action android:name="android.intent.action.MAIN" />-->
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <action android:name="LazyActivity" />
             </intent-filter>
@@ -158,7 +155,12 @@
 
         <activity android:name=".module.XalleActivity"></activity>
         <activity android:name="com.raqust.bluko.module.main.FirstActivity"></activity>
-        <activity android:name="com.raqust.bluko.module.LoginActivity"></activity>
+        <activity android:name="com.raqust.bluko.module.LoginActivity">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
 
         <activity android:name="com.raqust.bluko.module.Gallery.GalleryFinal">
             <!--<intent-filter>-->

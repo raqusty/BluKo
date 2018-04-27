@@ -29,7 +29,9 @@ public abstract class BaseFragment extends Fragment implements
 
     // 第一次可见时的状态
     private boolean firstVisible = true;
-
+    // 是否加载过view ，为了预防懒加载，第一个view 是先加loadData 再loadView
+    private boolean isLoadView = false;
+    private boolean isFirst = true;
     /**
      * 获取ContentView的资源ID
      *
@@ -56,9 +58,11 @@ public abstract class BaseFragment extends Fragment implements
 
         if (isVisibleToUser) {
             // 可见时执行的操作
-            if (firstVisible) {
-                firstVisibleInitData();
+            if (firstVisible && isLoadView) {
                 firstVisible = false;
+                firstVisibleInitData();
+            }else {
+                isFirst = false;
             }
         } else {
             // 不可见的时候执行操作
@@ -86,8 +90,13 @@ public abstract class BaseFragment extends Fragment implements
                 mRootView = view;
                 // 初始化界面
                 initViews(mRootView);
+
+                isLoadView = true;
                 // 设置监听器
                 setListener();
+                if (!isFirst){
+                    firstVisibleInitData();
+                }
             }
         }
         return mRootView;

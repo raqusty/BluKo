@@ -1,11 +1,17 @@
 package com.raqust.bluko.common.wrapper.impl
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.os.Build
+import android.support.annotation.RequiresApi
 import android.util.Log
 import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
+import android.content.DialogInterface
+
+
 
 
 /**
@@ -13,16 +19,18 @@ import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
  * time: 2018/4/17.
  * info:
  */
-class FlymeRom : IRom {
+class FlymeRom : SystemRom() {
 
-    val tag = "FlymeRom"
+    override val tag = "FlymeRom"
 
     //魅族 自启动管理
     private val MEIZU = 0x40
     //魅族 待机耗电管理
     private val MEIZU_GOD = 0x41
 
-    override    fun getIntent(context: Context, sIntentWrapperList: MutableList<WhiteIntentWrapper>) {
+    @RequiresApi(Build.VERSION_CODES.M)
+    override fun getIntent(context: Context, sIntentWrapperList: MutableList<WhiteIntentWrapper>) {
+        super.getIntent(context, sIntentWrapperList)
         //魅族 自启动管理
         Log.d("WhiteIntent", "魅族手机")
         var meizuIntent = Intent("com.meizu.safe.security.SHOW_APPSEC")
@@ -61,7 +69,41 @@ class FlymeRom : IRom {
         }
     }
 
-    override fun showDilog(a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
+    override fun showDilog(reason:String,a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
+        super.showDilog(reason,a, intent, wrapperList)
+        when (intent.type) {
+            MEIZU_GOD -> {
+                try {
+                    AlertDialog.Builder(a)
+                            .setCancelable(false)
+                            .setTitle(WhiteIntentWrapper.getString(a, "reason_mz_god_title",WhiteIntentWrapper.getApplicationName(a)))
+                            .setMessage(WhiteIntentWrapper.getString(a, "reason_mz_god_content", reason,WhiteIntentWrapper.getApplicationName(a),WhiteIntentWrapper.getApplicationName(a)))
+                            .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), DialogInterface.OnClickListener { d, w -> intent.startActivitySafely(a) })
+                            .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                            .show()
+                    wrapperList.add(intent)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+
+            }
+            MEIZU -> {
+                try {
+                    AlertDialog.Builder(a)
+                            .setCancelable(false)
+                            .setTitle(WhiteIntentWrapper.getString(a, "reason_mz_title",WhiteIntentWrapper.getApplicationName(a)))
+                            .setMessage(WhiteIntentWrapper.getString(a, "reason_mz_content", reason,WhiteIntentWrapper.getApplicationName(a)))
+                            .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), DialogInterface.OnClickListener { d, w -> intent.startActivitySafely(a) })
+                            .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                            .show()
+                    wrapperList.add(intent)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+
+
+            }
+        }
     }
 
 }

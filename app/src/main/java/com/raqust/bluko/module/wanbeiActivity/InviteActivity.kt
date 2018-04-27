@@ -1,11 +1,8 @@
 package com.raqust.bluko.module.wanbeiActivity
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
-import android.graphics.drawable.RotateDrawable
-import android.net.Uri
 import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,13 +11,10 @@ import android.widget.TextView
 import com.raqust.bluko.R
 import com.raqust.bluko.common.activity.BaseActivity
 import com.raqust.bluko.common.activity.ToolBarManager
-import com.raqust.bluko.common.utils.AppUtil
-import com.raqust.bluko.common.utils.NotificationsUtils
-import com.raqust.bluko.common.wrapper1.WhiteIntentWrapper
-import com.raqust.bluko.module.main.FirstActivity
+import com.raqust.bluko.common.utils.VersionUtil
+import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
 import kotlinx.android.synthetic.main.activity_invite.*
-import java.net.URI
-import java.util.LinkedHashMap
+import java.util.*
 
 /**
  * Created by linzehao
@@ -44,17 +38,34 @@ class InviteActivity : BaseActivity() {
         layerDrawable = LayerDrawable(layers)
         image.setImageDrawable(layerDrawable)
 
+//        WhiteIntentWrapper.whiteListMatters(this, "测试")
 
-        if (!NotificationsUtils.isNotificationEnabled(this)){
-            NotificationsUtils. goToSetNotification(this)
-        }
+        val v1 = "1.0.2.33"
+        val v2 = "1.0.2.444"
+        val v3 = "1.0.2.1"
+        val v4 = "1.0.2"
+        val v5 = "1.0.5"
+        val v6 = "1.0.66.32"
 
-        activities!![FirstActivity::class.java]
+        Log.i("linzehao","a   "+VersionUtil.compareVersion(v1,v2))
+        Log.i("linzehao","b   "+VersionUtil.compareVersion(v2,v1))
+        Log.i("linzehao","c   "+VersionUtil.compareVersion(v1,v3))
+        Log.i("linzehao","d   "+VersionUtil.compareVersion(v1,v4))
+        Log.i("linzehao","e   "+VersionUtil.compareVersion(v1,v5))
+        Log.i("linzehao","f   "+VersionUtil.compareVersion(v1,v6))
+
+        Log.i("linzehao","a   "+VersionUtil.duibi(v1,v2))
+        Log.i("linzehao","b   "+VersionUtil.duibi(v2,v1))
+        Log.i("linzehao","c   "+VersionUtil.duibi(v1,v3))
+        Log.i("linzehao","d   "+VersionUtil.duibi(v1,v4))
+        Log.i("linzehao","e   "+VersionUtil.duibi(v1,v5))
+        Log.i("linzehao","f   "+VersionUtil.duibi(v1,v6))
+
     }
-    private var activities: LinkedHashMap<Class<*>, Activity>? = LinkedHashMap()
+
 
     private fun getText(value: String): View {
-        val rootView = inflater.inflate(R.layout.item_tag_property, null)  as View
+        val rootView = inflater.inflate(R.layout.item_tag_property, null) as View
         val textView = rootView.findViewById(R.id.textview) as TextView
         textView.text = value
         textView.setOnClickListener {

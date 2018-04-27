@@ -95,13 +95,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-        JShareInterface.setDebugMode(true);
-        JShareInterface.init(this);
-        Log.i("linzehao","asdf");
-        List<String> platforms = JShareInterface.getPlatformList();
-        for(String str:platforms){
-            Log.i("linzehao",str);
-        }
+
     }
 
     @Override

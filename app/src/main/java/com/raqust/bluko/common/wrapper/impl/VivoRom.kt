@@ -1,11 +1,15 @@
 package com.raqust.bluko.common.wrapper.impl
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.util.Log
 import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
+import android.content.DialogInterface
+
+
 
 
 /**
@@ -13,15 +17,16 @@ import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
  * time: 2018/4/17.
  * info:
  */
-class VivoRom : IRom {
+class VivoRom : SystemRom() {
 
-    val tag = "VivoRom"
+    override val tag = "VivoRom"
 
     //Vivo 后台高耗电
     private val VIVO = 0x60
     private val VIVO_GOD = 0x61
 
     override   fun getIntent(context: Context, sIntentWrapperList: MutableList<WhiteIntentWrapper>) {
+        super.getIntent(context, sIntentWrapperList)
         //Vivo 后台高耗电
         Log.d("WhiteIntent", "Vivo手机")
         var vivoIntent = Intent()
@@ -71,6 +76,39 @@ class VivoRom : IRom {
         }
     }
 
-    override fun showDilog(a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
+    override fun showDilog(reason:String,a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
+        super.showDilog(reason,a, intent, wrapperList)
+        when (intent.type) {
+            DOZE -> {
+                try {
+                    AlertDialog.Builder(a)
+                            .setCancelable(false)
+                            .setTitle(WhiteIntentWrapper.getString(a, "reason_vv_title",WhiteIntentWrapper.getApplicationName(a)))
+                            .setMessage(WhiteIntentWrapper.getString(a, "reason_vv_content", reason,WhiteIntentWrapper.getApplicationName(a),WhiteIntentWrapper.getApplicationName(a),WhiteIntentWrapper.getApplicationName(a)))
+                            .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), DialogInterface.OnClickListener { d, w -> intent.startActivitySafely(a) })
+                            .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                            .show()
+                    wrapperList.add(intent)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+
+            }
+            VIVO_GOD -> {
+                try {
+                    AlertDialog.Builder(a)
+                            .setCancelable(false)
+                            .setTitle(WhiteIntentWrapper.getString(a, "reason_vv_god_title",WhiteIntentWrapper.getApplicationName(a)))
+                            .setMessage(WhiteIntentWrapper.getString(a, "reason_vv_god_content", reason,WhiteIntentWrapper.getApplicationName(a),WhiteIntentWrapper.getApplicationName(a),WhiteIntentWrapper.getApplicationName(a)))
+                            .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), DialogInterface.OnClickListener { d, w -> intent.startActivitySafely(a) })
+                            .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                            .show()
+                    wrapperList.add(intent)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+
+            }
+        }
     }
 }

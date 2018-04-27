@@ -1,11 +1,15 @@
 package com.raqust.bluko.common.wrapper.impl
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.util.Log
 import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
+import android.content.DialogInterface
+
+
 
 
 /**
@@ -13,9 +17,9 @@ import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
  * time: 2018/4/17.
  * info:
  */
-class LetvRom : IRom {
+class LetvRom : SystemRom() {
 
-    val tag = "LetvRom"
+    override  val tag = "LetvRom"
 
     //乐视 自启动管理
     private val LETV = 0x90
@@ -23,6 +27,7 @@ class LetvRom : IRom {
     private val LETV_GOD = 0x91
 
     override fun getIntent(context: Context, sIntentWrapperList: MutableList<WhiteIntentWrapper>) {
+        super.getIntent(context, sIntentWrapperList)
         //乐视 自启动管理
         Log.d("WhiteIntent", "乐视手机")
         var letvIntent = Intent()
@@ -72,6 +77,24 @@ class LetvRom : IRom {
         }
     }
 
-    override fun showDilog(a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
+    override fun showDilog(reason:String,a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
+        super.showDilog(reason,a, intent, wrapperList)
+        when (intent.type) {
+            LETV -> {
+                try {
+                    AlertDialog.Builder(a)
+                            .setCancelable(false)
+                            .setTitle(WhiteIntentWrapper.getString(a, "reason_le_title",WhiteIntentWrapper.getApplicationName(a)))
+                            .setMessage(WhiteIntentWrapper.getString(a, "reason_le_content", reason,WhiteIntentWrapper.getApplicationName(a),WhiteIntentWrapper.getApplicationName(a)))
+                            .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), DialogInterface.OnClickListener { d, w -> intent.startActivitySafely(a) })
+                            .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                            .show()
+                    wrapperList.add(intent)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+
+            }
+        }
     }
 }

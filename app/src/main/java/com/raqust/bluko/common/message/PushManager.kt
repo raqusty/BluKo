@@ -15,8 +15,8 @@ object PushManager : IPushProvider {
     private val pushImpl: IPushProvider by lazy {
         //todo 这里通过判断是什么机子，来决定用sdk
 //        JpushImpl()
-//        HuapushImpl()
-        MipushImpl()
+        HuapushImpl()
+//        MipushImpl()
 
 //        MeizuPushImpl()
     }

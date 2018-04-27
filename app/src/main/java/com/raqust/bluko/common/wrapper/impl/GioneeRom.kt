@@ -1,11 +1,15 @@
 package com.raqust.bluko.common.wrapper.impl
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.util.Log
 import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
+import android.content.DialogInterface
+
+
 
 
 /**
@@ -13,14 +17,15 @@ import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
  * time: 2018/4/17.
  * info:
  */
-class GioneeRom : IRom {
+class GioneeRom : SystemRom() {
 
-    val tag = "ZTERom"
+    override val tag = "ZTERom"
 
     //金立 应用自启
     private val GIONEE = 0x80
 
     override fun getIntent(context: Context, sIntentWrapperList: MutableList<WhiteIntentWrapper>) {
+        super.getIntent(context, sIntentWrapperList)
         //金立 应用自启
         Log.d("WhiteIntent", "金立手机")
         val gioneeIntent = Intent()
@@ -35,6 +40,24 @@ class GioneeRom : IRom {
             Log.e("WhiteIntent", "不可通过com.gionee.softmanager.MainActivity跳转自启动设置")
         }
     }
-    override fun showDilog(a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
+    override fun showDilog(reason:String,a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
+        super.showDilog(reason,a, intent, wrapperList)
+        when (intent.type) {
+            GIONEE -> {
+                try {
+                    AlertDialog.Builder(a)
+                            .setCancelable(false)
+                            .setTitle(WhiteIntentWrapper.getString(a, "reason_jl_title",WhiteIntentWrapper.getApplicationName(a)))
+                            .setMessage(WhiteIntentWrapper.getString(a, "reason_jl_content", reason,WhiteIntentWrapper.getApplicationName(a),WhiteIntentWrapper.getApplicationName(a),WhiteIntentWrapper.getApplicationName(a)))
+                            .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), DialogInterface.OnClickListener { d, w -> intent.startActivitySafely(a) })
+                            .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                            .show()
+                    wrapperList.add(intent)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+
+            }
+        }
     }
 }

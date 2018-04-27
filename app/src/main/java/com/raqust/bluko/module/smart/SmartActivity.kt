@@ -60,22 +60,22 @@ class SmartActivity : BaseActivity() {
             }
         })
 
-        scrollView.setOnScrollChangeListener(object : NestedScrollView.OnScrollChangeListener {
-            private var lastScrollY = 0
-            private val h = DensityUtil.dp2px(170f)
-            private val color = ContextCompat.getColor(applicationContext, R.color.colorPrimary) and 0x00ffffff
-            override fun onScrollChange(v: NestedScrollView, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int) {
-                var scrollY = scrollY
-                if (lastScrollY < h) {
-                    scrollY = Math.min(h, scrollY)
-                    mScrollY = if (scrollY > h) h else scrollY
-                    buttonBarLayout.setAlpha(1f * mScrollY / h)
-                    toolbar.setBackgroundColor(255 * mScrollY / h shl 24 or color)
-                    parallax.translationY = (mOffset - mScrollY).toFloat()
-                }
-                lastScrollY = scrollY
-            }
-        })
+//        scrollView.setOnScrollChangeListener(object : NestedScrollView.OnScrollChangeListener {
+//            private var lastScrollY = 0
+//            private val h = DensityUtil.dp2px(170f)
+//            private val color = ContextCompat.getColor(applicationContext, R.color.colorPrimary) and 0x00ffffff
+//            override fun onScrollChange(v: NestedScrollView, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int) {
+//                var scrollY = scrollY
+//                if (lastScrollY < h) {
+//                    scrollY = Math.min(h, scrollY)
+//                    mScrollY = if (scrollY > h) h else scrollY
+//                    buttonBarLayout.setAlpha(1f * mScrollY / h)
+//                    toolbar.setBackgroundColor(255 * mScrollY / h shl 24 or color)
+//                    parallax.translationY = (mOffset - mScrollY).toFloat()
+//                }
+//                lastScrollY = scrollY
+//            }
+//        })
         buttonBarLayout.setAlpha(0f)
         toolbar.setBackgroundColor(0)
     }

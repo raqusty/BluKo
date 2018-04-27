@@ -704,8 +704,8 @@ public final class WhiteIntentWrapper {
         }
 
         List<WhiteIntentWrapper> intentWrapperList = getIntentWrapperList(a);
-        for (final WhiteIntentWrapper iw : intentWrapperList) {
-            switch (iw.type) {
+        for (final WhiteIntentWrapper intent : intentWrapperList) {
+            switch (intent.type) {
                 case DOZE:
                     PowerManager pm = (PowerManager) a.getSystemService(Context.POWER_SERVICE);
                     if (pm.isIgnoringBatteryOptimizations(a.getPackageName())) {
@@ -715,16 +715,16 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(getString(a, "reason_doze_title", getApplicationName(a)))
-                                .setMessage(getString(a, "reason_doze_content", reason, getApplicationName(a)))
-                                .setPositiveButton(getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper.getString(a, "reason_doze_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper.getString(a, "reason_doze_content", reason, getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
-                                        iw.startActivitySafely(a);
+                                        intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
                                 .show();
-                        showed.add(iw);
+                        showed.add(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -733,16 +733,16 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(getString(a, "reason_system_title", getApplicationName(a)))
-                                .setMessage(getString(a, "reason_system_content", reason, getApplicationName(a)))
-                                .setPositiveButton(getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper.getString(a, "reason_system_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper.getString(a, "reason_system_content", reason, getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
-                                        iw.startActivitySafely(a);
+                                        intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
                                 .show();
-                        showed.add(iw);
+                        showed.add(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -751,16 +751,16 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(getString(a, "reason_hw_god_title", getApplicationName(a)))
-                                .setMessage(getString(a, "reason_hw_god_content", reason, getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper.getString(a, "reason_hw_god_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper.getString(a, "reason_hw_god_content", reason, getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
-                                        iw.startActivitySafely(a);
+                                        intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
                                 .show();
-                        showed.add(iw);
+                        showed.add(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -769,16 +769,16 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(getString(a, "reason_hw_title", getApplicationName(a)))
-                                .setMessage(getString(a, "reason_hw_content", reason, getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper.getString(a, "reason_hw_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper.getString(a, "reason_hw_content", reason, getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
-                                        iw.startActivitySafely(a);
+                                        intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
                                 .show();
-                        showed.add(iw);
+                        showed.add(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -787,16 +787,16 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(getString(a, "reason_xm_god_title", getApplicationName(a)))
-                                .setMessage(getString(a, "reason_xm_god_content", reason, getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper.getString(a, "reason_xm_god_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper.getString(a, "reason_xm_god_content", reason, getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
-                                        iw.startActivitySafely(a);
+                                        intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
                                 .show();
-                        showed.add(iw);
+                        showed.add(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -805,16 +805,16 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(getString(a, "reason_xm_title", getApplicationName(a)))
-                                .setMessage(getString(a, "reason_xm_content", reason, getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper.getString(a, "reason_xm_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper.getString(a, "reason_xm_content", reason, getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
-                                        iw.startActivitySafely(a);
+                                        intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
                                 .show();
-                        showed.add(iw);
+                        showed.add(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -823,16 +823,16 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(getString(a, "reason_ss_title", getApplicationName(a)))
-                                .setMessage(getString(a, "reason_ss_content", reason, getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper.getString(a, "reason_ss_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper.getString(a, "reason_ss_content", reason, getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
-                                        iw.startActivitySafely(a);
+                                        intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
                                 .show();
-                        showed.add(iw);
+                        showed.add(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -841,16 +841,16 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(getString(a, "reason_sony_title", getApplicationName(a)))
-                                .setMessage(getString(a, "reason_sony_content", reason, getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper.getString(a, "reason_sony_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper.getString(a, "reason_sony_content", reason, getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
-                                        iw.startActivitySafely(a);
+                                        intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
                                 .show();
-                        showed.add(iw);
+                        showed.add(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -859,16 +859,16 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(getString(a, "reason_lg_title", getApplicationName(a)))
-                                .setMessage(getString(a, "reason_lg_content", reason, getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper.getString(a, "reason_lg_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper.getString(a, "reason_lg_content", reason, getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
-                                        iw.startActivitySafely(a);
+                                        intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
                                 .show();
-                        showed.add(iw);
+                        showed.add(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -877,16 +877,16 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(getString(a, "reason_mz_god_title", getApplicationName(a)))
-                                .setMessage(getString(a, "reason_mz_god_content", reason, getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper.getString(a, "reason_mz_god_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper.getString(a, "reason_mz_god_content", reason, getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
-                                        iw.startActivitySafely(a);
+                                        intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
                                 .show();
-                        showed.add(iw);
+                        showed.add(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -895,16 +895,16 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(getString(a, "reason_mz_title", getApplicationName(a)))
-                                .setMessage(getString(a, "reason_mz_content", reason, getApplicationName(a)))
-                                .setPositiveButton(getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper.getString(a, "reason_mz_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper.getString(a, "reason_mz_content", reason, getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
-                                        iw.startActivitySafely(a);
+                                        intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
                                 .show();
-                        showed.add(iw);
+                        showed.add(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -913,16 +913,16 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(getString(a, "reason_zte_god_title", getApplicationName(a)))
-                                .setMessage(getString(a, "reason_zte_god_content", reason, getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper.getString(a, "reason_zte_god_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper.getString(a, "reason_zte_god_content", reason, getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
-                                        iw.startActivitySafely(a);
+                                        intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
                                 .show();
-                        showed.add(iw);
+                        showed.add(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -931,16 +931,16 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(getString(a, "reason_zte_title", getApplicationName(a)))
-                                .setMessage(getString(a, "reason_zte_content", reason, getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper.getString(a, "reason_zte_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper.getString(a, "reason_zte_content", reason, getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
-                                        iw.startActivitySafely(a);
+                                        intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
                                 .show();
-                        showed.add(iw);
+                        showed.add(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -949,16 +949,16 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(getString(a, "reason_le_god_title", getApplicationName(a)))
-                                .setMessage(getString(a, "reason_le_god_content", reason, getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper.getString(a, "reason_le_god_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper.getString(a, "reason_le_god_content", reason, getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
-                                        iw.startActivitySafely(a);
+                                        intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
                                 .show();
-                        showed.add(iw);
+                        showed.add(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -967,16 +967,16 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(getString(a, "reason_le_title", getApplicationName(a)))
-                                .setMessage(getString(a, "reason_le_content", reason, getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper.getString(a, "reason_le_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper.getString(a, "reason_le_content", reason, getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
-                                        iw.startActivitySafely(a);
+                                        intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
                                 .show();
-                        showed.add(iw);
+                        showed.add(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -985,16 +985,16 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(getString(a, "reason_oppo_sm_title", getApplicationName(a)))
-                                .setMessage(getString(a, "reason_oppo_sm_content", reason, getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper.getString(a, "reason_oppo_sm_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper.getString(a, "reason_oppo_sm_content", reason, getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
-                                        iw.startActivitySafely(a);
+                                        intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
                                 .show();
-                        showed.add(iw);
+                        showed.add(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -1003,16 +1003,16 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(getString(a, "reason_oppo_pm_title", getApplicationName(a)))
-                                .setMessage(getString(a, "reason_oppo_pm_content", reason, getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper.getString(a, "reason_oppo_pm_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper.getString(a, "reason_oppo_pm_content", reason, getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
-                                        iw.startActivitySafely(a);
+                                        intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
                                 .show();
-                        showed.add(iw);
+                        showed.add(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -1021,16 +1021,16 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(getString(a, "reason_oppo_god_title", getApplicationName(a)))
-                                .setMessage(getString(a, "reason_oppo_god_content", reason, getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper.getString(a, "reason_oppo_god_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper.getString(a, "reason_oppo_god_content", reason, getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
-                                        iw.startActivitySafely(a);
+                                        intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
                                 .show();
-                        showed.add(iw);
+                        showed.add(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -1039,16 +1039,16 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(getString(a, "reason_cp_title", getApplicationName(a)))
-                                .setMessage(getString(a, "reason_cp_content", reason, getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper.getString(a, "reason_cp_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper.getString(a, "reason_cp_content", reason, getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
-                                        iw.startActivitySafely(a);
+                                        intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
                                 .show();
-                        showed.add(iw);
+                        showed.add(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -1057,16 +1057,16 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(getString(a, "reason_vv_title", getApplicationName(a)))
-                                .setMessage(getString(a, "reason_vv_content", reason, getApplicationName(a), getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper.getString(a, "reason_vv_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper.getString(a, "reason_vv_content", reason, getApplicationName(a), getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
-                                        iw.startActivitySafely(a);
+                                        intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
                                 .show();
-                        showed.add(iw);
+                        showed.add(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -1075,16 +1075,16 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(getString(a, "reason_vv_god_title", getApplicationName(a)))
-                                .setMessage(getString(a, "reason_vv_god_content", reason, getApplicationName(a), getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper.getString(a, "reason_vv_god_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper.getString(a, "reason_vv_god_content", reason, getApplicationName(a), getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
-                                        iw.startActivitySafely(a);
+                                        intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
                                 .show();
-                        showed.add(iw);
+                        showed.add(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -1093,16 +1093,16 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(getString(a, "reason_jl_title", getApplicationName(a)))
-                                .setMessage(getString(a, "reason_jl_content", reason, getApplicationName(a), getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper.getString(a, "reason_jl_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper.getString(a, "reason_jl_content", reason, getApplicationName(a), getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
-                                        iw.startActivitySafely(a);
+                                        intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
                                 .show();
-                        showed.add(iw);
+                        showed.add(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -1111,16 +1111,16 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(getString(a, "reason_lv_god_title", getApplicationName(a)))
-                                .setMessage(getString(a, "reason_lv_god_content", reason, getApplicationName(a), getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper.getString(a, "reason_lv_god_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper.getString(a, "reason_lv_god_content", reason, getApplicationName(a), getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
-                                        iw.startActivitySafely(a);
+                                        intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
                                 .show();
-                        showed.add(iw);
+                        showed.add(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -1129,16 +1129,16 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(getString(a, "reason_lv_title", getApplicationName(a)))
-                                .setMessage(getString(a, "reason_lv_content", reason, getApplicationName(a), getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper.getString(a, "reason_lv_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper.getString(a, "reason_lv_content", reason, getApplicationName(a), getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
-                                        iw.startActivitySafely(a);
+                                        intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
                                 .show();
-                        showed.add(iw);
+                        showed.add(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -1147,16 +1147,16 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(getString(a, "reason_system_title", getApplicationName(a)))
-                                .setMessage(getString(a, "reason_system_content", reason, getApplicationName(a), getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper.getString(a, "reason_system_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper.getString(a, "reason_system_content", reason, getApplicationName(a), getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
-                                        iw.startActivitySafely(a);
+                                        intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
                                 .show();
-                        showed.add(iw);
+                        showed.add(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

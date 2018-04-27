@@ -21,8 +21,6 @@ class LazyActivity :BaseActivity(){
         fragments.add(LazyFragment2())
         fragments.add(LazyFragment3())
         fragments.add(LazyFragment4())
-
-
     }
 
     override fun initViews() {
@@ -31,7 +29,7 @@ class LazyActivity :BaseActivity(){
             override fun getItem(position: Int) = fragments[position]
             override fun getPageTitle(position: Int) = ""
         }
-        pager.offscreenPageLimit = fragments.size
+        pager.offscreenPageLimit = 1
     }
 
     override fun getToolBarResId(): Int =0

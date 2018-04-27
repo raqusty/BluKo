@@ -1,12 +1,16 @@
 package com.raqust.bluko.common.wrapper.impl
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
+import android.content.DialogInterface
+
+
 
 
 /**
@@ -14,15 +18,16 @@ import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
  * time: 2018/4/17.
  * info:
  */
-class SamsungRom : IRom {
+class SamsungRom : SystemRom() {
 
-    val tag = "SamsungRom"
+    override  val tag = "SamsungRom"
 
     //三星
     private val SAMSUNG = 0x30
 
 
     override  fun getIntent(context: Context, sIntentWrapperList: MutableList<WhiteIntentWrapper>) {
+        super.getIntent(context, sIntentWrapperList)
         //三星自启动应用程序管理
         Log.d("WhiteIntent", "三星手机")
         var samsungIntent: Intent? = Intent()
@@ -71,7 +76,7 @@ class SamsungRom : IRom {
                     Log.d("WhiteIntent", "尝试通过com.android.settings.applications.AppOpsDetails跳转应用详情页-->" + samsungIntent.toString())
                     if (WhiteIntentWrapper.doesActivityExists(context, samsungIntent)) {
                         Log.d("WhiteIntent", "可通过com.android.settings.applications.AppOpsDetails跳转应用详情页")
-                        sIntentWrapperList.add(WhiteIntentWrapper(samsungIntent, WhiteIntentWrapper.SYSTEM))
+                        sIntentWrapperList.add(WhiteIntentWrapper(samsungIntent, SYSTEM))
                     } else {
                         Log.e("WhiteIntent", "不可通过com.android.settings.applications.AppOpsDetails跳转应用详情页")
                     }
@@ -80,6 +85,24 @@ class SamsungRom : IRom {
         }
     }
 
-    override fun showDilog(a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
+    override fun showDilog(reason:String,a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
+        super.showDilog(reason,a, intent, wrapperList)
+        when (intent.type) {
+            DOZE -> {
+                try {
+                    AlertDialog.Builder(a)
+                            .setCancelable(false)
+                            .setTitle(WhiteIntentWrapper.getString(a, "reason_ss_title",WhiteIntentWrapper.getApplicationName(a)))
+                            .setMessage(WhiteIntentWrapper.getString(a, "reason_ss_content", reason,WhiteIntentWrapper.getApplicationName(a),WhiteIntentWrapper.getApplicationName(a)))
+                            .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), DialogInterface.OnClickListener { d, w -> intent.startActivitySafely(a) })
+                            .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                            .show()
+                    wrapperList.add(intent)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+
+            }
+        }
     }
 }

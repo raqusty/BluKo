@@ -1,6 +1,7 @@
 package com.raqust.bluko.common.wrapper.impl
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -9,6 +10,9 @@ import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
+import android.content.DialogInterface
+
+
 
 
 /**
@@ -16,9 +20,9 @@ import java.io.InputStreamReader
  * time: 2018/4/17.
  * info:
  */
-class MiuiRom :IRom{
-    
-    val tag = "HuaweiRom"
+class MiuiRom : SystemRom() {
+
+    override  val tag = "EmuiRom"
 
     //小米 自启动管理
     private val XIAOMI = 0x20
@@ -26,6 +30,7 @@ class MiuiRom :IRom{
     private val XIAOMI_GOD = 0x21
 
     override fun getIntent(context:Context,sIntentWrapperList:MutableList<WhiteIntentWrapper>) {
+        super.getIntent(context, sIntentWrapperList)
         //小米 自启动管理
         Log.d("WhiteIntent", "小米手机" + getMiuiVersion())
         var xiaomiIntent = Intent()
@@ -116,6 +121,38 @@ class MiuiRom :IRom{
         return line
     }
 
-    override fun showDilog(a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
+    override fun showDilog(reason:String,a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
+        super.showDilog(reason,a, intent, wrapperList)
+        when (intent.type) {
+            XIAOMI_GOD -> {
+                try {
+                    AlertDialog.Builder(a)
+                            .setCancelable(false)
+                            .setTitle(WhiteIntentWrapper.getString(a, "reason_xm_god_title",WhiteIntentWrapper.getApplicationName(a)))
+                            .setMessage(WhiteIntentWrapper.getString(a, "reason_xm_god_content", reason,WhiteIntentWrapper.getApplicationName(a),WhiteIntentWrapper.getApplicationName(a)))
+                            .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), DialogInterface.OnClickListener { d, w -> intent.startActivitySafely(a) })
+                            .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                            .show()
+                    wrapperList.add(intent)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+            XIAOMI -> {
+                try {
+                    AlertDialog.Builder(a)
+                            .setCancelable(false)
+                            .setTitle(WhiteIntentWrapper.getString(a, "reason_xm_title",WhiteIntentWrapper.getApplicationName(a)))
+                            .setMessage(WhiteIntentWrapper.getString(a, "reason_xm_content", reason,WhiteIntentWrapper.getApplicationName(a),WhiteIntentWrapper.getApplicationName(a)))
+                            .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), DialogInterface.OnClickListener { d, w -> intent.startActivitySafely(a) })
+                            .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                            .show()
+                    wrapperList.add(intent)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+
+            }
+        }
     }
 }

@@ -15,8 +15,8 @@ class LazyFragment6 : BaseFragment(){
     var data1 = ""
     override fun initViews(view: View) {
         var text =  view.findViewById(R.id.text) as TextView
-        text.text = "123123"
-        Log.i("linzehao", "4")
+        text.text = data1
+        Log.i("linzehao", "initViews "+data1)
     }
 
     fun setData(data:String){
@@ -30,5 +30,10 @@ class LazyFragment6 : BaseFragment(){
 
     override fun firstVisibleInitData() {
         Log.i("linzehao", "pullData  "+data1)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.i("linzehao","onDestroy "+data1 )
     }
 }
