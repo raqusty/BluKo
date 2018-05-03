@@ -15,6 +15,8 @@ import java.util.*
  * Created by linzehao
  * time: 2018/4/28.
  * info:
+ *
+ *
  */
 class RecyclerViewActivity : BaseActivity() {
 
@@ -61,11 +63,8 @@ class RecyclerViewActivity : BaseActivity() {
                             mScrollListData[lastVisibleView].startTime = System.currentTimeMillis()
                         }
                         if (curFirstVisibleView != firstVisibleView) {
-                            //Log.i("linzehao", "向上显示 $curFirstVisibleView  last  $firstVisibleView")
-                            if (2000 < (System.currentTimeMillis() - mScrollListData[curFirstVisibleView].startTime)) {
-                                Log.i("linzehao", "向上消失  " + mListData[curFirstVisibleView] + "  " + (System.currentTimeMillis() - mScrollListData[curFirstVisibleView].startTime))
-                            }
-
+                            //Log.i("linzehao", "向上消失 $curFirstVisibleView  last  $firstVisibleView")
+                            logScrollView(curFirstVisibleView)
                         }
                     } else {
                         if (curFirstVisibleView != firstVisibleView) {
@@ -75,9 +74,7 @@ class RecyclerViewActivity : BaseActivity() {
 
                         if (curLastVisibleView != lastVisibleView) {
                             //Log.i("linzehao", "向下消失  $curLastVisibleView   last  $lastVisibleView")
-                            if (2000 < (System.currentTimeMillis() - mScrollListData[curLastVisibleView].startTime)) {
-                                Log.i("linzehao", "向下消失  " + mListData[curLastVisibleView] + "  " + (System.currentTimeMillis() - mScrollListData[curLastVisibleView].startTime))
-                            }
+                            logScrollView(curLastVisibleView)
                         }
                     }
                     curLastVisibleView = lastVisibleView
@@ -88,15 +85,24 @@ class RecyclerViewActivity : BaseActivity() {
         })
     }
 
+    //静止统计
     private fun logIdleView() {
-        Log.i("linzehao", "SCROLL_STATE_IDLE  " + commond_recycler.childCount)
         (0 until commond_recycler.childCount).forEach {
-            Log.i("linzehao", "111  " + it)
             val index = commond_recycler.getChildAdapterPosition(commond_recycler.getChildAt(it))
-            Log.i("linzehao", "222   " + index)
+            if (!mScrollListData[index].isLog){
+                Log.i("linzehao", "静止统计  " + mScrollListData[index].content )
+            }
             mScrollListData[index].isLog = true
         }
+    }
 
+    //滑动统计
+    private fun logScrollView(index:Int){
+        if (!mScrollListData[index].isLog && 2000 < (System.currentTimeMillis() - mScrollListData[index].startTime)) {
+            Log.i("linzehao", "消失  " + mListData[index] + "  " + (System.currentTimeMillis() - mScrollListData[index].startTime))
+        }
+        mScrollListData[index].isLog = false
+        mScrollListData[index].startTime = 0L
     }
 
     override fun initToolBar(navigationBarMgr: ToolBarManager?) {
