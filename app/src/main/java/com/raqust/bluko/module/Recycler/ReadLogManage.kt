@@ -12,8 +12,6 @@ import com.raqust.bluko.module.log.LogManager
 
 class ReadLogManage {
 
-    var LogIdleCallback: (() -> Unit)? = null
-
     var curLastVisibleView = 0
     var curFirstVisibleView = 0
 

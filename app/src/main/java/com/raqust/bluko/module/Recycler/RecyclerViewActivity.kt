@@ -1,7 +1,6 @@
 package com.raqust.bluko.module.Recycler
 
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.widget.LinearLayout
 import com.raqust.bluko.R
 import com.raqust.bluko.common.activity.BaseActivity
@@ -36,76 +35,24 @@ class RecyclerViewActivity : BaseActivity() {
 
     override fun getToolBarResId(): Int = 0
 
-    var curLastVisibleView = 0
-    var curFirstVisibleView = 0
 
     override fun setListener() {
-        commond_recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-
-            override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                //停止的时候上传日志
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    logIdleView()
-                    LogManager.logStopSlideAction()
-                }
+        ReadLogManage().addLogListten(commond_recycler, magager, {
+            if (!mScrollListData[it].isLog) {
+                //Log.i("linzehao", "静止统计  " + mScrollListData[index].content )
+                LogManager.logStartSlideAction("静止统计  " + mScrollListData[it].content)
             }
-
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                //第一次进来的时候上传日志
-                if (commond_recycler.scrollState == RecyclerView.SCROLL_STATE_IDLE) {
-                    logIdleView()
-                } else {
-                    val lastVisibleView = magager.findLastVisibleItemPosition()
-                    val firstVisibleView = magager.findFirstVisibleItemPosition()
-                    if (dy > 0) {////向下滚动
-                        if (curLastVisibleView != lastVisibleView) {
-                            //Log.i("linzehao", "向上显示 $curLastVisibleView  last  $lastVisibleView")
-                            mScrollListData[lastVisibleView].startTime = System.currentTimeMillis()
-                        }
-                        if (curFirstVisibleView != firstVisibleView) {
-                            //Log.i("linzehao", "向上消失 $curFirstVisibleView  last  $firstVisibleView")
-                            logScrollView(curFirstVisibleView)
-                        }
-                    } else {
-                        if (curFirstVisibleView != firstVisibleView) {
-                            //Log.i("linzehao", "向下显示  $curFirstVisibleView   last  $firstVisibleView")
-                            mScrollListData[firstVisibleView].startTime = System.currentTimeMillis()
-                        }
-
-                        if (curLastVisibleView != lastVisibleView) {
-                            //Log.i("linzehao", "向下消失  $curLastVisibleView   last  $lastVisibleView")
-                            logScrollView(curLastVisibleView)
-                        }
-                    }
-                    curLastVisibleView = lastVisibleView
-                    curFirstVisibleView = firstVisibleView
-                }
+            mScrollListData[it].isLog = true
+        }, {
+            mScrollListData[it].startTime = System.currentTimeMillis()
+        }, {
+            if (!mScrollListData[it].isLog && 1000 < (System.currentTimeMillis() - mScrollListData[it].startTime)) {
+                //Log.i("linzehao", "消失  " + mListData[index] + "  " + (System.currentTimeMillis() - mScrollListData[index].startTime))
+                LogManager.logStartSlideAction("消失  " + mListData[it] + "  " + (System.currentTimeMillis() - mScrollListData[it].startTime))
             }
-
+            mScrollListData[it].isLog = false
+            mScrollListData[it].startTime = 0L
         })
-    }
-
-    //静止统计
-    private fun logIdleView() {
-        (0 until commond_recycler.childCount).forEach {
-            val index = commond_recycler.getChildAdapterPosition(commond_recycler.getChildAt(it))
-            if (!mScrollListData[index].isLog) {
-//                Log.i("linzehao", "静止统计  " + mScrollListData[index].content )
-                LogManager.logStartSlideAction("静止统计  " + mScrollListData[index].content)
-            }
-            mScrollListData[index].isLog = true
-        }
-    }
-
-    //滑动统计
-    private fun logScrollView(index: Int) {
-        if (!mScrollListData[index].isLog && 2000 < (System.currentTimeMillis() - mScrollListData[index].startTime)) {
-//            Log.i("linzehao", "消失  " + mListData[index] + "  " + (System.currentTimeMillis() - mScrollListData[index].startTime))
-            LogManager.logStartSlideAction("消失  " + mListData[index] + "  " + (System.currentTimeMillis() - mScrollListData[index].startTime))
-        }
-        mScrollListData[index].isLog = false
-        mScrollListData[index].startTime = 0L
     }
 
     override fun initToolBar(navigationBarMgr: ToolBarManager?) {
