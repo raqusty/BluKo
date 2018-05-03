@@ -105,6 +105,14 @@
             <!--</intent-filter>-->
         </activity>
 
+        <activity
+            android:name="com.raqust.bluko.module.Recycler.RecyclerViewActivity">
+            <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".module.wanbeiActivity.InviteActivity">
             <!--<intent-filter>-->
             <!--<action android:name="android.intent.action.MAIN" />-->
@@ -144,12 +152,12 @@
         </activity>
 
         <activity android:name=".module.lazyFragment.LazyActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <action android:name="LazyActivity" />
-            </intent-filter>
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+                <!--<category android:name="android.intent.category.DEFAULT" />-->
+                <!--<action android:name="LazyActivity" />-->
+            <!--</intent-filter>-->
         </activity>
 
 

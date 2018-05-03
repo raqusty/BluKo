@@ -18,7 +18,7 @@ class HuapushImpl() : IPushProvider {
 //        HMSAgent.connect(application, ConnectHandler { rst -> showLog("HMS connect end:" + rst) })
         HMSAgent.Push.getToken {
             huaweiToken = it
-            Log.i("linzehao", "hua pust  " + huaweiToken.toString())
+//            Log.i("linzehao", "hua pust  " + huaweiToken.toString())
         }
     }
 
