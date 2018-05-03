@@ -50,8 +50,8 @@ object LogManager{
     /**
      * 滑动事件统计
      */
-    fun logStopSlideAction(value :String){
-        slideImpl.logAction(value,true)
+    fun logStopSlideAction(){
+        slideImpl.logSotpAction()
     }
 
     /**

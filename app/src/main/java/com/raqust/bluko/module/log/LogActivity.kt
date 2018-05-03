@@ -110,7 +110,7 @@ class LogActivity : BaseActivity() {
                 for (i in 0 until 10) {
                     LogManager.logStartSlideAction("" + index++)
                     if (i == 9){
-                        LogManager.logStopSlideAction("" + index++)
+//                        LogManager.logStopSlideAction("" + index++)
                     }
                 }
 

@@ -27,11 +27,12 @@ class SlideImpl {
 //            str = str + it + " "
 //        }
 //        Log.i(TAG, "数据  " + str)
-        if (stop) {
-            SaveManager.saveSlideAction(firstSlideCache)
-            firstSlideCache.clear()
-        }
 
+    }
+
+    fun logSotpAction() {
+        SaveManager.saveSlideAction(firstSlideCache)
+        firstSlideCache.clear()
     }
 
 }

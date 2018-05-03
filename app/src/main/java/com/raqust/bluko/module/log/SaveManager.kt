@@ -2,7 +2,6 @@ package com.raqust.bluko.module.log
 
 import android.util.Log
 import com.raqust.bluko.module.log.LogConstant.FIRST_CACHE
-import com.raqust.bluko.module.log.LogConstant.SECOND_SLIDE_CACHE
 import com.raqust.bluko.module.log.LogConstant.TAG
 import kotlin.concurrent.thread
 
@@ -84,16 +83,10 @@ object SaveManager {
      */
     @Synchronized
     private fun firToSecCacheBySlide() {
-        val secondSize = firstSlideCache.size
-        if (secondSize > SECOND_SLIDE_CACHE) {
-            if (!isLoopSlide) {
-                slideQueue.addAll(firstSlideCache)
-                firstSlideCache.clear()
-                startSlideLoop()
-            } else {
-                Log.i(TAG, "secondSize " + secondSize + " size " + (secondSize - SECOND_SLIDE_CACHE) + "  size " + SECOND_SLIDE_CACHE + 1)
-                firstSlideCache = firstSlideCache.subList(secondSize - SECOND_SLIDE_CACHE, secondSize)
-            }
+        if (!isLoopSlide) {
+            slideQueue.addAll(firstSlideCache)
+            firstSlideCache.clear()
+            startSlideLoop()
         }
     }
 

@@ -2,12 +2,12 @@ package com.raqust.bluko.module.Recycler
 
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.widget.LinearLayout
 import com.raqust.bluko.R
 import com.raqust.bluko.common.activity.BaseActivity
 import com.raqust.bluko.common.activity.ToolBarManager
 import com.raqust.bluko.module.ScrollToolActivity.itemAdapter
+import com.raqust.bluko.module.log.LogManager
 import kotlinx.android.synthetic.main.activity_recyclerview.*
 import java.util.*
 
@@ -47,6 +47,7 @@ class RecyclerViewActivity : BaseActivity() {
                 //停止的时候上传日志
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     logIdleView()
+                    LogManager.logStopSlideAction()
                 }
             }
 
@@ -89,17 +90,19 @@ class RecyclerViewActivity : BaseActivity() {
     private fun logIdleView() {
         (0 until commond_recycler.childCount).forEach {
             val index = commond_recycler.getChildAdapterPosition(commond_recycler.getChildAt(it))
-            if (!mScrollListData[index].isLog){
-                Log.i("linzehao", "静止统计  " + mScrollListData[index].content )
+            if (!mScrollListData[index].isLog) {
+//                Log.i("linzehao", "静止统计  " + mScrollListData[index].content )
+                LogManager.logStartSlideAction("静止统计  " + mScrollListData[index].content)
             }
             mScrollListData[index].isLog = true
         }
     }
 
     //滑动统计
-    private fun logScrollView(index:Int){
+    private fun logScrollView(index: Int) {
         if (!mScrollListData[index].isLog && 2000 < (System.currentTimeMillis() - mScrollListData[index].startTime)) {
-            Log.i("linzehao", "消失  " + mListData[index] + "  " + (System.currentTimeMillis() - mScrollListData[index].startTime))
+//            Log.i("linzehao", "消失  " + mListData[index] + "  " + (System.currentTimeMillis() - mScrollListData[index].startTime))
+            LogManager.logStartSlideAction("消失  " + mListData[index] + "  " + (System.currentTimeMillis() - mScrollListData[index].startTime))
         }
         mScrollListData[index].isLog = false
         mScrollListData[index].startTime = 0L

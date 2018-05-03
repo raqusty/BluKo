@@ -12,9 +12,6 @@ object LogConstant{
 
     //滑动一级缓存条数
     val FIRST_SLIDE_CACHE = 15
-    //滑动二级缓存条数
-    val SECOND_SLIDE_CACHE = 20
-
 
     val TAG = "LogManager"
 
