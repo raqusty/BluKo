@@ -38,7 +38,7 @@ class InviteActivity : BaseActivity() {
         layerDrawable = LayerDrawable(layers)
         image.setImageDrawable(layerDrawable)
 
-//        WhiteIntentWrapper.whiteListMatters(this, "测试")
+//        WhiteIntentWrapper1.whiteListMatters(this, "测试")
 
     }
 

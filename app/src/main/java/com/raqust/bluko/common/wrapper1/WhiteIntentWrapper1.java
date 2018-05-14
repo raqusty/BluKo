@@ -23,12 +23,12 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class WhiteIntentWrapper {
+public final class WhiteIntentWrapper1 {
 
     private Intent intent;
     private int type;
 
-    private WhiteIntentWrapper(Intent intent, int type) {
+    private WhiteIntentWrapper1(Intent intent, int type) {
         this.intent = intent;
         this.type = type;
     }
@@ -117,7 +117,7 @@ public final class WhiteIntentWrapper {
     //Other 自启管理
     private static final int OTHER = 0x150;
 
-    private static List<WhiteIntentWrapper> sIntentWrapperList;
+    private static List<WhiteIntentWrapper1> sIntentWrapperList;
 
     private static boolean doesActivityExists(Context context, Intent intent) {
         PackageManager pm = context.getPackageManager();
@@ -125,7 +125,7 @@ public final class WhiteIntentWrapper {
         return list != null && list.size() > 0;
     }
 
-    private static List<WhiteIntentWrapper> getIntentWrapperList(Context context) {
+    private static List<WhiteIntentWrapper1> getIntentWrapperList(Context context) {
         if (sIntentWrapperList == null) {
             sIntentWrapperList = new ArrayList<>();
 
@@ -147,7 +147,7 @@ public final class WhiteIntentWrapper {
                     dozeIntent.setData(Uri.parse("package:" + context.getPackageName()));
                     if (doesActivityExists(context, dozeIntent)) {
                         Log.d("WhiteIntent", "可以跳转到电池优化白名单设置页面");
-                        sIntentWrapperList.add(new WhiteIntentWrapper(dozeIntent, DOZE));
+                        sIntentWrapperList.add(new WhiteIntentWrapper1(dozeIntent, DOZE));
                     } else {
                         Log.e("WhiteIntent", "不可跳转到电池优化白名单设置页面");
                     }
@@ -166,7 +166,7 @@ public final class WhiteIntentWrapper {
                 Log.d("WhiteIntent", "尝试通过Action=huawei.intent.action.HSM_BOOTAPP_MANAGER跳转自启动设置");
                 if (doesActivityExists(context, huaweiIntent)) {
                     Log.d("WhiteIntent", "可通过Action=huawei.intent.action.HSM_BOOTAPP_MANAGER跳转自启动设置");
-                    sIntentWrapperList.add(new WhiteIntentWrapper(huaweiIntent, HUAWEI));
+                    sIntentWrapperList.add(new WhiteIntentWrapper1(huaweiIntent, HUAWEI));
                 } else {
                     Log.e("WhiteIntent", "不可通过Action==huawei.intent.action.HSM_BOOTAPP_MANAGER跳转自启动设置");
                     huaweiIntent = new Intent();
@@ -176,7 +176,7 @@ public final class WhiteIntentWrapper {
                     Log.d("WhiteIntent", "尝试通过com.huawei.systemmanager.optimize.process.ProtectActivity跳转自启动设置");
                     if (doesActivityExists(context, huaweiIntent)) {
                         Log.d("WhiteIntent", "可通过com.huawei.systemmanager.optimize.process.ProtectActivity跳转自启动设置");
-                        sIntentWrapperList.add(new WhiteIntentWrapper(huaweiIntent, HUAWEI));
+                        sIntentWrapperList.add(new WhiteIntentWrapper1(huaweiIntent, HUAWEI));
                     } else {
                         Log.e("WhiteIntent", "不可通过com.huawei.systemmanager.optimize.process.ProtectActivity跳转自启动设置");
                         huaweiIntent = new Intent();
@@ -186,7 +186,7 @@ public final class WhiteIntentWrapper {
                         Log.d("WhiteIntent", "尝试通过com.huawei.permissionmanager.ui.MainActivity跳转自启动设置");
                         if (doesActivityExists(context, huaweiIntent)) {
                             Log.d("WhiteIntent", "可通过com.huawei.permissionmanager.ui.MainActivity跳转自启动设置");
-                            sIntentWrapperList.add(new WhiteIntentWrapper(huaweiIntent, HUAWEI));
+                            sIntentWrapperList.add(new WhiteIntentWrapper1(huaweiIntent, HUAWEI));
                         } else {
                             Log.e("WhiteIntent", "不可通过com.huawei.permissionmanager.ui.MainActivity跳转自启动设置");
                         }
@@ -200,7 +200,7 @@ public final class WhiteIntentWrapper {
                 Log.d("WhiteIntent", "尝试通过com.huawei.systemmanager.optimize.process.ProtectActivity跳转锁屏清理白名单设置页");
                 if (doesActivityExists(context, huaweiGodIntent)) {
                     Log.d("WhiteIntent", "可通过com.huawei.systemmanager.optimize.process.ProtectActivity跳转锁屏清理白名单设置页");
-                    sIntentWrapperList.add(new WhiteIntentWrapper(huaweiGodIntent, HUAWEI_GOD));
+                    sIntentWrapperList.add(new WhiteIntentWrapper1(huaweiGodIntent, HUAWEI_GOD));
                 } else {
                     Log.e("WhiteIntent", "不可通过com.huawei.systemmanager.optimize.process.ProtectActivity跳转锁屏清理白名单设置页");
                 }
@@ -215,7 +215,7 @@ public final class WhiteIntentWrapper {
                 Log.d("WhiteIntent", "尝试通过Action=miui.intent.action.OP_AUTO_START跳转自启动设置页");
                 if (doesActivityExists(context, xiaomiIntent)) {
                     Log.d("WhiteIntent", "可通过Action=miui.intent.action.OP_AUTO_START跳转自启动设置页");
-                    sIntentWrapperList.add(new WhiteIntentWrapper(xiaomiIntent, XIAOMI));
+                    sIntentWrapperList.add(new WhiteIntentWrapper1(xiaomiIntent, XIAOMI));
                 } else {
                     Log.e("WhiteIntent", "不可通过Action=miui.intent.action.OP_AUTO_START跳转自启动设置页");
                     xiaomiIntent = new Intent();
@@ -225,7 +225,7 @@ public final class WhiteIntentWrapper {
                     Log.d("WhiteIntent", "尝试通过com.miui.permcenter.autostart.AutoStartManagementActivity跳转自启动设置页");
                     if (doesActivityExists(context, xiaomiIntent)) {
                         Log.d("WhiteIntent", "可通过com.miui.permcenter.autostart.AutoStartManagementActivity跳转自启动设置页");
-                        sIntentWrapperList.add(new WhiteIntentWrapper(xiaomiIntent, XIAOMI));
+                        sIntentWrapperList.add(new WhiteIntentWrapper1(xiaomiIntent, XIAOMI));
                     } else {
                         Log.e("WhiteIntent", "不可通过com.miui.permcenter.autostart.AutoStartManagementActivity跳转自启动设置页");
                         xiaomiIntent = new Intent("miui.intent.action.APP_PERM_EDITOR");
@@ -236,7 +236,7 @@ public final class WhiteIntentWrapper {
                         Log.d("WhiteIntent", "尝试通过com.miui.permcenter.permissions.AppPermissionsEditorActivity跳转自启动设置页");
                         if (doesActivityExists(context, xiaomiIntent)) {
                             Log.d("WhiteIntent", "可通过com.miui.permcenter.permissions.AppPermissionsEditorActivity跳转自启动设置页");
-                            sIntentWrapperList.add(new WhiteIntentWrapper(xiaomiIntent, XIAOMI));
+                            sIntentWrapperList.add(new WhiteIntentWrapper1(xiaomiIntent, XIAOMI));
                         } else {
                             Log.e("WhiteIntent", "不可通过com.miui.permcenter.permissions.AppPermissionsEditorActivity跳转自启动设置页");
                             xiaomiIntent = new Intent("miui.intent.action.APP_PERM_EDITOR");
@@ -247,7 +247,7 @@ public final class WhiteIntentWrapper {
                             Log.d("WhiteIntent", "尝试通过com.miui.permcenter.permissions.PermissionsEditorActivity跳转自启动设置页");
                             if (doesActivityExists(context, xiaomiIntent)) {
                                 Log.d("WhiteIntent", "可通过com.miui.permcenter.permissions.PermissionsEditorActivity跳转自启动设置页");
-                                sIntentWrapperList.add(new WhiteIntentWrapper(xiaomiIntent, XIAOMI));
+                                sIntentWrapperList.add(new WhiteIntentWrapper1(xiaomiIntent, XIAOMI));
                             } else {
                                 Log.e("WhiteIntent", "不可通过com.miui.permcenter.permissions.PermissionsEditorActivity跳转自启动设置页");
                             }
@@ -264,7 +264,7 @@ public final class WhiteIntentWrapper {
                 Log.d("WhiteIntent", "尝试通过com.miui.powerkeeper.ui.HiddenAppsConfigActivity跳转神隐模式设置页");
                 if (doesActivityExists(context, xiaomiGodIntent)) {
                     Log.d("WhiteIntent", "可通过com.miui.powerkeeper.ui.HiddenAppsConfigActivity跳转神隐模式设置页");
-                    sIntentWrapperList.add(new WhiteIntentWrapper(xiaomiGodIntent, XIAOMI_GOD));
+                    sIntentWrapperList.add(new WhiteIntentWrapper1(xiaomiGodIntent, XIAOMI_GOD));
                 } else {
                     Log.e("WhiteIntent", "不可通过com.miui.powerkeeper.ui.HiddenAppsConfigActivity跳转神隐模式设置页");
                 }
@@ -278,7 +278,7 @@ public final class WhiteIntentWrapper {
                 Log.d("WhiteIntent", "尝试通过com.coloros.privacypermissionsentry.PermissionTopActivity跳转权限隐私设置");
                 if (doesActivityExists(context, oppoIntent)) {
                     Log.d("WhiteIntent", "可通过com.coloros.privacypermissionsentry.PermissionTopActivity跳转权限隐私设置");
-                    sIntentWrapperList.add(new WhiteIntentWrapper(oppoIntent, OPPO_PM));
+                    sIntentWrapperList.add(new WhiteIntentWrapper1(oppoIntent, OPPO_PM));
                 } else {
                     Log.e("WhiteIntent", "不可通过com.coloros.privacypermissionsentry.PermissionTopActivity跳转权限隐私设置");
                     oppoIntent = new Intent();
@@ -288,7 +288,7 @@ public final class WhiteIntentWrapper {
                     Log.d("WhiteIntent", "尝试通过com.coloros.safecenter.permission.startup.StartupAppListActivity跳转自启动设置");
                     if (doesActivityExists(context, oppoIntent)) {
                         Log.d("WhiteIntent", "可通过com.coloros.safecenter.permission.startup.StartupAppListActivity跳转自启动设置");
-                        sIntentWrapperList.add(new WhiteIntentWrapper(oppoIntent, OPPO_SM));
+                        sIntentWrapperList.add(new WhiteIntentWrapper1(oppoIntent, OPPO_SM));
                     } else {
                         Log.e("WhiteIntent", "不可通过com.coloros.safecenter.permission.startup.StartupAppListActivity跳转自启动设置");
                         oppoIntent = new Intent();
@@ -298,7 +298,7 @@ public final class WhiteIntentWrapper {
                         Log.d("WhiteIntent", "尝试通过com.color.safecenter.permission.startup.StartupAppListActivity跳转自启动设置");
                         if (doesActivityExists(context, oppoIntent)) {
                             Log.d("WhiteIntent", "可通过com.color.safecenter.permission.startup.StartupAppListActivity跳转自启动设置");
-                            sIntentWrapperList.add(new WhiteIntentWrapper(oppoIntent, OPPO_SM));
+                            sIntentWrapperList.add(new WhiteIntentWrapper1(oppoIntent, OPPO_SM));
                         } else {
                             Log.e("WhiteIntent", "不可通过com.color.safecenter.permission.startup.StartupAppListActivity跳转自启动设置");
                             oppoIntent = new Intent();
@@ -308,7 +308,7 @@ public final class WhiteIntentWrapper {
                             Log.d("WhiteIntent", "尝试通过com.color.safecenter.permission.PermissionManagerActivity跳转自启动设置");
                             if (doesActivityExists(context, oppoIntent)) {
                                 Log.d("WhiteIntent", "可通过com.color.safecenter.permission.PermissionManagerActivity跳转自启动设置");
-                                sIntentWrapperList.add(new WhiteIntentWrapper(oppoIntent, OPPO_PM));
+                                sIntentWrapperList.add(new WhiteIntentWrapper1(oppoIntent, OPPO_PM));
                             } else {
                                 Log.e("WhiteIntent", "不可通过com.color.safecenter.permission.PermissionManagerActivity跳转自启动设置");
                                 oppoIntent = new Intent();
@@ -318,7 +318,7 @@ public final class WhiteIntentWrapper {
                                 Log.d("WhiteIntent", "尝试通过com.oppo.safe.permission.startup.StartupAppListActivity跳转自启动设置");
                                 if (doesActivityExists(context, oppoIntent)) {
                                     Log.d("WhiteIntent", "可通过com.oppo.safe.permission.startup.StartupAppListActivity跳转自启动设置");
-                                    sIntentWrapperList.add(new WhiteIntentWrapper(oppoIntent, OPPO_SM));
+                                    sIntentWrapperList.add(new WhiteIntentWrapper1(oppoIntent, OPPO_SM));
                                 } else {
                                     Log.e("WhiteIntent", "不可通过com.oppo.safe.permission.startup.StartupAppListActivity跳转自启动设置");
                                 }
@@ -334,7 +334,7 @@ public final class WhiteIntentWrapper {
                 Log.d("WhiteIntent", "尝试通过com.oppo.purebackground.PurebackgroundTopActivity跳转纯净后台设置页");
                 if (doesActivityExists(context, oppoGodIntent)) {
                     Log.d("WhiteIntent", "可通过com.oppo.purebackground.PurebackgroundTopActivity跳转纯净后台设置页");
-                    sIntentWrapperList.add(new WhiteIntentWrapper(oppoGodIntent, OPPO_GOD));
+                    sIntentWrapperList.add(new WhiteIntentWrapper1(oppoGodIntent, OPPO_GOD));
                 } else {
                     Log.e("WhiteIntent", "不可通过com.oppo.purebackground.PurebackgroundTopActivity跳转纯净后台设置页");
                     oppoGodIntent = new Intent();
@@ -344,7 +344,7 @@ public final class WhiteIntentWrapper {
                     Log.d("WhiteIntent", "尝试通过com.color.purebackground.PurebackgroundTopActivity跳转纯净后台设置页");
                     if (doesActivityExists(context, oppoGodIntent)) {
                         Log.d("WhiteIntent", "可通过com.color.purebackground.PurebackgroundTopActivity跳转纯净后台设置页");
-                        sIntentWrapperList.add(new WhiteIntentWrapper(oppoGodIntent, OPPO_GOD));
+                        sIntentWrapperList.add(new WhiteIntentWrapper1(oppoGodIntent, OPPO_GOD));
                     } else {
                         Log.e("WhiteIntent", "不可通过com.coloros.purebackground.PurebackgroundTopActivity跳转纯净后台设置页");
                         oppoGodIntent = new Intent();
@@ -354,7 +354,7 @@ public final class WhiteIntentWrapper {
                         Log.d("WhiteIntent", "尝试通过com.coloros.purebackground.PurebackgroundTopActivity跳转纯净后台设置页");
                         if (doesActivityExists(context, oppoGodIntent)) {
                             Log.d("WhiteIntent", "可通过com.coloros.purebackground.PurebackgroundTopActivity跳转纯净后台设置页");
-                            sIntentWrapperList.add(new WhiteIntentWrapper(oppoGodIntent, OPPO_GOD));
+                            sIntentWrapperList.add(new WhiteIntentWrapper1(oppoGodIntent, OPPO_GOD));
                         } else {
                             Log.e("WhiteIntent", "不可通过com.coloros.purebackground.PurebackgroundTopActivity跳转纯净后台设置页");
                         }
@@ -370,7 +370,7 @@ public final class WhiteIntentWrapper {
                 Log.d("WhiteIntent", "尝试通过Action=com.letv.android.permissionautoboot跳转自启动设置");
                 if (doesActivityExists(context, letvIntent)) {
                     Log.d("WhiteIntent", "可通过Action=com.letv.android.permissionautoboot跳转自启动设置");
-                    sIntentWrapperList.add(new WhiteIntentWrapper(letvIntent, LETV));
+                    sIntentWrapperList.add(new WhiteIntentWrapper1(letvIntent, LETV));
                 } else {
                     Log.e("WhiteIntent", "不可通过Action=com.letv.android.permissionautoboot跳转自启动设置");
                     letvIntent = new Intent();
@@ -380,7 +380,7 @@ public final class WhiteIntentWrapper {
                     Log.d("WhiteIntent", "尝试通过com.letv.android.letvsafe.AutobootManageActivity跳转自启动设置");
                     if (doesActivityExists(context, letvIntent)) {
                         Log.d("WhiteIntent", "可通过com.letv.android.letvsafe.AutobootManageActivity跳转自启动设置");
-                        sIntentWrapperList.add(new WhiteIntentWrapper(letvIntent, LETV));
+                        sIntentWrapperList.add(new WhiteIntentWrapper1(letvIntent, LETV));
                     } else {
                         Log.e("WhiteIntent", "不可通过com.letv.android.letvsafe.AutobootManageActivity跳转自启动设置");
                         letvIntent = new Intent();
@@ -390,7 +390,7 @@ public final class WhiteIntentWrapper {
                         Log.d("WhiteIntent", "尝试通过com.letv.android.letvsafe.PermissionAndApps跳转自启动设置");
                         if (doesActivityExists(context, letvIntent)) {
                             Log.d("WhiteIntent", "可通过com.letv.android.letvsafe.PermissionAndApps跳转自启动设置");
-                            sIntentWrapperList.add(new WhiteIntentWrapper(letvIntent, LETV));
+                            sIntentWrapperList.add(new WhiteIntentWrapper1(letvIntent, LETV));
                         } else {
                             Log.e("WhiteIntent", "不可通过com.letv.android.letvsafe.PermissionAndApps跳转自启动设置");
                         }
@@ -404,7 +404,7 @@ public final class WhiteIntentWrapper {
                 Log.d("WhiteIntent", "尝试通过com.letv.android.letvsafe.BackgroundAppManageActivity跳转后台应用保护设置");
                 if (doesActivityExists(context, letvGodIntent)) {
                     Log.d("WhiteIntent", "可通过com.letv.android.letvsafe.BackgroundAppManageActivity跳转后台应用保护设置");
-                    sIntentWrapperList.add(new WhiteIntentWrapper(letvGodIntent, LETV_GOD));
+                    sIntentWrapperList.add(new WhiteIntentWrapper1(letvGodIntent, LETV_GOD));
                 } else {
                     Log.e("WhiteIntent", "不可通过com.letv.android.letvsafe.BackgroundAppManageActivity跳转后台应用保护设置");
                 }
@@ -418,7 +418,7 @@ public final class WhiteIntentWrapper {
                 Log.d("WhiteIntent", "尝试通过Action=com.meizu.safe.security.SHOW_APPSEC跳转自启动设置");
                 if (doesActivityExists(context, meizuIntent)) {
                     Log.d("WhiteIntent", "可通过Action=com.meizu.safe.security.SHOW_APPSEC跳转自启动设置");
-                    sIntentWrapperList.add(new WhiteIntentWrapper(meizuIntent, MEIZU));
+                    sIntentWrapperList.add(new WhiteIntentWrapper1(meizuIntent, MEIZU));
                 } else {
                     Log.e("WhiteIntent", "不可通过Action=com.meizu.safe.security.SHOW_APPSEC跳转自启动设置");
                     meizuIntent = new Intent();
@@ -428,7 +428,7 @@ public final class WhiteIntentWrapper {
                     Log.d("WhiteIntent", "尝试通过com.meizu.safe.permission.PermissionMainActivity跳转自启动设置");
                     if (doesActivityExists(context, meizuIntent)) {
                         Log.d("WhiteIntent", "可通过com.meizu.safe.permission.PermissionMainActivity跳转自启动设置");
-                        sIntentWrapperList.add(new WhiteIntentWrapper(meizuIntent, MEIZU));
+                        sIntentWrapperList.add(new WhiteIntentWrapper1(meizuIntent, MEIZU));
                     } else {
                         Log.e("WhiteIntent", "不可通过com.meizu.safe.permission.PermissionMainActivity跳转自启动设置");
                     }
@@ -441,7 +441,7 @@ public final class WhiteIntentWrapper {
                 Log.d("WhiteIntent", "尝试通过com.meizu.safe.powerui.PowerAppPermissionActivity跳转待机耗电管理页");
                 if (doesActivityExists(context, meizuGodIntent)) {
                     Log.d("WhiteIntent", "可通过com.meizu.safe.powerui.PowerAppPermissionActivity跳转待机耗电管理页");
-                    sIntentWrapperList.add(new WhiteIntentWrapper(meizuGodIntent, MEIZU_GOD));
+                    sIntentWrapperList.add(new WhiteIntentWrapper1(meizuGodIntent, MEIZU_GOD));
                 } else {
                     Log.e("WhiteIntent", "不可通过com.meizu.safe.powerui.PowerAppPermissionActivity跳转待机耗电管理页");
                 }
@@ -455,7 +455,7 @@ public final class WhiteIntentWrapper {
                 Log.d("WhiteIntent", "尝试通过com.iqoo.secure.ui.phoneoptimize.AddWhiteListActivity跳转自启动设置");
                 if (doesActivityExists(context, vivoIntent)) {
                     Log.d("WhiteIntent", "可通过com.iqoo.secure.ui.phoneoptimize.AddWhiteListActivity跳转自启动设置");
-                    sIntentWrapperList.add(new WhiteIntentWrapper(vivoIntent, VIVO));
+                    sIntentWrapperList.add(new WhiteIntentWrapper1(vivoIntent, VIVO));
                 } else {
                     Log.e("WhiteIntent", "不可通过com.iqoo.secure.ui.phoneoptimize.AddWhiteListActivity跳转自启动设置");
                     vivoIntent = new Intent();
@@ -465,7 +465,7 @@ public final class WhiteIntentWrapper {
                     Log.d("WhiteIntent", "尝试通过com.iqoo.secure.safeguard.PurviewTabActivity跳转自启动设置");
                     if (doesActivityExists(context, vivoIntent)) {
                         Log.d("WhiteIntent", "可通过com.iqoo.secure.safeguard.PurviewTabActivity跳转自启动设置");
-                        sIntentWrapperList.add(new WhiteIntentWrapper(vivoIntent, VIVO));
+                        sIntentWrapperList.add(new WhiteIntentWrapper1(vivoIntent, VIVO));
                     } else {
                         Log.e("WhiteIntent", "不可通过com.iqoo.secure.safeguard.PurviewTabActivity跳转自启动设置");
                         vivoIntent = new Intent();
@@ -475,7 +475,7 @@ public final class WhiteIntentWrapper {
                         Log.d("WhiteIntent", "尝试通过com.vivo.settings.DevelpmentSettingsActivity2跳转自启动设置");
                         if (doesActivityExists(context, vivoIntent)) {
                             Log.d("WhiteIntent", "可通过com.vivo.settings.DevelpmentSettingsActivity2跳转自启动设置");
-                            sIntentWrapperList.add(new WhiteIntentWrapper(vivoIntent, VIVO));
+                            sIntentWrapperList.add(new WhiteIntentWrapper1(vivoIntent, VIVO));
                         } else {
                             Log.e("WhiteIntent", "不可通过com.vivo.settings.DevelpmentSettingsActivity2跳转自启动设置");
                         }
@@ -489,7 +489,7 @@ public final class WhiteIntentWrapper {
                 Log.d("WhiteIntent", "尝试通过com.vivo.applicationbehaviorengine.ui.ExcessivePowerManagerActivity跳转高耗电设置");
                 if (doesActivityExists(context, vivoGodIntent)) {
                     Log.d("WhiteIntent", "可通过com.vivo.applicationbehaviorengine.ui.ExcessivePowerManagerActivity跳转高耗电设置");
-                    sIntentWrapperList.add(new WhiteIntentWrapper(vivoGodIntent, VIVO_GOD));
+                    sIntentWrapperList.add(new WhiteIntentWrapper1(vivoGodIntent, VIVO_GOD));
                 } else {
                     Log.e("WhiteIntent", "不可通过com.vivo.applicationbehaviorengine.ui.ExcessivePowerManagerActivity跳转高耗电设置");
                 }
@@ -503,7 +503,7 @@ public final class WhiteIntentWrapper {
                 Log.d("WhiteIntent", "尝试通过com.lenovo.security.purebackground.PureBackgroundActivity跳转后台管理页");
                 if (doesActivityExists(context, lenovoIntent)) {
                     Log.d("WhiteIntent", "尝试通过com.lenovo.security.purebackground.PureBackgroundActivity跳转后台管理页");
-                    sIntentWrapperList.add(new WhiteIntentWrapper(lenovoIntent, LENOVO));
+                    sIntentWrapperList.add(new WhiteIntentWrapper1(lenovoIntent, LENOVO));
                 } else {
                     Log.e("WhiteIntent", "不可通过com.lenovo.security.purebackground.PureBackgroundActivity跳转后台管理页");
                 }
@@ -515,7 +515,7 @@ public final class WhiteIntentWrapper {
                 Log.d("WhiteIntent", "尝试通过com.lenovo.powersetting.ui.Settings$HighPowerApplicationsActivity跳转后台耗电优化");
                 if (doesActivityExists(context, lenovoGodIntent)) {
                     Log.d("WhiteIntent", "可通过com.lenovo.powersetting.ui.Settings$HighPowerApplicationsActivity跳转后台耗电优化");
-                    sIntentWrapperList.add(new WhiteIntentWrapper(lenovoGodIntent, LENOVO_GOD));
+                    sIntentWrapperList.add(new WhiteIntentWrapper1(lenovoGodIntent, LENOVO_GOD));
                 } else {
                     Log.e("WhiteIntent", "不可通过com.lenovo.powersetting.ui.Settings$HighPowerApplicationsActivity跳转后台耗电优化");
                 }
@@ -527,14 +527,14 @@ public final class WhiteIntentWrapper {
 //                zteIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //                Log.d("WhiteIntent", "尝试通过com.lenovo.security.purebackground.PureBackgroundActivity跳转后台管理页");
 //                if (doesActivityExists(context, zteIntent)) {
-//                    sIntentWrapperList.add(new WhiteIntentWrapper(zteIntent, ZTE));
+//                    sIntentWrapperList.add(new WhiteIntentWrapper1(zteIntent, ZTE));
 //                }
 //                //中兴 锁屏加速受保护应用
 //                Intent zteGodIntent = new Intent();
 //                zteGodIntent.setComponent(new ComponentName("com.zte.heartyservice", "com.zte.heartyservice.setting.ClearAppSettingsActivity"));
 //                zteGodIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //                if (doesActivityExists(context, zteGodIntent)) {
-//                    sIntentWrapperList.add(new WhiteIntentWrapper(zteGodIntent, ZTE_GOD));
+//                    sIntentWrapperList.add(new WhiteIntentWrapper1(zteGodIntent, ZTE_GOD));
 //                }
             } else if (RomUtils.INSTANCE.isGionee()) {
                 //金立 应用自启
@@ -546,7 +546,7 @@ public final class WhiteIntentWrapper {
                 Log.d("WhiteIntent", "尝试通过com.gionee.softmanager.MainActivity跳转自启动设置");
                 if (doesActivityExists(context, gioneeIntent)) {
                     Log.d("WhiteIntent", "可通过com.gionee.softmanager.MainActivity跳转自启动设置");
-                    sIntentWrapperList.add(new WhiteIntentWrapper(gioneeIntent, GIONEE));
+                    sIntentWrapperList.add(new WhiteIntentWrapper1(gioneeIntent, GIONEE));
                 } else {
                     Log.e("WhiteIntent", "不可通过com.gionee.softmanager.MainActivity跳转自启动设置");
                 }
@@ -559,7 +559,7 @@ public final class WhiteIntentWrapper {
                     coolpadIntent.putExtra("packageName", context.getPackageName());
                     coolpadIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     Log.d("WhiteIntent", "可通过getLaunchIntentForPackage(com.yulong.android.security)跳转酷管家");
-                    sIntentWrapperList.add(new WhiteIntentWrapper(coolpadIntent, COOLPAD));
+                    sIntentWrapperList.add(new WhiteIntentWrapper1(coolpadIntent, COOLPAD));
                 } else {
                     Log.e("WhiteIntent", "不可通过getLaunchIntentForPackage(com.yulong.android.security)跳转酷管家");
                 }
@@ -581,7 +581,7 @@ public final class WhiteIntentWrapper {
                         Log.d("WhiteIntent", "可通过getLaunchIntentForPackage(com.samsung.android.sm)跳转自启动管理页");
                         samsungIntent.putExtra("packageName", context.getPackageName());
                         samsungIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        sIntentWrapperList.add(new WhiteIntentWrapper(samsungIntent, SAMSUNG));
+                        sIntentWrapperList.add(new WhiteIntentWrapper1(samsungIntent, SAMSUNG));
                     } else {
                         Log.e("WhiteIntent", "不可通过getLaunchIntentForPackage(com.samsung.android.sm)跳转自启动管理页");
                         samsungIntent = new Intent();
@@ -591,7 +591,7 @@ public final class WhiteIntentWrapper {
                         Log.d("WhiteIntent", "尝试通过com.samsung.android.sm.ui.battery.BatteryActivity跳转自启动管理页");
                         if (doesActivityExists(context, samsungIntent)) {
                             Log.d("WhiteIntent", "可通过com.samsung.android.sm.ui.battery.BatteryActivity跳转自启动管理页");
-                            sIntentWrapperList.add(new WhiteIntentWrapper(samsungIntent, SAMSUNG));
+                            sIntentWrapperList.add(new WhiteIntentWrapper1(samsungIntent, SAMSUNG));
                         } else {
                             Log.e("WhiteIntent", "不可通过com.samsung.android.sm.ui.battery.BatteryActivity跳转自启动管理页");
                             Bundle bundle = new Bundle();
@@ -612,7 +612,7 @@ public final class WhiteIntentWrapper {
                             Log.d("WhiteIntent", "尝试通过com.android.settings.applications.AppOpsDetails跳转应用详情页-->" + samsungIntent.toString());
                             if (doesActivityExists(context, samsungIntent)) {
                                 Log.d("WhiteIntent", "可通过com.android.settings.applications.AppOpsDetails跳转应用详情页");
-                                sIntentWrapperList.add(new WhiteIntentWrapper(samsungIntent, SYSTEM));
+                                sIntentWrapperList.add(new WhiteIntentWrapper1(samsungIntent, SYSTEM));
                             } else {
                                 Log.e("WhiteIntent", "不可通过com.android.settings.applications.AppOpsDetails跳转应用详情页");
                             }
@@ -629,7 +629,7 @@ public final class WhiteIntentWrapper {
                 Log.d("WhiteIntent", "尝试通过com.sonymobile.cta.SomcCTAMainActivity跳转自启动设置");
                 if (doesActivityExists(context, sonyIntent)) {
                     Log.d("WhiteIntent", "可通过com.sonymobile.cta.SomcCTAMainActivity跳转自启动设置");
-                    sIntentWrapperList.add(new WhiteIntentWrapper(sonyIntent, SONY));
+                    sIntentWrapperList.add(new WhiteIntentWrapper1(sonyIntent, SONY));
                 } else {
                     Log.e("WhiteIntent", "不可通过com.sonymobile.cta.SomcCTAMainActivity跳转自启动设置");
                 }
@@ -643,7 +643,7 @@ public final class WhiteIntentWrapper {
                 Log.d("WhiteIntent", "尝试通过com.android.settings.Settings$AccessLockSummaryActivity跳转自启动设置");
                 if (doesActivityExists(context, lgIntent)) {
                     Log.d("WhiteIntent", "可通过com.android.settings.Settings$AccessLockSummaryActivity跳转自启动设置");
-                    sIntentWrapperList.add(new WhiteIntentWrapper(lgIntent, LG));
+                    sIntentWrapperList.add(new WhiteIntentWrapper1(lgIntent, LG));
                 } else {
                     Log.e("WhiteIntent", "不可通过com.android.settings.Settings$AccessLockSummaryActivity跳转自启动设置");
                 }
@@ -658,7 +658,7 @@ public final class WhiteIntentWrapper {
                     Log.d("WhiteIntent", "尝试通过android.settings.APPLICATION_DETAILS_SETTINGS Action跳转应用详情页");
                     if (doesActivityExists(context, intent)) {
                         Log.d("WhiteIntent", "可通过android.settings.APPLICATION_DETAILS_SETTINGS Action跳转应用详情页");
-                        sIntentWrapperList.add(new WhiteIntentWrapper(intent, OTHER));
+                        sIntentWrapperList.add(new WhiteIntentWrapper1(intent, OTHER));
                     } else {
                         Log.e("WhiteIntent", "不可通过android.settings.APPLICATION_DETAILS_SETTINGS Action跳转应用详情页");
                     }
@@ -686,7 +686,7 @@ public final class WhiteIntentWrapper {
         return sApplicationName;
     }
 
-//    public static List<WhiteIntentWrapper> whiteListMatters(String reason) {
+//    public static List<WhiteIntentWrapper1> whiteListMatters(String reason) {
 //        return whiteListMatters(DaemonManager.sActivity, reason);
 //    }
 
@@ -696,15 +696,15 @@ public final class WhiteIntentWrapper {
      * @return 弹过框的 IntentWrapper.
      */
     @TargetApi(Build.VERSION_CODES.M)
-    public static List<WhiteIntentWrapper> whiteListMatters(Activity activity, String reason) {
-        List<WhiteIntentWrapper> showed = new ArrayList<>();
+    public static List<WhiteIntentWrapper1> whiteListMatters(Activity activity, String reason) {
+        List<WhiteIntentWrapper1> showed = new ArrayList<>();
         final Activity a = activity;
         if (a == null) {
             return showed;
         }
 
-        List<WhiteIntentWrapper> intentWrapperList = getIntentWrapperList(a);
-        for (final WhiteIntentWrapper intent : intentWrapperList) {
+        List<WhiteIntentWrapper1> intentWrapperList = getIntentWrapperList(a);
+        for (final WhiteIntentWrapper1 intent : intentWrapperList) {
             switch (intent.type) {
                 case DOZE:
                     PowerManager pm = (PowerManager) a.getSystemService(Context.POWER_SERVICE);
@@ -715,14 +715,14 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(WhiteIntentWrapper.getString(a, "reason_doze_title", getApplicationName(a)))
-                                .setMessage(WhiteIntentWrapper.getString(a, "reason_doze_content", reason, getApplicationName(a)))
-                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper1.getString(a, "reason_doze_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper1.getString(a, "reason_doze_content", reason, getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper1.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
                                         intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper1.getString(a, "cancel"), null)
                                 .show();
                         showed.add(intent);
                     } catch (Exception e) {
@@ -733,14 +733,14 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(WhiteIntentWrapper.getString(a, "reason_system_title", getApplicationName(a)))
-                                .setMessage(WhiteIntentWrapper.getString(a, "reason_system_content", reason, getApplicationName(a)))
-                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper1.getString(a, "reason_system_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper1.getString(a, "reason_system_content", reason, getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper1.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
                                         intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper1.getString(a, "cancel"), null)
                                 .show();
                         showed.add(intent);
                     } catch (Exception e) {
@@ -751,14 +751,14 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(WhiteIntentWrapper.getString(a, "reason_hw_god_title", getApplicationName(a)))
-                                .setMessage(WhiteIntentWrapper.getString(a, "reason_hw_god_content", reason, getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper1.getString(a, "reason_hw_god_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper1.getString(a, "reason_hw_god_content", reason, getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper1.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
                                         intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper1.getString(a, "cancel"), null)
                                 .show();
                         showed.add(intent);
                     } catch (Exception e) {
@@ -769,14 +769,14 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(WhiteIntentWrapper.getString(a, "reason_hw_title", getApplicationName(a)))
-                                .setMessage(WhiteIntentWrapper.getString(a, "reason_hw_content", reason, getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper1.getString(a, "reason_hw_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper1.getString(a, "reason_hw_content", reason, getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper1.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
                                         intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper1.getString(a, "cancel"), null)
                                 .show();
                         showed.add(intent);
                     } catch (Exception e) {
@@ -787,14 +787,14 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(WhiteIntentWrapper.getString(a, "reason_xm_god_title", getApplicationName(a)))
-                                .setMessage(WhiteIntentWrapper.getString(a, "reason_xm_god_content", reason, getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper1.getString(a, "reason_xm_god_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper1.getString(a, "reason_xm_god_content", reason, getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper1.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
                                         intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper1.getString(a, "cancel"), null)
                                 .show();
                         showed.add(intent);
                     } catch (Exception e) {
@@ -805,14 +805,14 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(WhiteIntentWrapper.getString(a, "reason_xm_title", getApplicationName(a)))
-                                .setMessage(WhiteIntentWrapper.getString(a, "reason_xm_content", reason, getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper1.getString(a, "reason_xm_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper1.getString(a, "reason_xm_content", reason, getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper1.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
                                         intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper1.getString(a, "cancel"), null)
                                 .show();
                         showed.add(intent);
                     } catch (Exception e) {
@@ -823,14 +823,14 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(WhiteIntentWrapper.getString(a, "reason_ss_title", getApplicationName(a)))
-                                .setMessage(WhiteIntentWrapper.getString(a, "reason_ss_content", reason, getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper1.getString(a, "reason_ss_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper1.getString(a, "reason_ss_content", reason, getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper1.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
                                         intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper1.getString(a, "cancel"), null)
                                 .show();
                         showed.add(intent);
                     } catch (Exception e) {
@@ -841,14 +841,14 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(WhiteIntentWrapper.getString(a, "reason_sony_title", getApplicationName(a)))
-                                .setMessage(WhiteIntentWrapper.getString(a, "reason_sony_content", reason, getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper1.getString(a, "reason_sony_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper1.getString(a, "reason_sony_content", reason, getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper1.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
                                         intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper1.getString(a, "cancel"), null)
                                 .show();
                         showed.add(intent);
                     } catch (Exception e) {
@@ -859,14 +859,14 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(WhiteIntentWrapper.getString(a, "reason_lg_title", getApplicationName(a)))
-                                .setMessage(WhiteIntentWrapper.getString(a, "reason_lg_content", reason, getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper1.getString(a, "reason_lg_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper1.getString(a, "reason_lg_content", reason, getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper1.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
                                         intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper1.getString(a, "cancel"), null)
                                 .show();
                         showed.add(intent);
                     } catch (Exception e) {
@@ -877,14 +877,14 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(WhiteIntentWrapper.getString(a, "reason_mz_god_title", getApplicationName(a)))
-                                .setMessage(WhiteIntentWrapper.getString(a, "reason_mz_god_content", reason, getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper1.getString(a, "reason_mz_god_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper1.getString(a, "reason_mz_god_content", reason, getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper1.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
                                         intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper1.getString(a, "cancel"), null)
                                 .show();
                         showed.add(intent);
                     } catch (Exception e) {
@@ -895,14 +895,14 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(WhiteIntentWrapper.getString(a, "reason_mz_title", getApplicationName(a)))
-                                .setMessage(WhiteIntentWrapper.getString(a, "reason_mz_content", reason, getApplicationName(a)))
-                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper1.getString(a, "reason_mz_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper1.getString(a, "reason_mz_content", reason, getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper1.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
                                         intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper1.getString(a, "cancel"), null)
                                 .show();
                         showed.add(intent);
                     } catch (Exception e) {
@@ -913,14 +913,14 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(WhiteIntentWrapper.getString(a, "reason_zte_god_title", getApplicationName(a)))
-                                .setMessage(WhiteIntentWrapper.getString(a, "reason_zte_god_content", reason, getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper1.getString(a, "reason_zte_god_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper1.getString(a, "reason_zte_god_content", reason, getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper1.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
                                         intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper1.getString(a, "cancel"), null)
                                 .show();
                         showed.add(intent);
                     } catch (Exception e) {
@@ -931,14 +931,14 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(WhiteIntentWrapper.getString(a, "reason_zte_title", getApplicationName(a)))
-                                .setMessage(WhiteIntentWrapper.getString(a, "reason_zte_content", reason, getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper1.getString(a, "reason_zte_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper1.getString(a, "reason_zte_content", reason, getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper1.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
                                         intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper1.getString(a, "cancel"), null)
                                 .show();
                         showed.add(intent);
                     } catch (Exception e) {
@@ -949,14 +949,14 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(WhiteIntentWrapper.getString(a, "reason_le_god_title", getApplicationName(a)))
-                                .setMessage(WhiteIntentWrapper.getString(a, "reason_le_god_content", reason, getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper1.getString(a, "reason_le_god_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper1.getString(a, "reason_le_god_content", reason, getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper1.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
                                         intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper1.getString(a, "cancel"), null)
                                 .show();
                         showed.add(intent);
                     } catch (Exception e) {
@@ -967,14 +967,14 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(WhiteIntentWrapper.getString(a, "reason_le_title", getApplicationName(a)))
-                                .setMessage(WhiteIntentWrapper.getString(a, "reason_le_content", reason, getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper1.getString(a, "reason_le_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper1.getString(a, "reason_le_content", reason, getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper1.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
                                         intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper1.getString(a, "cancel"), null)
                                 .show();
                         showed.add(intent);
                     } catch (Exception e) {
@@ -985,14 +985,14 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(WhiteIntentWrapper.getString(a, "reason_oppo_sm_title", getApplicationName(a)))
-                                .setMessage(WhiteIntentWrapper.getString(a, "reason_oppo_sm_content", reason, getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper1.getString(a, "reason_oppo_sm_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper1.getString(a, "reason_oppo_sm_content", reason, getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper1.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
                                         intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper1.getString(a, "cancel"), null)
                                 .show();
                         showed.add(intent);
                     } catch (Exception e) {
@@ -1003,14 +1003,14 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(WhiteIntentWrapper.getString(a, "reason_oppo_pm_title", getApplicationName(a)))
-                                .setMessage(WhiteIntentWrapper.getString(a, "reason_oppo_pm_content", reason, getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper1.getString(a, "reason_oppo_pm_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper1.getString(a, "reason_oppo_pm_content", reason, getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper1.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
                                         intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper1.getString(a, "cancel"), null)
                                 .show();
                         showed.add(intent);
                     } catch (Exception e) {
@@ -1021,14 +1021,14 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(WhiteIntentWrapper.getString(a, "reason_oppo_god_title", getApplicationName(a)))
-                                .setMessage(WhiteIntentWrapper.getString(a, "reason_oppo_god_content", reason, getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper1.getString(a, "reason_oppo_god_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper1.getString(a, "reason_oppo_god_content", reason, getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper1.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
                                         intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper1.getString(a, "cancel"), null)
                                 .show();
                         showed.add(intent);
                     } catch (Exception e) {
@@ -1039,14 +1039,14 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(WhiteIntentWrapper.getString(a, "reason_cp_title", getApplicationName(a)))
-                                .setMessage(WhiteIntentWrapper.getString(a, "reason_cp_content", reason, getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper1.getString(a, "reason_cp_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper1.getString(a, "reason_cp_content", reason, getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper1.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
                                         intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper1.getString(a, "cancel"), null)
                                 .show();
                         showed.add(intent);
                     } catch (Exception e) {
@@ -1057,14 +1057,14 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(WhiteIntentWrapper.getString(a, "reason_vv_title", getApplicationName(a)))
-                                .setMessage(WhiteIntentWrapper.getString(a, "reason_vv_content", reason, getApplicationName(a), getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper1.getString(a, "reason_vv_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper1.getString(a, "reason_vv_content", reason, getApplicationName(a), getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper1.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
                                         intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper1.getString(a, "cancel"), null)
                                 .show();
                         showed.add(intent);
                     } catch (Exception e) {
@@ -1075,14 +1075,14 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(WhiteIntentWrapper.getString(a, "reason_vv_god_title", getApplicationName(a)))
-                                .setMessage(WhiteIntentWrapper.getString(a, "reason_vv_god_content", reason, getApplicationName(a), getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper1.getString(a, "reason_vv_god_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper1.getString(a, "reason_vv_god_content", reason, getApplicationName(a), getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper1.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
                                         intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper1.getString(a, "cancel"), null)
                                 .show();
                         showed.add(intent);
                     } catch (Exception e) {
@@ -1093,14 +1093,14 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(WhiteIntentWrapper.getString(a, "reason_jl_title", getApplicationName(a)))
-                                .setMessage(WhiteIntentWrapper.getString(a, "reason_jl_content", reason, getApplicationName(a), getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper1.getString(a, "reason_jl_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper1.getString(a, "reason_jl_content", reason, getApplicationName(a), getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper1.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
                                         intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper1.getString(a, "cancel"), null)
                                 .show();
                         showed.add(intent);
                     } catch (Exception e) {
@@ -1111,14 +1111,14 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(WhiteIntentWrapper.getString(a, "reason_lv_god_title", getApplicationName(a)))
-                                .setMessage(WhiteIntentWrapper.getString(a, "reason_lv_god_content", reason, getApplicationName(a), getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper1.getString(a, "reason_lv_god_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper1.getString(a, "reason_lv_god_content", reason, getApplicationName(a), getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper1.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
                                         intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper1.getString(a, "cancel"), null)
                                 .show();
                         showed.add(intent);
                     } catch (Exception e) {
@@ -1129,14 +1129,14 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(WhiteIntentWrapper.getString(a, "reason_lv_title", getApplicationName(a)))
-                                .setMessage(WhiteIntentWrapper.getString(a, "reason_lv_content", reason, getApplicationName(a), getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper1.getString(a, "reason_lv_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper1.getString(a, "reason_lv_content", reason, getApplicationName(a), getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper1.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
                                         intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper1.getString(a, "cancel"), null)
                                 .show();
                         showed.add(intent);
                     } catch (Exception e) {
@@ -1147,14 +1147,14 @@ public final class WhiteIntentWrapper {
                     try {
                         new AlertDialog.Builder(a)
                                 .setCancelable(false)
-                                .setTitle(WhiteIntentWrapper.getString(a, "reason_system_title", getApplicationName(a)))
-                                .setMessage(WhiteIntentWrapper.getString(a, "reason_system_content", reason, getApplicationName(a), getApplicationName(a), getApplicationName(a)))
-                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), new DialogInterface.OnClickListener() {
+                                .setTitle(WhiteIntentWrapper1.getString(a, "reason_system_title", getApplicationName(a)))
+                                .setMessage(WhiteIntentWrapper1.getString(a, "reason_system_content", reason, getApplicationName(a), getApplicationName(a), getApplicationName(a)))
+                                .setPositiveButton(WhiteIntentWrapper1.getString(a, "ok"), new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface d, int w) {
                                         intent.startActivitySafely(a);
                                     }
                                 })
-                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
+                                .setNegativeButton(WhiteIntentWrapper1.getString(a, "cancel"), null)
                                 .show();
                         showed.add(intent);
                     } catch (Exception e) {

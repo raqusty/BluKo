@@ -1,5 +1,6 @@
 package com.raqust.bluko.common.wrapper.impl
 
+import android.annotation.TargetApi
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
@@ -9,8 +10,10 @@ import android.net.Uri
 import android.os.Build
 import android.os.PowerManager
 import android.provider.Settings
+import android.support.annotation.RequiresApi
 import android.util.Log
 import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
+import com.raqust.bluko.common.wrapper1.WhiteIntentWrapper1
 
 
 /**
@@ -26,16 +29,14 @@ open class SystemRom : IRom {
     val SYSTEM = 0x00
     val DOZE = 0x01
 
+    @TargetApi(Build.VERSION_CODES.M)
     override fun getIntent(context: Context, sIntentWrapperList: MutableList<WhiteIntentWrapper>) {
-        val pm = context.getSystemService(Context.POWER_SERVICE) as PowerManager
-        val ignoringBatteryOptimizations = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            pm.isIgnoringBatteryOptimizations(context.packageName)
-        } else {
-            TODO("VERSION.SDK_INT < M")
-        }
-        if (!ignoringBatteryOptimizations) {
-            Log.d("WhiteIntent", "在电池优化白名单中")
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        //Android 7.0+ Doze 模式
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            val pm = context.getSystemService(Context.POWER_SERVICE) as PowerManager
+            val ignoringBatteryOptimizations = pm.isIgnoringBatteryOptimizations(context.packageName)
+            if (!ignoringBatteryOptimizations) {
+                Log.d("WhiteIntent", "在电池优化白名单中")
                 val dozeIntent = Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS)
                 dozeIntent.data = Uri.parse("package:" + context.packageName)
                 if (WhiteIntentWrapper.doesActivityExists(context, dozeIntent)) {
@@ -44,13 +45,13 @@ open class SystemRom : IRom {
                 } else {
                     Log.e("WhiteIntent", "不可跳转到电池优化白名单设置页面")
                 }
+            } else {
+                Log.d("WhiteIntent", "不在电池优化白名单中")
             }
-        } else {
-            Log.d("WhiteIntent", "不在电池优化白名单中")
         }
     }
 
-    override fun showDilog(reason: String, a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
+    override fun showDialog(reason: String, a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
         when (intent.type) {
             DOZE -> {
                 val pm = a.getSystemService(Context.POWER_SERVICE) as PowerManager

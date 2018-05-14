@@ -39,8 +39,8 @@ class KupaiRom : SystemRom() {
         }
     }
 
-    override fun showDilog(reason:String,a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
-        super.showDilog(reason,a, intent, wrapperList)
+    override fun showDialog(reason:String, a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
+        super.showDialog(reason,a, intent, wrapperList)
         when (intent.type) {
             COOLPAD -> {
                 try {

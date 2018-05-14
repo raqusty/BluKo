@@ -12,5 +12,5 @@ import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
 interface IRom{
     fun getIntent(context: Context, sIntentWrapperList: MutableList<WhiteIntentWrapper>)
 
-    fun showDilog(reason:String,a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>)
+    fun showDialog(reason:String, a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>)
 }
