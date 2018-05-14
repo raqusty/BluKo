@@ -19,7 +19,7 @@ import android.content.DialogInterface
  */
 class GioneeRom : SystemRom() {
 
-    override val tag = "ZTERom"
+    override val tag = "GioneeRom"
 
     //金立 应用自启
     private val GIONEE = 0x80

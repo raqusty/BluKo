@@ -19,7 +19,7 @@ import android.content.DialogInterface
  */
 class OtherRom : SystemRom() {
 
-    override   val tag = "ZTERom"
+    override   val tag = "OtherRom"
 
     //Other 自启管理
     private val OTHER = 0x150

@@ -12,7 +12,7 @@ import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
  */
 class HTCRom : SystemRom() {
 
-    override val tag = "ZTERom"
+    override val tag = "HTCRom"
 
 
     override fun getIntent(context: Context, sIntentWrapperList: MutableList<WhiteIntentWrapper>) {

@@ -22,7 +22,7 @@ import android.content.DialogInterface
  */
 class MiuiRom : SystemRom() {
 
-    override  val tag = "EmuiRom"
+    override  val tag = "MiuiRom"
 
     //小米 自启动管理
     private val XIAOMI = 0x20

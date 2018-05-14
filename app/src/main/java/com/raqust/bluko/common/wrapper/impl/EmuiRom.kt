@@ -4,11 +4,10 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.ComponentName
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.util.Log
 import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
-import android.content.DialogInterface
-
 
 
 /**
@@ -25,7 +24,7 @@ class EmuiRom : SystemRom() {
     //华为 锁屏清理
     private val HUAWEI_GOD = 0x11
 
-    override fun getIntent(context:Context,sIntentWrapperList:MutableList<WhiteIntentWrapper>) {
+    override fun getIntent(context: Context, sIntentWrapperList: MutableList<WhiteIntentWrapper>) {
         super.getIntent(context, sIntentWrapperList)
         var huaweiIntent = Intent()
         huaweiIntent.action = "huawei.intent.action.HSM_BOOTAPP_MANAGER"
@@ -35,7 +34,7 @@ class EmuiRom : SystemRom() {
 
         if (WhiteIntentWrapper.doesActivityExists(context, huaweiIntent)) {
             Log.d(tag, "可通过Action=huawei.intent.action.HSM_BOOTAPP_MANAGER跳转自启动设置")
-          sIntentWrapperList.add(WhiteIntentWrapper(huaweiIntent, HUAWEI))
+            sIntentWrapperList.add(WhiteIntentWrapper(huaweiIntent, HUAWEI))
         } else {
             Log.e(tag, "不可通过Action==huawei.intent.action.HSM_BOOTAPP_MANAGER跳转自启动设置")
             huaweiIntent = Intent()
@@ -74,15 +73,15 @@ class EmuiRom : SystemRom() {
         }
     }
 
-    override fun showDialog(reason:String, a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
-        super.showDialog(reason,a, intent, wrapperList)
+    override fun showDialog(reason: String, a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
+        super.showDialog(reason, a, intent, wrapperList)
         when (intent.type) {
             HUAWEI_GOD -> {
                 try {
                     AlertDialog.Builder(a)
                             .setCancelable(false)
-                            .setTitle(WhiteIntentWrapper.getString(a, "reason_hw_god_title",WhiteIntentWrapper.getApplicationName(a)))
-                            .setMessage(WhiteIntentWrapper.getString(a, "reason_hw_god_content", reason,WhiteIntentWrapper.getApplicationName(a),WhiteIntentWrapper.getApplicationName(a)))
+                            .setTitle(WhiteIntentWrapper.getString(a, "reason_hw_god_title", WhiteIntentWrapper.getApplicationName(a)))
+                            .setMessage(WhiteIntentWrapper.getString(a, "reason_hw_god_content", reason, WhiteIntentWrapper.getApplicationName(a), WhiteIntentWrapper.getApplicationName(a)))
                             .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), DialogInterface.OnClickListener { d, w -> intent.startActivitySafely(a) })
                             .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
                             .show()
@@ -96,8 +95,8 @@ class EmuiRom : SystemRom() {
                 try {
                     AlertDialog.Builder(a)
                             .setCancelable(false)
-                            .setTitle(WhiteIntentWrapper.getString(a, "reason_hw_title",WhiteIntentWrapper.getApplicationName(a)))
-                            .setMessage(WhiteIntentWrapper.getString(a, "reason_hw_content", reason,WhiteIntentWrapper.getApplicationName(a),WhiteIntentWrapper.getApplicationName(a)))
+                            .setTitle(WhiteIntentWrapper.getString(a, "reason_hw_title", WhiteIntentWrapper.getApplicationName(a)))
+                            .setMessage(WhiteIntentWrapper.getString(a, "reason_hw_content", reason, WhiteIntentWrapper.getApplicationName(a), WhiteIntentWrapper.getApplicationName(a)))
                             .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), DialogInterface.OnClickListener { d, w -> intent.startActivitySafely(a) })
                             .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
                             .show()

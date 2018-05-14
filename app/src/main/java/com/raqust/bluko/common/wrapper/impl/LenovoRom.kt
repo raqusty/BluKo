@@ -19,7 +19,7 @@ import android.content.DialogInterface
  */
 class LenovoRom : SystemRom() {
 
-    override  val tag = "LetvRom"
+    override  val tag = "LenovoRom"
 
     //联想 后台管理
     private val LENOVO = 0x100
