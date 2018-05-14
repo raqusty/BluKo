@@ -28,7 +28,7 @@ class InviteActivity : BaseActivity() {
     val inflater by lazy { LayoutInflater.from(mContext) }
 
     override fun initViews() {
-        for (i in 0 until 10) {
+        for (i in 0 until 35) {
             flexboxLayout.addView(getText("" + i + i))
         }
 
@@ -39,27 +39,6 @@ class InviteActivity : BaseActivity() {
         image.setImageDrawable(layerDrawable)
 
 //        WhiteIntentWrapper.whiteListMatters(this, "测试")
-
-        val v1 = "1.0.2.33"
-        val v2 = "1.0.2.444"
-        val v3 = "1.0.2.1"
-        val v4 = "1.0.2"
-        val v5 = "1.0.5"
-        val v6 = "1.0.66.32"
-
-        Log.i("linzehao","a   "+VersionUtil.compareVersion(v1,v2))
-        Log.i("linzehao","b   "+VersionUtil.compareVersion(v2,v1))
-        Log.i("linzehao","c   "+VersionUtil.compareVersion(v1,v3))
-        Log.i("linzehao","d   "+VersionUtil.compareVersion(v1,v4))
-        Log.i("linzehao","e   "+VersionUtil.compareVersion(v1,v5))
-        Log.i("linzehao","f   "+VersionUtil.compareVersion(v1,v6))
-
-        Log.i("linzehao","a   "+VersionUtil.duibi(v1,v2))
-        Log.i("linzehao","b   "+VersionUtil.duibi(v2,v1))
-        Log.i("linzehao","c   "+VersionUtil.duibi(v1,v3))
-        Log.i("linzehao","d   "+VersionUtil.duibi(v1,v4))
-        Log.i("linzehao","e   "+VersionUtil.duibi(v1,v5))
-        Log.i("linzehao","f   "+VersionUtil.duibi(v1,v6))
 
     }
 

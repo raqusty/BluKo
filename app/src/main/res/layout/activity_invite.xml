@@ -10,19 +10,25 @@
         android:layout_width="match_parent"
         android:layout_height="300dp" />
 
-    <com.google.android.flexbox.FlexboxLayout
-        android:id="@+id/flexboxLayout"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        app:flexWrap="wrap"
-        app:justifyContent="space_between" />
+        android:fillViewport="true">
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/flexboxLayout"
+            android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+            app:flexWrap="wrap"
+            app:justifyContent="space_between" />
+
+    </android.support.v4.widget.NestedScrollView>
 
     <TextView
         android:id="@+id/finish"
-
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:gravity="center"
         android:onClick="click"
         android:background="@drawable/select_tag_property"
