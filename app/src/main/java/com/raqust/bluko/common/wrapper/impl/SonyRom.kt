@@ -5,6 +5,8 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import com.raqust.bluko.common.wrapper.Constant
+import com.raqust.bluko.common.wrapper.Constant.COMMAND_START_YOURSELF
 import com.raqust.bluko.common.wrapper.DialogImpl
 import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
 
@@ -21,20 +23,26 @@ class SonyRom : SystemRom() {
     //索尼 自启管理
     private val SONY = 0x120
 
-    override fun getIntent(context: Context, sIntentWrapperList: MutableList<WhiteIntentWrapper>) {
-        super.getIntent(context, sIntentWrapperList)
-        //索尼自启动应用程序管理
-        Log.d("WhiteIntent", "索尼手机")
-        val sonyIntent = Intent()
-        sonyIntent.component = ComponentName("com.sonymobile.cta", "com.sonymobile.cta.SomcCTAMainActivity")
-        sonyIntent.putExtra("packageName", context.packageName)
-        sonyIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        Log.d("WhiteIntent", "尝试通过com.sonymobile.cta.SomcCTAMainActivity跳转自启动设置")
-        if (WhiteIntentWrapper.doesActivityExists(context, sonyIntent)) {
-            Log.d("WhiteIntent", "可通过com.sonymobile.cta.SomcCTAMainActivity跳转自启动设置")
-            sIntentWrapperList.add(WhiteIntentWrapper(sonyIntent, SONY))
-        } else {
-            Log.e("WhiteIntent", "不可通过com.sonymobile.cta.SomcCTAMainActivity跳转自启动设置")
+    override fun getIntent(context: Context, sIntentWrapperList: MutableList<WhiteIntentWrapper>, commandList: List<String>) {
+        super.getIntent(context, sIntentWrapperList, commandList)
+        (0 until commandList.size ).forEach {
+            when (commandList[it]) {
+                COMMAND_START_YOURSELF -> {
+                    //索尼自启动应用程序管理
+                    Log.d("WhiteIntent", "索尼手机")
+                    val sonyIntent = Intent()
+                    sonyIntent.component = ComponentName("com.sonymobile.cta", "com.sonymobile.cta.SomcCTAMainActivity")
+                    sonyIntent.putExtra("packageName", context.packageName)
+                    sonyIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    Log.d("WhiteIntent", "尝试通过com.sonymobile.cta.SomcCTAMainActivity跳转自启动设置")
+                    if (WhiteIntentWrapper.doesActivityExists(context, sonyIntent)) {
+                        Log.d("WhiteIntent", "可通过com.sonymobile.cta.SomcCTAMainActivity跳转自启动设置")
+                        sIntentWrapperList.add(WhiteIntentWrapper(sonyIntent, SONY,COMMAND_START_YOURSELF))
+                    } else {
+                        Log.e("WhiteIntent", "不可通过com.sonymobile.cta.SomcCTAMainActivity跳转自启动设置")
+                    }
+                }
+            }
         }
     }
 

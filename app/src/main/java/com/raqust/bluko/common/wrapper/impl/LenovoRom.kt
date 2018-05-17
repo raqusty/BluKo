@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.util.Log
+import com.raqust.bluko.common.wrapper.Constant
 import com.raqust.bluko.common.wrapper.DialogImpl
 import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
 
@@ -25,32 +26,41 @@ class LenovoRom : SystemRom() {
     //联想 后台耗电优化
     private val LENOVO_GOD = 0x101
 
-    override fun getIntent(context: Context, sIntentWrapperList: MutableList<WhiteIntentWrapper>) {
-        super.getIntent(context, sIntentWrapperList)
-        //联想 后台管理
-        Log.d("WhiteIntent", "联想手机")
+    override fun getIntent(context: Context, sIntentWrapperList: MutableList<WhiteIntentWrapper>, commandList: List<String>) {
+        super.getIntent(context, sIntentWrapperList, commandList)
         val lenovoIntent = Intent()
-        lenovoIntent.component = ComponentName("com.lenovo.security", "com.lenovo.security.purebackground.PureBackgroundActivity")
-        lenovoIntent.putExtra("packageName", context.packageName)
-        lenovoIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        Log.d("WhiteIntent", "尝试通过com.lenovo.security.purebackground.PureBackgroundActivity跳转后台管理页")
-        if (WhiteIntentWrapper.doesActivityExists(context, lenovoIntent)) {
-            Log.d("WhiteIntent", "尝试通过com.lenovo.security.purebackground.PureBackgroundActivity跳转后台管理页")
-            sIntentWrapperList.add(WhiteIntentWrapper(lenovoIntent, LENOVO))
-        } else {
-            Log.e("WhiteIntent", "不可通过com.lenovo.security.purebackground.PureBackgroundActivity跳转后台管理页")
-        }
-        //联想 后台耗电优化
-        val lenovoGodIntent = Intent()
-        lenovoGodIntent.component = ComponentName("com.lenovo.powersetting", "com.lenovo.powersetting.ui.Settings\$HighPowerApplicationsActivity")
-        lenovoIntent.putExtra("packageName", context.packageName)
-        lenovoIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        Log.d("WhiteIntent", "尝试通过com.lenovo.powersetting.ui.Settings\$HighPowerApplicationsActivity跳转后台耗电优化")
-        if (WhiteIntentWrapper.doesActivityExists(context, lenovoGodIntent)) {
-            Log.d("WhiteIntent", "可通过com.lenovo.powersetting.ui.Settings\$HighPowerApplicationsActivity跳转后台耗电优化")
-            sIntentWrapperList.add(WhiteIntentWrapper(lenovoGodIntent, LENOVO_GOD))
-        } else {
-            Log.e("WhiteIntent", "不可通过com.lenovo.powersetting.ui.Settings\$HighPowerApplicationsActivity跳转后台耗电优化")
+        (0 until commandList.size ).forEach {
+            when (commandList[it]) {
+                Constant.COMMAND_START_YOURSELF -> {
+                    //联想 后台管理
+                    Log.d("WhiteIntent", "联想手机")
+
+                    lenovoIntent.component = ComponentName("com.lenovo.security", "com.lenovo.security.purebackground.PureBackgroundActivity")
+                    lenovoIntent.putExtra("packageName", context.packageName)
+                    lenovoIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    Log.d("WhiteIntent", "尝试通过com.lenovo.security.purebackground.PureBackgroundActivity跳转后台管理页")
+                    if (WhiteIntentWrapper.doesActivityExists(context, lenovoIntent)) {
+                        Log.d("WhiteIntent", "尝试通过com.lenovo.security.purebackground.PureBackgroundActivity跳转后台管理页")
+                        sIntentWrapperList.add(WhiteIntentWrapper(lenovoIntent, LENOVO,Constant.COMMAND_START_YOURSELF))
+                    } else {
+                        Log.e("WhiteIntent", "不可通过com.lenovo.security.purebackground.PureBackgroundActivity跳转后台管理页")
+                    }
+                }
+                Constant.COMMAND_CONSUME_POWER -> {
+                    //联想 后台耗电优化
+                    val lenovoGodIntent = Intent()
+                    lenovoGodIntent.component = ComponentName("com.lenovo.powersetting", "com.lenovo.powersetting.ui.Settings\$HighPowerApplicationsActivity")
+                    lenovoIntent.putExtra("packageName", context.packageName)
+                    lenovoIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    Log.d("WhiteIntent", "尝试通过com.lenovo.powersetting.ui.Settings\$HighPowerApplicationsActivity跳转后台耗电优化")
+                    if (WhiteIntentWrapper.doesActivityExists(context, lenovoGodIntent)) {
+                        Log.d("WhiteIntent", "可通过com.lenovo.powersetting.ui.Settings\$HighPowerApplicationsActivity跳转后台耗电优化")
+                        sIntentWrapperList.add(WhiteIntentWrapper(lenovoGodIntent, LENOVO_GOD,Constant.COMMAND_CONSUME_POWER))
+                    } else {
+                        Log.e("WhiteIntent", "不可通过com.lenovo.powersetting.ui.Settings\$HighPowerApplicationsActivity跳转后台耗电优化")
+                    }
+                }
+            }
         }
     }
 

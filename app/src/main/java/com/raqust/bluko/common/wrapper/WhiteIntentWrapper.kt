@@ -20,10 +20,13 @@ class WhiteIntentWrapper {
 
     var intent: Intent? = null
     var type: Int = 0
+    var command:String=""
 
-    constructor(intent: Intent, type: Int) {
+    constructor(intent: Intent, type: Int,command:String) {
         this.intent = intent
         this.type = type
+        this.command = command
+
     }
 
     /**
@@ -53,44 +56,54 @@ class WhiteIntentWrapper {
             return list != null && list.size > 0
         }
 
-        private fun getIntentWrapperList(context: Context): List<WhiteIntentWrapper> {
-            if (sIntentWrapperList.size == 0) {
-                when {
-                    RomUtils.isEmui -> phoneRom = EmuiRom()
-                    RomUtils.isMiui -> phoneRom = MiuiRom()
-                    RomUtils.isVivo -> phoneRom = VivoRom()
-                    RomUtils.isOppo -> phoneRom = OppoRom()
-                    RomUtils.isLeTv -> phoneRom = LetvRom()
-                    RomUtils.isFlyme -> phoneRom = FlymeRom()
-                    RomUtils.isSamsung -> phoneRom = SamsungRom()
-                    RomUtils.isLenovo -> phoneRom = LenovoRom()
-                    RomUtils.isZTE -> phoneRom = ZTERom()
-                    RomUtils.isGionee -> phoneRom = GioneeRom()
-                    RomUtils.isKupai -> phoneRom = KupaiRom()
-                    RomUtils.isSony -> phoneRom = SonyRom()
-                    RomUtils.isLG -> phoneRom = LGRom()
-                    RomUtils.isHTC -> phoneRom = HTCRom()
-                    else -> {
-                        phoneRom = OtherRom()
-                    }
+        private fun getIntentWrapperList(context: Context,commandList:List<String>): List<WhiteIntentWrapper> {
+            sIntentWrapperList.clear()
+            when {
+                RomUtils.isEmui -> phoneRom = EmuiRom()
+                RomUtils.isMiui -> phoneRom = MiuiRom()
+                RomUtils.isVivo -> phoneRom = VivoRom()
+                RomUtils.isOppo -> phoneRom = OppoRom()
+                RomUtils.isLeTv -> phoneRom = LetvRom()
+                RomUtils.isFlyme -> phoneRom = FlymeRom()
+                RomUtils.isSamsung -> phoneRom = SamsungRom()
+                RomUtils.isLenovo -> phoneRom = LenovoRom()
+                RomUtils.isZTE -> phoneRom = ZTERom()
+                RomUtils.isGionee -> phoneRom = GioneeRom()
+                RomUtils.isKupai -> phoneRom = KupaiRom()
+                RomUtils.isSony -> phoneRom = SonyRom()
+                RomUtils.isLG -> phoneRom = LGRom()
+                RomUtils.isHTC -> phoneRom = HTCRom()
+                else -> {
+                    phoneRom = OtherRom()
                 }
-                phoneRom?.getIntent(context, sIntentWrapperList)
             }
+            phoneRom?.getIntent(context, sIntentWrapperList,commandList)
             return sIntentWrapperList
         }
 
-        fun whiteListMatters(activity: Activity?, reason: String): List<WhiteIntentWrapper> {
+        fun whiteListMatters(activity: Activity?, reason: String,commandList:List<String>): List<WhiteIntentWrapper> {
             val showed by lazy { mutableListOf<WhiteIntentWrapper>() }
             if (activity == null) {
                 return showed
             }
-            val intentWrapperList = getIntentWrapperList(activity)
+            val intentWrapperList = getIntentWrapperList(activity,commandList)
             intentWrapperList.forEach {
                 phoneRom?.showDialog(reason, activity, it, showed)
             }
             return showed
         }
 
+        fun getWhiteListState(activity: Activity?, commandList:List<String>):List<Pair<String,Boolean>>?{
+            val list = mutableListOf<Pair<String,Boolean>>()
+            if (activity == null) {
+                return null
+            }
+            val intentWrapperList = getIntentWrapperList(activity,commandList)
+            intentWrapperList.forEach {
+                list.add(Pair(it.command,true))
+            }
+            return list
+        }
 
         fun getApplicationName(context: Context): String {
             val pm: PackageManager

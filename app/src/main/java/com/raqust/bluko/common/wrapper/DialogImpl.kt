@@ -31,7 +31,7 @@ class DialogImpl(activity: Activity, title: String, content: String, positive: S
                         }
                     })
             if (checkCallback != null) {
-                builder.checkBoxPrompt(check, true, { _, isCheck ->
+                builder.checkBoxPrompt(check, false, { _, isCheck ->
                     checkCallback.invoke(isCheck)
                 })
             }

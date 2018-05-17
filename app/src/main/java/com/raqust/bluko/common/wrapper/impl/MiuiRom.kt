@@ -7,6 +7,9 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.util.Log
+import com.raqust.bluko.common.wrapper.Constant
+import com.raqust.bluko.common.wrapper.Constant.COMMAND_GOD
+import com.raqust.bluko.common.wrapper.Constant.COMMAND_START_YOURSELF
 import com.raqust.bluko.common.wrapper.DialogImpl
 import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
 import java.io.BufferedReader
@@ -28,70 +31,78 @@ class MiuiRom : SystemRom() {
     //小米 神隐模式
     private val XIAOMI_GOD = 0x21
 
-    override fun getIntent(context: Context, sIntentWrapperList: MutableList<WhiteIntentWrapper>) {
-        super.getIntent(context, sIntentWrapperList)
-        //小米 自启动管理
-        Log.d("WhiteIntent", "小米手机" + getMiuiVersion())
-        var xiaomiIntent = Intent()
-        xiaomiIntent.action = "miui.intent.action.OP_AUTO_START"
-        xiaomiIntent.addCategory(Intent.CATEGORY_DEFAULT)
-        xiaomiIntent.putExtra("packageName", context.packageName)
-        xiaomiIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        Log.d("WhiteIntent", "尝试通过Action=miui.intent.action.OP_AUTO_START跳转自启动设置页")
-        if (WhiteIntentWrapper.doesActivityExists(context, xiaomiIntent)) {
-            Log.d("WhiteIntent", "可通过Action=miui.intent.action.OP_AUTO_START跳转自启动设置页")
-            sIntentWrapperList.add(WhiteIntentWrapper(xiaomiIntent, XIAOMI))
-        } else {
-            Log.e("WhiteIntent", "不可通过Action=miui.intent.action.OP_AUTO_START跳转自启动设置页")
-            xiaomiIntent = Intent()
-            xiaomiIntent.component = ComponentName.unflattenFromString("com.miui.securitycenter/com.miui.permcenter.autostart.AutoStartManagementActivity")
-            xiaomiIntent.putExtra("packageName", context.packageName)
-            xiaomiIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            Log.d("WhiteIntent", "尝试通过com.miui.permcenter.autostart.AutoStartManagementActivity跳转自启动设置页")
-            if (WhiteIntentWrapper.doesActivityExists(context, xiaomiIntent)) {
-                Log.d("WhiteIntent", "可通过com.miui.permcenter.autostart.AutoStartManagementActivity跳转自启动设置页")
-                sIntentWrapperList.add(WhiteIntentWrapper(xiaomiIntent, XIAOMI))
-            } else {
-                Log.e("WhiteIntent", "不可通过com.miui.permcenter.autostart.AutoStartManagementActivity跳转自启动设置页")
-                xiaomiIntent = Intent("miui.intent.action.APP_PERM_EDITOR")
-                xiaomiIntent.component = ComponentName("com.miui.securitycenter", "com.miui.permcenter.permissions.AppPermissionsEditorActivity")
-                xiaomiIntent.putExtra("extra_pkgname", context.packageName)
-                xiaomiIntent.putExtra("packageName", context.packageName)
-                xiaomiIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                Log.d("WhiteIntent", "尝试通过com.miui.permcenter.permissions.AppPermissionsEditorActivity跳转自启动设置页")
-                if (WhiteIntentWrapper.doesActivityExists(context, xiaomiIntent)) {
-                    Log.d("WhiteIntent", "可通过com.miui.permcenter.permissions.AppPermissionsEditorActivity跳转自启动设置页")
-                    sIntentWrapperList.add(WhiteIntentWrapper(xiaomiIntent, XIAOMI))
-                } else {
-                    Log.e("WhiteIntent", "不可通过com.miui.permcenter.permissions.AppPermissionsEditorActivity跳转自启动设置页")
-                    xiaomiIntent = Intent("miui.intent.action.APP_PERM_EDITOR")
-                    xiaomiIntent.setClassName("com.miui.securitycenter", "com.miui.permcenter.permissions.PermissionsEditorActivity")
-                    xiaomiIntent.putExtra("extra_pkgname", context.packageName)
+    override fun getIntent(context: Context, sIntentWrapperList: MutableList<WhiteIntentWrapper>, commandList: List<String>) {
+        super.getIntent(context, sIntentWrapperList, commandList)
+        (0 until commandList.size ).forEach {
+            when (commandList[it]) {
+                COMMAND_START_YOURSELF -> {
+                    //小米 自启动管理
+                    Log.d("WhiteIntent", "小米手机" + getMiuiVersion())
+                    var xiaomiIntent = Intent()
+                    xiaomiIntent.action = "miui.intent.action.OP_AUTO_START"
+                    xiaomiIntent.addCategory(Intent.CATEGORY_DEFAULT)
                     xiaomiIntent.putExtra("packageName", context.packageName)
                     xiaomiIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                    Log.d("WhiteIntent", "尝试通过com.miui.permcenter.permissions.PermissionsEditorActivity跳转自启动设置页")
+                    Log.d("WhiteIntent", "尝试通过Action=miui.intent.action.OP_AUTO_START跳转自启动设置页")
                     if (WhiteIntentWrapper.doesActivityExists(context, xiaomiIntent)) {
-                        Log.d("WhiteIntent", "可通过com.miui.permcenter.permissions.PermissionsEditorActivity跳转自启动设置页")
-                        sIntentWrapperList.add(WhiteIntentWrapper(xiaomiIntent, XIAOMI))
+                        Log.d("WhiteIntent", "可通过Action=miui.intent.action.OP_AUTO_START跳转自启动设置页")
+                        sIntentWrapperList.add(WhiteIntentWrapper(xiaomiIntent, XIAOMI,COMMAND_START_YOURSELF))
                     } else {
-                        Log.e("WhiteIntent", "不可通过com.miui.permcenter.permissions.PermissionsEditorActivity跳转自启动设置页")
+                        Log.e("WhiteIntent", "不可通过Action=miui.intent.action.OP_AUTO_START跳转自启动设置页")
+                        xiaomiIntent = Intent()
+                        xiaomiIntent.component = ComponentName.unflattenFromString("com.miui.securitycenter/com.miui.permcenter.autostart.AutoStartManagementActivity")
+                        xiaomiIntent.putExtra("packageName", context.packageName)
+                        xiaomiIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                        Log.d("WhiteIntent", "尝试通过com.miui.permcenter.autostart.AutoStartManagementActivity跳转自启动设置页")
+                        if (WhiteIntentWrapper.doesActivityExists(context, xiaomiIntent)) {
+                            Log.d("WhiteIntent", "可通过com.miui.permcenter.autostart.AutoStartManagementActivity跳转自启动设置页")
+                            sIntentWrapperList.add(WhiteIntentWrapper(xiaomiIntent, XIAOMI,COMMAND_START_YOURSELF))
+                        } else {
+                            Log.e("WhiteIntent", "不可通过com.miui.permcenter.autostart.AutoStartManagementActivity跳转自启动设置页")
+                            xiaomiIntent = Intent("miui.intent.action.APP_PERM_EDITOR")
+                            xiaomiIntent.component = ComponentName("com.miui.securitycenter", "com.miui.permcenter.permissions.AppPermissionsEditorActivity")
+                            xiaomiIntent.putExtra("extra_pkgname", context.packageName)
+                            xiaomiIntent.putExtra("packageName", context.packageName)
+                            xiaomiIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                            Log.d("WhiteIntent", "尝试通过com.miui.permcenter.permissions.AppPermissionsEditorActivity跳转自启动设置页")
+                            if (WhiteIntentWrapper.doesActivityExists(context, xiaomiIntent)) {
+                                Log.d("WhiteIntent", "可通过com.miui.permcenter.permissions.AppPermissionsEditorActivity跳转自启动设置页")
+                                sIntentWrapperList.add(WhiteIntentWrapper(xiaomiIntent, XIAOMI,COMMAND_START_YOURSELF))
+                            } else {
+                                Log.e("WhiteIntent", "不可通过com.miui.permcenter.permissions.AppPermissionsEditorActivity跳转自启动设置页")
+                                xiaomiIntent = Intent("miui.intent.action.APP_PERM_EDITOR")
+                                xiaomiIntent.setClassName("com.miui.securitycenter", "com.miui.permcenter.permissions.PermissionsEditorActivity")
+                                xiaomiIntent.putExtra("extra_pkgname", context.packageName)
+                                xiaomiIntent.putExtra("packageName", context.packageName)
+                                xiaomiIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                                Log.d("WhiteIntent", "尝试通过com.miui.permcenter.permissions.PermissionsEditorActivity跳转自启动设置页")
+                                if (WhiteIntentWrapper.doesActivityExists(context, xiaomiIntent)) {
+                                    Log.d("WhiteIntent", "可通过com.miui.permcenter.permissions.PermissionsEditorActivity跳转自启动设置页")
+                                    sIntentWrapperList.add(WhiteIntentWrapper(xiaomiIntent, XIAOMI,COMMAND_START_YOURSELF))
+                                } else {
+                                    Log.e("WhiteIntent", "不可通过com.miui.permcenter.permissions.PermissionsEditorActivity跳转自启动设置页")
+                                }
+                            }
+                        }
+                    }
+                }
+                COMMAND_GOD->{
+                    //小米 神隐模式
+                    val xiaomiGodIntent = Intent()
+                    xiaomiGodIntent.component = ComponentName("com.miui.powerkeeper", "com.miui.powerkeeper.ui.HiddenAppsConfigActivity")
+                    xiaomiGodIntent.putExtra("package_name", context.packageName)
+                    xiaomiGodIntent.putExtra("package_label", WhiteIntentWrapper.getApplicationName(context))
+                    xiaomiGodIntent.putExtra("packageName", context.packageName)
+                    xiaomiGodIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    Log.d("WhiteIntent", "尝试通过com.miui.powerkeeper.ui.HiddenAppsConfigActivity跳转神隐模式设置页")
+                    if (WhiteIntentWrapper.doesActivityExists(context, xiaomiGodIntent)) {
+                        Log.d("WhiteIntent", "可通过com.miui.powerkeeper.ui.HiddenAppsConfigActivity跳转神隐模式设置页")
+                        sIntentWrapperList.add(WhiteIntentWrapper(xiaomiGodIntent, XIAOMI_GOD,COMMAND_GOD))
+                    } else {
+                        Log.e("WhiteIntent", "不可通过com.miui.powerkeeper.ui.HiddenAppsConfigActivity跳转神隐模式设置页")
                     }
                 }
             }
-        }
-        //小米 神隐模式
-        val xiaomiGodIntent = Intent()
-        xiaomiGodIntent.component = ComponentName("com.miui.powerkeeper", "com.miui.powerkeeper.ui.HiddenAppsConfigActivity")
-        xiaomiGodIntent.putExtra("package_name", context.packageName)
-        xiaomiGodIntent.putExtra("package_label", WhiteIntentWrapper.getApplicationName(context))
-        xiaomiGodIntent.putExtra("packageName", context.packageName)
-        xiaomiGodIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        Log.d("WhiteIntent", "尝试通过com.miui.powerkeeper.ui.HiddenAppsConfigActivity跳转神隐模式设置页")
-        if (WhiteIntentWrapper.doesActivityExists(context, xiaomiGodIntent)) {
-            Log.d("WhiteIntent", "可通过com.miui.powerkeeper.ui.HiddenAppsConfigActivity跳转神隐模式设置页")
-            sIntentWrapperList.add(WhiteIntentWrapper(xiaomiGodIntent, XIAOMI_GOD))
-        } else {
-            Log.e("WhiteIntent", "不可通过com.miui.powerkeeper.ui.HiddenAppsConfigActivity跳转神隐模式设置页")
         }
     }
 

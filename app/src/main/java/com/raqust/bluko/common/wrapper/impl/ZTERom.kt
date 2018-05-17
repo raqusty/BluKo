@@ -20,8 +20,8 @@ class ZTERom : SystemRom() {
     //中兴 锁屏加速受保护应用
     private val ZTE_GOD = 0x111
 
-    override fun getIntent(context: Context, sIntentWrapperList: MutableList<WhiteIntentWrapper>) {
-        super.getIntent(context, sIntentWrapperList)
+    override fun getIntent(context: Context, sIntentWrapperList: MutableList<WhiteIntentWrapper>,commandList:List<String>) {
+        super.getIntent(context, sIntentWrapperList,commandList)
     }
 
     override fun showDialog(reason: String, a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {

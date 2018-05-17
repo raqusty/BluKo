@@ -9,6 +9,9 @@ import android.content.Intent
 import android.os.Build
 import android.support.annotation.RequiresApi
 import android.util.Log
+import com.raqust.bluko.common.wrapper.Constant
+import com.raqust.bluko.common.wrapper.Constant.COMMAND_CONSUME_POWER
+import com.raqust.bluko.common.wrapper.Constant.COMMAND_START_YOURSELF
 import com.raqust.bluko.common.wrapper.DialogImpl
 import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
 
@@ -28,43 +31,51 @@ class FlymeRom : SystemRom() {
     private val MEIZU_GOD = 0x41
 
     @RequiresApi(Build.VERSION_CODES.M)
-    override fun getIntent(context: Context, sIntentWrapperList: MutableList<WhiteIntentWrapper>) {
-        super.getIntent(context, sIntentWrapperList)
-        //魅族 自启动管理
-        Log.d("WhiteIntent", "魅族手机")
-        var meizuIntent = Intent("com.meizu.safe.security.SHOW_APPSEC")
-        meizuIntent.addCategory(Intent.CATEGORY_DEFAULT)
-        meizuIntent.putExtra("packageName", context.packageName)
-        meizuIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        Log.d("WhiteIntent", "尝试通过Action=com.meizu.safe.security.SHOW_APPSEC跳转自启动设置")
-        if (WhiteIntentWrapper.doesActivityExists(context, meizuIntent)) {
-            Log.d("WhiteIntent", "可通过Action=com.meizu.safe.security.SHOW_APPSEC跳转自启动设置")
-            sIntentWrapperList.add(WhiteIntentWrapper(meizuIntent, MEIZU))
-        } else {
-            Log.e("WhiteIntent", "不可通过Action=com.meizu.safe.security.SHOW_APPSEC跳转自启动设置")
-            meizuIntent = Intent()
-            meizuIntent.component = ComponentName.unflattenFromString("com.meizu.safe/.permission.PermissionMainActivity")
-            meizuIntent.putExtra("packageName", context.packageName)
-            meizuIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            Log.d("WhiteIntent", "尝试通过com.meizu.safe.permission.PermissionMainActivity跳转自启动设置")
-            if (WhiteIntentWrapper.doesActivityExists(context, meizuIntent)) {
-                Log.d("WhiteIntent", "可通过com.meizu.safe.permission.PermissionMainActivity跳转自启动设置")
-                sIntentWrapperList.add(WhiteIntentWrapper(meizuIntent, MEIZU))
-            } else {
-                Log.e("WhiteIntent", "不可通过com.meizu.safe.permission.PermissionMainActivity跳转自启动设置")
+    override fun getIntent(context: Context, sIntentWrapperList: MutableList<WhiteIntentWrapper>,commandList:List<String>) {
+        super.getIntent(context, sIntentWrapperList,commandList)
+        (0 until commandList.size ).forEach {
+            when (commandList[it]) {
+                COMMAND_START_YOURSELF -> {
+                    //魅族 自启动管理
+                    Log.d("WhiteIntent", "魅族手机")
+                    var meizuIntent = Intent("com.meizu.safe.security.SHOW_APPSEC")
+                    meizuIntent.addCategory(Intent.CATEGORY_DEFAULT)
+                    meizuIntent.putExtra("packageName", context.packageName)
+                    meizuIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    Log.d("WhiteIntent", "尝试通过Action=com.meizu.safe.security.SHOW_APPSEC跳转自启动设置")
+                    if (WhiteIntentWrapper.doesActivityExists(context, meizuIntent)) {
+                        Log.d("WhiteIntent", "可通过Action=com.meizu.safe.security.SHOW_APPSEC跳转自启动设置")
+                        sIntentWrapperList.add(WhiteIntentWrapper(meizuIntent, MEIZU,COMMAND_START_YOURSELF))
+                    } else {
+                        Log.e("WhiteIntent", "不可通过Action=com.meizu.safe.security.SHOW_APPSEC跳转自启动设置")
+                        meizuIntent = Intent()
+                        meizuIntent.component = ComponentName.unflattenFromString("com.meizu.safe/.permission.PermissionMainActivity")
+                        meizuIntent.putExtra("packageName", context.packageName)
+                        meizuIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                        Log.d("WhiteIntent", "尝试通过com.meizu.safe.permission.PermissionMainActivity跳转自启动设置")
+                        if (WhiteIntentWrapper.doesActivityExists(context, meizuIntent)) {
+                            Log.d("WhiteIntent", "可通过com.meizu.safe.permission.PermissionMainActivity跳转自启动设置")
+                            sIntentWrapperList.add(WhiteIntentWrapper(meizuIntent, MEIZU,COMMAND_START_YOURSELF))
+                        } else {
+                            Log.e("WhiteIntent", "不可通过com.meizu.safe.permission.PermissionMainActivity跳转自启动设置")
+                        }
+                    }
+                }
+                COMMAND_CONSUME_POWER->{
+                    //魅族 待机耗电管理
+                    val meizuGodIntent = Intent()
+                    meizuGodIntent.component = ComponentName("com.meizu.safe", "com.meizu.safe.powerui.PowerAppPermissionActivity")
+                    meizuGodIntent.putExtra("packageName", context.packageName)
+                    meizuGodIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    Log.d("WhiteIntent", "尝试通过com.meizu.safe.powerui.PowerAppPermissionActivity跳转待机耗电管理页")
+                    if (WhiteIntentWrapper.doesActivityExists(context, meizuGodIntent)) {
+                        Log.d("WhiteIntent", "可通过com.meizu.safe.powerui.PowerAppPermissionActivity跳转待机耗电管理页")
+                        sIntentWrapperList.add(WhiteIntentWrapper(meizuGodIntent, MEIZU_GOD,COMMAND_CONSUME_POWER))
+                    } else {
+                        Log.e("WhiteIntent", "不可通过com.meizu.safe.powerui.PowerAppPermissionActivity跳转待机耗电管理页")
+                    }
+                }
             }
-        }
-        //魅族 待机耗电管理
-        val meizuGodIntent = Intent()
-        meizuGodIntent.component = ComponentName("com.meizu.safe", "com.meizu.safe.powerui.PowerAppPermissionActivity")
-        meizuGodIntent.putExtra("packageName", context.packageName)
-        meizuGodIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        Log.d("WhiteIntent", "尝试通过com.meizu.safe.powerui.PowerAppPermissionActivity跳转待机耗电管理页")
-        if (WhiteIntentWrapper.doesActivityExists(context, meizuGodIntent)) {
-            Log.d("WhiteIntent", "可通过com.meizu.safe.powerui.PowerAppPermissionActivity跳转待机耗电管理页")
-            sIntentWrapperList.add(WhiteIntentWrapper(meizuGodIntent, MEIZU_GOD))
-        } else {
-            Log.e("WhiteIntent", "不可通过com.meizu.safe.powerui.PowerAppPermissionActivity跳转待机耗电管理页")
         }
     }
 

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import com.raqust.bluko.common.wrapper.Constant
 import com.raqust.bluko.common.wrapper.DialogImpl
 import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
 
@@ -20,19 +21,25 @@ class KupaiRom : SystemRom() {
     //酷派 自启动管理
     private val COOLPAD = 0x70
 
-    override fun getIntent(context: Context, sIntentWrapperList: MutableList<WhiteIntentWrapper>) {
-        super.getIntent(context, sIntentWrapperList)
-        //酷派 自启动管理
-        Log.d("WhiteIntent", "酷派手机")
-        val coolpadIntent = context.packageManager.getLaunchIntentForPackage("com.yulong.android.security")
-        Log.d("WhiteIntent", "尝试通过getLaunchIntentForPackage(com.yulong.android.security)跳转酷管家")
-        if (coolpadIntent != null) {
-            coolpadIntent.putExtra("packageName", context.packageName)
-            coolpadIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            Log.d("WhiteIntent", "可通过getLaunchIntentForPackage(com.yulong.android.security)跳转酷管家")
-            sIntentWrapperList.add(WhiteIntentWrapper(coolpadIntent, COOLPAD))
-        } else {
-            Log.e("WhiteIntent", "不可通过getLaunchIntentForPackage(com.yulong.android.security)跳转酷管家")
+    override fun getIntent(context: Context, sIntentWrapperList: MutableList<WhiteIntentWrapper>, commandList: List<String>) {
+        super.getIntent(context, sIntentWrapperList, commandList)
+        (0 until commandList.size ).forEach {
+            when (commandList[it]) {
+                Constant.COMMAND_START_YOURSELF -> {
+                    //酷派 自启动管理
+                    Log.d("WhiteIntent", "酷派手机")
+                    val coolpadIntent = context.packageManager.getLaunchIntentForPackage("com.yulong.android.security")
+                    Log.d("WhiteIntent", "尝试通过getLaunchIntentForPackage(com.yulong.android.security)跳转酷管家")
+                    if (coolpadIntent != null) {
+                        coolpadIntent.putExtra("packageName", context.packageName)
+                        coolpadIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                        Log.d("WhiteIntent", "可通过getLaunchIntentForPackage(com.yulong.android.security)跳转酷管家")
+                        sIntentWrapperList.add(WhiteIntentWrapper(coolpadIntent, COOLPAD,Constant.COMMAND_START_YOURSELF))
+                    } else {
+                        Log.e("WhiteIntent", "不可通过getLaunchIntentForPackage(com.yulong.android.security)跳转酷管家")
+                    }
+                }
+            }
         }
     }
 

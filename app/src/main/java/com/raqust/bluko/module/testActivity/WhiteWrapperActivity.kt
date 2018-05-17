@@ -1,8 +1,11 @@
 package com.raqust.bluko.module.testActivity
 
+import android.util.Log
 import com.raqust.bluko.R
 import com.raqust.bluko.common.activity.BaseActivity
 import com.raqust.bluko.common.activity.ToolBarManager
+import com.raqust.bluko.common.wrapper.Constant.COMMAND_START_YOURSELF
+import com.raqust.bluko.common.wrapper.Constant.COMMAND_WHITE_LIST
 import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
 import com.raqust.bluko.common.wrapper1.WhiteIntentWrapper1
 import kotlinx.android.synthetic.main.activity_two_text.*
@@ -22,10 +25,14 @@ class WhiteWrapperActivity : BaseActivity() {
 
     override fun setListener() {
         one.setOnClickListener {
-            WhiteIntentWrapper.whiteListMatters(this, "test")
+            WhiteIntentWrapper.whiteListMatters(this, "test", arrayListOf(COMMAND_START_YOURSELF))
         }
         two.setOnClickListener {
-            WhiteIntentWrapper1.whiteListMatters(this,"test")
+            WhiteIntentWrapper.whiteListMatters(this, "test", arrayListOf(COMMAND_START_YOURSELF,COMMAND_WHITE_LIST))
+
+            WhiteIntentWrapper.getWhiteListState(this,arrayListOf(COMMAND_START_YOURSELF,COMMAND_WHITE_LIST))?.forEach {
+                Log.i("linzehao",it.first )
+            }
         }
     }
 
