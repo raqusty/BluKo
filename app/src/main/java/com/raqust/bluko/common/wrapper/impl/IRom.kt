@@ -9,8 +9,8 @@ import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
  * time: 2018/4/17.
  * info:
  */
-interface IRom{
+interface IRom {
     fun getIntent(context: Context, sIntentWrapperList: MutableList<WhiteIntentWrapper>)
 
-    fun showDialog(reason:String, a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>)
+    fun showDialog(reason: String, a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>)
 }

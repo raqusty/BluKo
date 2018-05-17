@@ -1,15 +1,13 @@
 package com.raqust.bluko.common.wrapper.impl
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
 import android.util.Log
-import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
-import android.content.DialogInterface
 import com.raqust.bluko.common.wrapper.DialogImpl
+import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
 
 
 /**
@@ -19,7 +17,7 @@ import com.raqust.bluko.common.wrapper.DialogImpl
  */
 class OtherRom : SystemRom() {
 
-    override   val tag = "OtherRom"
+    override val tag = "OtherRom"
 
     //Other 自启管理
     private val OTHER = 0x150
@@ -40,13 +38,13 @@ class OtherRom : SystemRom() {
         }
     }
 
-    override fun showDialog(reason:String, a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
-        super.showDialog(reason,a, intent, wrapperList)
+    override fun showDialog(reason: String, a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
+        super.showDialog(reason, a, intent, wrapperList)
         val applicationName = WhiteIntentWrapper.getApplicationName(a)
         when (intent.type) {
             OTHER -> {
                 DialogImpl(a, WhiteIntentWrapper.getString(a, "reason_system_title", applicationName),
-                        WhiteIntentWrapper.getString(a, "reason_system_content", reason, applicationName,applicationName,applicationName),
+                        WhiteIntentWrapper.getString(a, "reason_system_content", reason, applicationName, applicationName, applicationName),
                         WhiteIntentWrapper.getString(a, "ok"),
                         WhiteIntentWrapper.getString(a, "cancel"), {
                     intent.startActivitySafely(a)

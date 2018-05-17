@@ -4,14 +4,14 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.ComponentName
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.util.Log
+import com.raqust.bluko.common.wrapper.DialogImpl
 import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
-import android.content.DialogInterface
-import com.raqust.bluko.common.wrapper.DialogImpl
 
 
 /**
@@ -21,14 +21,14 @@ import com.raqust.bluko.common.wrapper.DialogImpl
  */
 class MiuiRom : SystemRom() {
 
-    override  val tag = "MiuiRom"
+    override val tag = "MiuiRom"
 
     //小米 自启动管理
     private val XIAOMI = 0x20
     //小米 神隐模式
     private val XIAOMI_GOD = 0x21
 
-    override fun getIntent(context:Context,sIntentWrapperList:MutableList<WhiteIntentWrapper>) {
+    override fun getIntent(context: Context, sIntentWrapperList: MutableList<WhiteIntentWrapper>) {
         super.getIntent(context, sIntentWrapperList)
         //小米 自启动管理
         Log.d("WhiteIntent", "小米手机" + getMiuiVersion())
@@ -120,16 +120,16 @@ class MiuiRom : SystemRom() {
         return line
     }
 
-    override fun showDialog(reason:String, a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
-        super.showDialog(reason,a, intent, wrapperList)
+    override fun showDialog(reason: String, a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
+        super.showDialog(reason, a, intent, wrapperList)
         val applicationName = WhiteIntentWrapper.getApplicationName(a)
         when (intent.type) {
             XIAOMI_GOD -> {
                 try {
                     AlertDialog.Builder(a)
                             .setCancelable(false)
-                            .setTitle(WhiteIntentWrapper.getString(a, "reason_xm_god_title",WhiteIntentWrapper.getApplicationName(a)))
-                            .setMessage(WhiteIntentWrapper.getString(a, "reason_xm_god_content", reason,WhiteIntentWrapper.getApplicationName(a),WhiteIntentWrapper.getApplicationName(a)))
+                            .setTitle(WhiteIntentWrapper.getString(a, "reason_xm_god_title", WhiteIntentWrapper.getApplicationName(a)))
+                            .setMessage(WhiteIntentWrapper.getString(a, "reason_xm_god_content", reason, WhiteIntentWrapper.getApplicationName(a), WhiteIntentWrapper.getApplicationName(a)))
                             .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), DialogInterface.OnClickListener { d, w -> intent.startActivitySafely(a) })
                             .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
                             .show()
@@ -138,7 +138,7 @@ class MiuiRom : SystemRom() {
                     e.printStackTrace()
                 }
                 DialogImpl(a, WhiteIntentWrapper.getString(a, "reason_xm_god_title", applicationName),
-                        WhiteIntentWrapper.getString(a, "reason_xm_god_content", reason, applicationName,applicationName),
+                        WhiteIntentWrapper.getString(a, "reason_xm_god_content", reason, applicationName, applicationName),
                         WhiteIntentWrapper.getString(a, "ok"),
                         WhiteIntentWrapper.getString(a, "cancel"), {
                     intent.startActivitySafely(a)
@@ -147,7 +147,7 @@ class MiuiRom : SystemRom() {
             }
             XIAOMI -> {
                 DialogImpl(a, WhiteIntentWrapper.getString(a, "reason_xm_title", applicationName),
-                        WhiteIntentWrapper.getString(a, "reason_xm_content", reason, applicationName,applicationName),
+                        WhiteIntentWrapper.getString(a, "reason_xm_content", reason, applicationName, applicationName),
                         WhiteIntentWrapper.getString(a, "ok"),
                         WhiteIntentWrapper.getString(a, "cancel"), {
                     intent.startActivitySafely(a)

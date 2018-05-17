@@ -1,14 +1,12 @@
 package com.raqust.bluko.common.wrapper.impl
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
-import android.content.DialogInterface
 import com.raqust.bluko.common.wrapper.DialogImpl
+import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
 
 
 /**
@@ -39,13 +37,14 @@ class GioneeRom : SystemRom() {
             Log.e("WhiteIntent", "不可通过com.gionee.softmanager.MainActivity跳转自启动设置")
         }
     }
-    override fun showDialog(reason:String, a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
-        super.showDialog(reason,a, intent, wrapperList)
+
+    override fun showDialog(reason: String, a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
+        super.showDialog(reason, a, intent, wrapperList)
         val applicationName = WhiteIntentWrapper.getApplicationName(a)
         when (intent.type) {
             GIONEE -> {
                 DialogImpl(a, WhiteIntentWrapper.getString(a, "reason_jl_title", applicationName),
-                        WhiteIntentWrapper.getString(a, "reason_jl_content", reason, applicationName,applicationName,applicationName),
+                        WhiteIntentWrapper.getString(a, "reason_jl_content", reason, applicationName, applicationName, applicationName),
                         WhiteIntentWrapper.getString(a, "ok"),
                         WhiteIntentWrapper.getString(a, "cancel"), {
                     intent.startActivitySafely(a)

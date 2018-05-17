@@ -93,7 +93,7 @@ class EmuiRom : SystemRom() {
                         WhiteIntentWrapper.getString(a, "ok"),
                         WhiteIntentWrapper.getString(a, "cancel"), {
                     intent.startActivitySafely(a)
-                },CONSTANT_NO_WARM,{
+                }, CONSTANT_NO_WARM, {
 
                 })
                 wrapperList.add(intent)

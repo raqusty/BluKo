@@ -1,14 +1,12 @@
 package com.raqust.bluko.common.wrapper.impl
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
-import android.content.DialogInterface
 import com.raqust.bluko.common.wrapper.DialogImpl
+import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
 
 
 /**
@@ -120,13 +118,14 @@ class OppoRom : SystemRom() {
             }
         }
     }
-    override fun showDialog(reason:String, a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
-        super.showDialog(reason,a, intent, wrapperList)
+
+    override fun showDialog(reason: String, a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
+        super.showDialog(reason, a, intent, wrapperList)
         val applicationName = WhiteIntentWrapper.getApplicationName(a)
         when (intent.type) {
             OPPO_SM -> {
                 DialogImpl(a, WhiteIntentWrapper.getString(a, "reason_oppo_sm_title", applicationName),
-                        WhiteIntentWrapper.getString(a, "reason_oppo_sm_content", reason, applicationName,applicationName),
+                        WhiteIntentWrapper.getString(a, "reason_oppo_sm_content", reason, applicationName, applicationName),
                         WhiteIntentWrapper.getString(a, "ok"),
                         WhiteIntentWrapper.getString(a, "cancel"), {
                     intent.startActivitySafely(a)
@@ -135,7 +134,7 @@ class OppoRom : SystemRom() {
             }
             OPPO_PM -> {
                 DialogImpl(a, WhiteIntentWrapper.getString(a, "reason_oppo_pm_title", applicationName),
-                        WhiteIntentWrapper.getString(a, "reason_oppo_pm_content", reason, applicationName,applicationName),
+                        WhiteIntentWrapper.getString(a, "reason_oppo_pm_content", reason, applicationName, applicationName),
                         WhiteIntentWrapper.getString(a, "ok"),
                         WhiteIntentWrapper.getString(a, "cancel"), {
                     intent.startActivitySafely(a)
@@ -144,7 +143,7 @@ class OppoRom : SystemRom() {
             }
             OPPO_GOD -> {
                 DialogImpl(a, WhiteIntentWrapper.getString(a, "reason_oppo_god_title", applicationName),
-                        WhiteIntentWrapper.getString(a, "reason_oppo_god_content", reason, applicationName,applicationName),
+                        WhiteIntentWrapper.getString(a, "reason_oppo_god_content", reason, applicationName, applicationName),
                         WhiteIntentWrapper.getString(a, "ok"),
                         WhiteIntentWrapper.getString(a, "cancel"), {
                     intent.startActivitySafely(a)

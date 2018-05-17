@@ -4,11 +4,11 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.ComponentName
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.util.Log
-import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
-import android.content.DialogInterface
 import com.raqust.bluko.common.wrapper.DialogImpl
+import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
 
 
 /**
@@ -18,7 +18,7 @@ import com.raqust.bluko.common.wrapper.DialogImpl
  */
 class LenovoRom : SystemRom() {
 
-    override  val tag = "LenovoRom"
+    override val tag = "LenovoRom"
 
     //联想 后台管理
     private val LENOVO = 0x100
@@ -54,16 +54,16 @@ class LenovoRom : SystemRom() {
         }
     }
 
-    override fun showDialog(reason:String, a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
-        super.showDialog(reason,a, intent, wrapperList)
+    override fun showDialog(reason: String, a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
+        super.showDialog(reason, a, intent, wrapperList)
         val applicationName = WhiteIntentWrapper.getApplicationName(a)
         when (intent.type) {
             LENOVO_GOD -> {
                 try {
                     AlertDialog.Builder(a)
                             .setCancelable(false)
-                            .setTitle(WhiteIntentWrapper.getString(a, "reason_lv_god_title",WhiteIntentWrapper.getApplicationName(a)))
-                            .setMessage(WhiteIntentWrapper.getString(a, "reason_lv_god_content", reason,WhiteIntentWrapper.getApplicationName(a),WhiteIntentWrapper.getApplicationName(a),WhiteIntentWrapper.getApplicationName(a)))
+                            .setTitle(WhiteIntentWrapper.getString(a, "reason_lv_god_title", WhiteIntentWrapper.getApplicationName(a)))
+                            .setMessage(WhiteIntentWrapper.getString(a, "reason_lv_god_content", reason, WhiteIntentWrapper.getApplicationName(a), WhiteIntentWrapper.getApplicationName(a), WhiteIntentWrapper.getApplicationName(a)))
                             .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), DialogInterface.OnClickListener { d, w -> intent.startActivitySafely(a) })
                             .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
                             .show()
@@ -81,7 +81,7 @@ class LenovoRom : SystemRom() {
             }
             LENOVO -> {
                 DialogImpl(a, WhiteIntentWrapper.getString(a, "reason_lv_title", applicationName),
-                        WhiteIntentWrapper.getString(a, "reason_lv_content", reason, applicationName,applicationName,applicationName),
+                        WhiteIntentWrapper.getString(a, "reason_lv_content", reason, applicationName, applicationName, applicationName),
                         WhiteIntentWrapper.getString(a, "ok"),
                         WhiteIntentWrapper.getString(a, "cancel"), {
                     intent.startActivitySafely(a)

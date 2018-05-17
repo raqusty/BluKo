@@ -1,11 +1,9 @@
 package com.raqust.bluko.common.wrapper.impl
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
-import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
-import android.content.DialogInterface
 import com.raqust.bluko.common.wrapper.DialogImpl
+import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
 
 
 /**
@@ -26,8 +24,8 @@ class ZTERom : SystemRom() {
         super.getIntent(context, sIntentWrapperList)
     }
 
-    override fun showDialog(reason:String, a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
-        super.showDialog(reason,a, intent, wrapperList)
+    override fun showDialog(reason: String, a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
+        super.showDialog(reason, a, intent, wrapperList)
         val applicationName = WhiteIntentWrapper.getApplicationName(a)
         when (intent.type) {
             ZTE -> {

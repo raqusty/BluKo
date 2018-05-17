@@ -4,13 +4,13 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.ComponentName
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Build
 import android.support.annotation.RequiresApi
 import android.util.Log
-import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
-import android.content.DialogInterface
 import com.raqust.bluko.common.wrapper.DialogImpl
+import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
 
 
 /**
@@ -68,16 +68,16 @@ class FlymeRom : SystemRom() {
         }
     }
 
-    override fun showDialog(reason:String, a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
-        super.showDialog(reason,a, intent, wrapperList)
+    override fun showDialog(reason: String, a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
+        super.showDialog(reason, a, intent, wrapperList)
         val applicationName = WhiteIntentWrapper.getApplicationName(a)
         when (intent.type) {
             MEIZU_GOD -> {
                 try {
                     AlertDialog.Builder(a)
                             .setCancelable(false)
-                            .setTitle(WhiteIntentWrapper.getString(a, "reason_mz_god_title",WhiteIntentWrapper.getApplicationName(a)))
-                            .setMessage(WhiteIntentWrapper.getString(a, "reason_mz_god_content", reason,WhiteIntentWrapper.getApplicationName(a),WhiteIntentWrapper.getApplicationName(a)))
+                            .setTitle(WhiteIntentWrapper.getString(a, "reason_mz_god_title", WhiteIntentWrapper.getApplicationName(a)))
+                            .setMessage(WhiteIntentWrapper.getString(a, "reason_mz_god_content", reason, WhiteIntentWrapper.getApplicationName(a), WhiteIntentWrapper.getApplicationName(a)))
                             .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), DialogInterface.OnClickListener { d, w -> intent.startActivitySafely(a) })
                             .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
                             .show()
@@ -86,7 +86,7 @@ class FlymeRom : SystemRom() {
                     e.printStackTrace()
                 }
                 DialogImpl(a, WhiteIntentWrapper.getString(a, "reason_mz_god_title", applicationName),
-                        WhiteIntentWrapper.getString(a, "reason_mz_god_content", reason, applicationName,applicationName),
+                        WhiteIntentWrapper.getString(a, "reason_mz_god_content", reason, applicationName, applicationName),
                         WhiteIntentWrapper.getString(a, "ok"),
                         WhiteIntentWrapper.getString(a, "cancel"), {
                     intent.startActivitySafely(a)

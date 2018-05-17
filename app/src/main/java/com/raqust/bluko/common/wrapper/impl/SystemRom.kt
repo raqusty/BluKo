@@ -2,19 +2,15 @@ package com.raqust.bluko.common.wrapper.impl
 
 import android.annotation.TargetApi
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.PowerManager
 import android.provider.Settings
-import android.support.annotation.RequiresApi
 import android.util.Log
 import com.raqust.bluko.common.wrapper.DialogImpl
 import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
-import com.raqust.bluko.common.wrapper1.WhiteIntentWrapper1
 
 
 /**
