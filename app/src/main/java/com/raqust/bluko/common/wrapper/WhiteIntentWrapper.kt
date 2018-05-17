@@ -18,8 +18,8 @@ class WhiteIntentWrapper {
 
     val tag = "WhiteIntent"
 
-     var intent: Intent? = null
-     var type: Int = 0
+    var intent: Intent? = null
+    var type: Int = 0
 
     constructor(intent: Intent, type: Int) {
         this.intent = intent
@@ -54,7 +54,7 @@ class WhiteIntentWrapper {
         }
 
         private fun getIntentWrapperList(context: Context): List<WhiteIntentWrapper> {
-            if (sIntentWrapperList.size == 0){
+            if (sIntentWrapperList.size == 0) {
                 when {
                     RomUtils.isEmui -> phoneRom = EmuiRom()
                     RomUtils.isMiui -> phoneRom = MiuiRom()
@@ -86,29 +86,24 @@ class WhiteIntentWrapper {
             }
             val intentWrapperList = getIntentWrapperList(activity)
             intentWrapperList.forEach {
-                phoneRom?.showDialog(reason,activity, it, showed)
+                phoneRom?.showDialog(reason, activity, it, showed)
             }
             return showed
         }
 
 
-        private var sApplicationName: String? = ""
-
         fun getApplicationName(context: Context): String {
-            if (sApplicationName == null) {
-                val pm: PackageManager
-                val ai: ApplicationInfo
-                try {
-                    pm = context.packageManager
-                    ai = pm.getApplicationInfo(context.packageName, 0)
-                    sApplicationName = pm.getApplicationLabel(ai).toString()
-                } catch (e: PackageManager.NameNotFoundException) {
-                    e.printStackTrace()
-                    sApplicationName = context.packageName
-                }
-
+            val pm: PackageManager
+            val ai: ApplicationInfo
+            return try {
+                pm = context.packageManager
+                ai = pm.getApplicationInfo(context.packageName, 0)
+                pm.getApplicationLabel(ai).toString()
+            } catch (e: PackageManager.NameNotFoundException) {
+                e.printStackTrace()
+                context.packageName
             }
-            return sApplicationName!!
+
         }
 
         fun getString(context: Context, name: String, vararg format: Any): String {

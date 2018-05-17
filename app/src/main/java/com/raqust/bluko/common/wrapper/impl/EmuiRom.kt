@@ -1,12 +1,12 @@
 package com.raqust.bluko.common.wrapper.impl
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.ComponentName
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.util.Log
+import com.raqust.bluko.common.wrapper.Constant.CONSTANT_NO_WARM
+import com.raqust.bluko.common.wrapper.DialogImpl
 import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
 
 
@@ -75,35 +75,29 @@ class EmuiRom : SystemRom() {
 
     override fun showDialog(reason: String, a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
         super.showDialog(reason, a, intent, wrapperList)
+        val applicationName = WhiteIntentWrapper.getApplicationName(a)
         when (intent.type) {
             HUAWEI_GOD -> {
-                try {
-                    AlertDialog.Builder(a)
-                            .setCancelable(false)
-                            .setTitle(WhiteIntentWrapper.getString(a, "reason_hw_god_title", WhiteIntentWrapper.getApplicationName(a)))
-                            .setMessage(WhiteIntentWrapper.getString(a, "reason_hw_god_content", reason, WhiteIntentWrapper.getApplicationName(a), WhiteIntentWrapper.getApplicationName(a)))
-                            .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), DialogInterface.OnClickListener { d, w -> intent.startActivitySafely(a) })
-                            .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
-                            .show()
-                    wrapperList.add(intent)
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
+                DialogImpl(a, WhiteIntentWrapper.getString(a, "reason_hw_god_title", applicationName),
+                        WhiteIntentWrapper.getString(a, "reason_hw_god_content", reason, applicationName, applicationName),
+                        WhiteIntentWrapper.getString(a, "ok"),
+                        WhiteIntentWrapper.getString(a, "cancel"), {
+                    intent.startActivitySafely(a)
+                })
+                wrapperList.add(intent)
 
             }
             HUAWEI -> {
-                try {
-                    AlertDialog.Builder(a)
-                            .setCancelable(false)
-                            .setTitle(WhiteIntentWrapper.getString(a, "reason_hw_title", WhiteIntentWrapper.getApplicationName(a)))
-                            .setMessage(WhiteIntentWrapper.getString(a, "reason_hw_content", reason, WhiteIntentWrapper.getApplicationName(a), WhiteIntentWrapper.getApplicationName(a)))
-                            .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), DialogInterface.OnClickListener { d, w -> intent.startActivitySafely(a) })
-                            .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
-                            .show()
-                    wrapperList.add(intent)
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
+                DialogImpl(a, WhiteIntentWrapper.getString(a, "reason_hw_title", applicationName),
+                        WhiteIntentWrapper.getString(a, "reason_hw_content", reason, applicationName, applicationName),
+                        WhiteIntentWrapper.getString(a, "ok"),
+                        WhiteIntentWrapper.getString(a, "cancel"), {
+                    intent.startActivitySafely(a)
+                },CONSTANT_NO_WARM,{
+
+                })
+                wrapperList.add(intent)
+
             }
         }
     }

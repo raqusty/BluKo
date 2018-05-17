@@ -171,6 +171,10 @@ dependencies {
     //没有使用特殊Header，可以不加这行
     api 'com.android.support:design:25.3.1'
 //    implementation files('libs/huawei-3.1.2-sources.jar')
+
+    //material Dailog
+    compile 'com.afollestad.material-dialogs:core:0.9.1.0'
+    compile 'com.afollestad.material-dialogs:commons:0.9.1.0'
 }
 repositories {
     mavenCentral()

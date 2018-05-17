@@ -43,6 +43,7 @@ class LGRom : SystemRom() {
 
     override fun showDialog(reason:String, a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
         super.showDialog(reason,a, intent, wrapperList)
+        val applicationName = WhiteIntentWrapper.getApplicationName(a)
         when (intent.type) {
             LG -> {
                 try {

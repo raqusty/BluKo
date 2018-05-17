@@ -52,6 +52,7 @@ open class SystemRom : IRom {
     }
 
     override fun showDialog(reason: String, a: Activity, intent: WhiteIntentWrapper, wrapperList: MutableList<WhiteIntentWrapper>) {
+        val applicationName = WhiteIntentWrapper.getApplicationName(a)
         when (intent.type) {
             DOZE -> {
                 val pm = a.getSystemService(Context.POWER_SERVICE) as PowerManager
