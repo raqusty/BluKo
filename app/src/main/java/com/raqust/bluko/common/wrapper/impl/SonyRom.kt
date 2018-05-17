@@ -8,8 +8,7 @@ import android.content.Intent
 import android.content.ComponentName
 import android.util.Log
 import android.content.DialogInterface
-
-
+import com.raqust.bluko.common.wrapper.DialogImpl
 
 
 /**
@@ -46,19 +45,13 @@ class SonyRom : SystemRom() {
         val applicationName = WhiteIntentWrapper.getApplicationName(a)
         when (intent.type) {
             SONY -> {
-                try {
-                    AlertDialog.Builder(a)
-                            .setCancelable(false)
-                            .setTitle(WhiteIntentWrapper.getString(a, "reason_sony_title",WhiteIntentWrapper.getApplicationName(a)))
-                            .setMessage(WhiteIntentWrapper.getString(a, "reason_sony_content", reason,WhiteIntentWrapper.getApplicationName(a),WhiteIntentWrapper.getApplicationName(a)))
-                            .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), DialogInterface.OnClickListener { d, w -> intent.startActivitySafely(a) })
-                            .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
-                            .show()
-                    wrapperList.add(intent)
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-
+                DialogImpl(a, WhiteIntentWrapper.getString(a, "reason_sony_title", applicationName),
+                        WhiteIntentWrapper.getString(a, "reason_sony_content", reason, applicationName,applicationName),
+                        WhiteIntentWrapper.getString(a, "ok"),
+                        WhiteIntentWrapper.getString(a, "cancel"), {
+                    intent.startActivitySafely(a)
+                })
+                wrapperList.add(intent)
             }
         }
     }

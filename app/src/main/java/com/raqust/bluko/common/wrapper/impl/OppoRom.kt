@@ -8,8 +8,7 @@ import android.content.Intent
 import android.util.Log
 import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
 import android.content.DialogInterface
-
-
+import com.raqust.bluko.common.wrapper.DialogImpl
 
 
 /**
@@ -126,49 +125,31 @@ class OppoRom : SystemRom() {
         val applicationName = WhiteIntentWrapper.getApplicationName(a)
         when (intent.type) {
             OPPO_SM -> {
-                try {
-                    AlertDialog.Builder(a)
-                            .setCancelable(false)
-                            .setTitle(WhiteIntentWrapper.getString(a, "reason_oppo_sm_title",WhiteIntentWrapper.getApplicationName(a)))
-                            .setMessage(WhiteIntentWrapper.getString(a, "reason_oppo_sm_content", reason,WhiteIntentWrapper.getApplicationName(a),WhiteIntentWrapper.getApplicationName(a)))
-                            .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), DialogInterface.OnClickListener { d, w -> intent.startActivitySafely(a) })
-                            .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
-                            .show()
-                    wrapperList.add(intent)
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-
+                DialogImpl(a, WhiteIntentWrapper.getString(a, "reason_oppo_sm_title", applicationName),
+                        WhiteIntentWrapper.getString(a, "reason_oppo_sm_content", reason, applicationName,applicationName),
+                        WhiteIntentWrapper.getString(a, "ok"),
+                        WhiteIntentWrapper.getString(a, "cancel"), {
+                    intent.startActivitySafely(a)
+                })
+                wrapperList.add(intent)
             }
             OPPO_PM -> {
-                try {
-                    AlertDialog.Builder(a)
-                            .setCancelable(false)
-                            .setTitle(WhiteIntentWrapper.getString(a, "reason_oppo_pm_title",WhiteIntentWrapper.getApplicationName(a)))
-                            .setMessage(WhiteIntentWrapper.getString(a, "reason_oppo_pm_content", reason,WhiteIntentWrapper.getApplicationName(a),WhiteIntentWrapper.getApplicationName(a)))
-                            .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), DialogInterface.OnClickListener { d, w -> intent.startActivitySafely(a) })
-                            .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
-                            .show()
-                    wrapperList.add(intent)
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-
+                DialogImpl(a, WhiteIntentWrapper.getString(a, "reason_oppo_pm_title", applicationName),
+                        WhiteIntentWrapper.getString(a, "reason_oppo_pm_content", reason, applicationName,applicationName),
+                        WhiteIntentWrapper.getString(a, "ok"),
+                        WhiteIntentWrapper.getString(a, "cancel"), {
+                    intent.startActivitySafely(a)
+                })
+                wrapperList.add(intent)
             }
             OPPO_GOD -> {
-                try {
-                    AlertDialog.Builder(a)
-                            .setCancelable(false)
-                            .setTitle(WhiteIntentWrapper.getString(a, "reason_oppo_god_title",WhiteIntentWrapper.getApplicationName(a)))
-                            .setMessage(WhiteIntentWrapper.getString(a, "reason_oppo_god_content", reason,WhiteIntentWrapper.getApplicationName(a),WhiteIntentWrapper.getApplicationName(a)))
-                            .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), DialogInterface.OnClickListener { d, w -> intent.startActivitySafely(a) })
-                            .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
-                            .show()
-                    wrapperList.add(intent)
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-
+                DialogImpl(a, WhiteIntentWrapper.getString(a, "reason_oppo_god_title", applicationName),
+                        WhiteIntentWrapper.getString(a, "reason_oppo_god_content", reason, applicationName,applicationName),
+                        WhiteIntentWrapper.getString(a, "ok"),
+                        WhiteIntentWrapper.getString(a, "cancel"), {
+                    intent.startActivitySafely(a)
+                })
+                wrapperList.add(intent)
             }
         }
     }

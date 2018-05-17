@@ -8,8 +8,7 @@ import android.content.Intent
 import android.util.Log
 import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
 import android.content.DialogInterface
-
-
+import com.raqust.bluko.common.wrapper.DialogImpl
 
 
 /**
@@ -82,19 +81,13 @@ class LetvRom : SystemRom() {
         val applicationName = WhiteIntentWrapper.getApplicationName(a)
         when (intent.type) {
             LETV -> {
-                try {
-                    AlertDialog.Builder(a)
-                            .setCancelable(false)
-                            .setTitle(WhiteIntentWrapper.getString(a, "reason_le_title",WhiteIntentWrapper.getApplicationName(a)))
-                            .setMessage(WhiteIntentWrapper.getString(a, "reason_le_content", reason,WhiteIntentWrapper.getApplicationName(a),WhiteIntentWrapper.getApplicationName(a)))
-                            .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), DialogInterface.OnClickListener { d, w -> intent.startActivitySafely(a) })
-                            .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
-                            .show()
-                    wrapperList.add(intent)
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-
+                DialogImpl(a, WhiteIntentWrapper.getString(a, "reason_le_title", applicationName),
+                        WhiteIntentWrapper.getString(a, "reason_le_content", reason, applicationName,applicationName),
+                        WhiteIntentWrapper.getString(a, "ok"),
+                        WhiteIntentWrapper.getString(a, "cancel"), {
+                    intent.startActivitySafely(a)
+                })
+                wrapperList.add(intent)
             }
         }
     }

@@ -12,6 +12,7 @@ import android.os.PowerManager
 import android.provider.Settings
 import android.support.annotation.RequiresApi
 import android.util.Log
+import com.raqust.bluko.common.wrapper.DialogImpl
 import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
 import com.raqust.bluko.common.wrapper1.WhiteIntentWrapper1
 
@@ -58,33 +59,23 @@ open class SystemRom : IRom {
                 val pm = a.getSystemService(Context.POWER_SERVICE) as PowerManager
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     pm.isIgnoringBatteryOptimizations(a.packageName)
-                    try {
-                        AlertDialog.Builder(a)
-                                .setCancelable(false)
-                                .setTitle(WhiteIntentWrapper.getString(a, "reason_doze_title", WhiteIntentWrapper.getApplicationName(a)))
-                                .setMessage(WhiteIntentWrapper.getString(a, "reason_doze_content", "", WhiteIntentWrapper.getApplicationName(a)))
-                                .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), { d, w -> intent.startActivitySafely(a) })
-                                .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
-                                .show()
-                        wrapperList.add(intent)
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    }
+                    DialogImpl(a, WhiteIntentWrapper.getString(a, "reason_doze_title", applicationName),
+                            WhiteIntentWrapper.getString(a, "reason_doze_content", reason, applicationName),
+                            WhiteIntentWrapper.getString(a, "ok"),
+                            WhiteIntentWrapper.getString(a, "cancel"), {
+                        intent.startActivitySafely(a)
+                    })
+                    wrapperList.add(intent)
                 }
             }
             SYSTEM -> {
-                try {
-                    AlertDialog.Builder(a)
-                            .setCancelable(false)
-                            .setTitle(WhiteIntentWrapper.getString(a, "reason_system_title", WhiteIntentWrapper.getApplicationName(a)))
-                            .setMessage(WhiteIntentWrapper.getString(a, "reason_system_content", reason, WhiteIntentWrapper.getApplicationName(a)))
-                            .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), DialogInterface.OnClickListener { d, w -> intent.startActivitySafely(a) })
-                            .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
-                            .show()
-                    wrapperList.add(intent)
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
+                DialogImpl(a, WhiteIntentWrapper.getString(a, "reason_system_title", applicationName),
+                        WhiteIntentWrapper.getString(a, "reason_system_content", reason, applicationName),
+                        WhiteIntentWrapper.getString(a, "ok"),
+                        WhiteIntentWrapper.getString(a, "cancel"), {
+                    intent.startActivitySafely(a)
+                })
+                wrapperList.add(intent)
 
             }
         }

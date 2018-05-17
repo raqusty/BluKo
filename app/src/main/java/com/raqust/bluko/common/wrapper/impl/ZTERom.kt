@@ -5,8 +5,7 @@ import android.app.AlertDialog
 import android.content.Context
 import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
 import android.content.DialogInterface
-
-
+import com.raqust.bluko.common.wrapper.DialogImpl
 
 
 /**
@@ -32,32 +31,22 @@ class ZTERom : SystemRom() {
         val applicationName = WhiteIntentWrapper.getApplicationName(a)
         when (intent.type) {
             ZTE -> {
-                try {
-                    AlertDialog.Builder(a)
-                            .setCancelable(false)
-                            .setTitle(WhiteIntentWrapper.getString(a, "reason_zte_title",WhiteIntentWrapper.getApplicationName(a)))
-                            .setMessage(WhiteIntentWrapper.getString(a, "reason_zte_content", reason,WhiteIntentWrapper.getApplicationName(a),WhiteIntentWrapper.getApplicationName(a)))
-                            .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), DialogInterface.OnClickListener { d, w -> intent.startActivitySafely(a) })
-                            .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
-                            .show()
-                    wrapperList.add(intent)
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
+                DialogImpl(a, WhiteIntentWrapper.getString(a, "reason_zte_title", applicationName),
+                        WhiteIntentWrapper.getString(a, "reason_zte_content", reason, applicationName, applicationName),
+                        WhiteIntentWrapper.getString(a, "ok"),
+                        WhiteIntentWrapper.getString(a, "cancel"), {
+                    intent.startActivitySafely(a)
+                })
+                wrapperList.add(intent)
             }
             ZTE_GOD -> {
-                try {
-                    AlertDialog.Builder(a)
-                            .setCancelable(false)
-                            .setTitle(WhiteIntentWrapper.getString(a, "reason_le_god_title",WhiteIntentWrapper.getApplicationName(a)))
-                            .setMessage(WhiteIntentWrapper.getString(a, "reason_le_god_content", reason,WhiteIntentWrapper.getApplicationName(a),WhiteIntentWrapper.getApplicationName(a)))
-                            .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), DialogInterface.OnClickListener { d, w -> intent.startActivitySafely(a) })
-                            .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
-                            .show()
-                    wrapperList.add(intent)
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
+                DialogImpl(a, WhiteIntentWrapper.getString(a, "reason_le_god_title", applicationName),
+                        WhiteIntentWrapper.getString(a, "reason_le_god_content", reason, applicationName, applicationName),
+                        WhiteIntentWrapper.getString(a, "ok"),
+                        WhiteIntentWrapper.getString(a, "cancel"), {
+                    intent.startActivitySafely(a)
+                })
+                wrapperList.add(intent)
             }
         }
     }

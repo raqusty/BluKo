@@ -11,8 +11,7 @@ import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
 import android.content.DialogInterface
-
-
+import com.raqust.bluko.common.wrapper.DialogImpl
 
 
 /**
@@ -138,21 +137,22 @@ class MiuiRom : SystemRom() {
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
+                DialogImpl(a, WhiteIntentWrapper.getString(a, "reason_xm_god_title", applicationName),
+                        WhiteIntentWrapper.getString(a, "reason_xm_god_content", reason, applicationName,applicationName),
+                        WhiteIntentWrapper.getString(a, "ok"),
+                        WhiteIntentWrapper.getString(a, "cancel"), {
+                    intent.startActivitySafely(a)
+                })
+                wrapperList.add(intent)
             }
             XIAOMI -> {
-                try {
-                    AlertDialog.Builder(a)
-                            .setCancelable(false)
-                            .setTitle(WhiteIntentWrapper.getString(a, "reason_xm_title",WhiteIntentWrapper.getApplicationName(a)))
-                            .setMessage(WhiteIntentWrapper.getString(a, "reason_xm_content", reason,WhiteIntentWrapper.getApplicationName(a),WhiteIntentWrapper.getApplicationName(a)))
-                            .setPositiveButton(WhiteIntentWrapper.getString(a, "ok"), DialogInterface.OnClickListener { d, w -> intent.startActivitySafely(a) })
-                            .setNegativeButton(WhiteIntentWrapper.getString(a, "cancel"), null)
-                            .show()
-                    wrapperList.add(intent)
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-
+                DialogImpl(a, WhiteIntentWrapper.getString(a, "reason_xm_title", applicationName),
+                        WhiteIntentWrapper.getString(a, "reason_xm_content", reason, applicationName,applicationName),
+                        WhiteIntentWrapper.getString(a, "ok"),
+                        WhiteIntentWrapper.getString(a, "cancel"), {
+                    intent.startActivitySafely(a)
+                })
+                wrapperList.add(intent)
             }
         }
     }
