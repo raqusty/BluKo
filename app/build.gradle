@@ -31,18 +31,20 @@ android {
 
     }
 
-    flavorDimensions "myflavor"
-    productFlavors {
-        allchannel {
-            dimension "myflavor"
-            manifestPlaceholders = [app_icon: "@mipmap/ic_launcher"]
-        }
+    //打出不同的渠道包  android:icon="${app_icon}"
+//    flavorDimensions "myflavor"
+//    productFlavors {
+//        allchannel {
+//            dimension "myflavor"
+//            manifestPlaceholders = [app_icon: "@mipmap/ic_launcher"]
+//        }
+//
+//        yingyongbao {
+//            dimension "myflavor"
+//            manifestPlaceholders = [app_icon: "@mipmap/ic_launcher2"]
+//        }
+//    }
 
-        yingyongbao {
-            dimension "myflavor"
-            manifestPlaceholders = [app_icon: "@mipmap/ic_launcher2"]
-        }
-    }
 
     signingConfigs {
         config {
@@ -70,7 +72,9 @@ android {
         }
     }
 
+    buildToolsVersion '26.0.2'
 }
+
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -169,10 +173,6 @@ dependencies {
 
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-3'
     compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-3'
-
-    //没有使用特殊Header，可以不加这行
-    api "com.android.support:design:$support_version"
-//    implementation files('libs/huawei-3.1.2-sources.jar')
 
     //material Dailog
     compile 'com.afollestad.material-dialogs:core:0.9.1.0'
