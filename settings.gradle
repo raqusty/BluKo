@@ -1,1 +1,1 @@
-include ':app', ':matisse', ':mylibrary','jjdxm-ijkplayer'
+include ':app'
