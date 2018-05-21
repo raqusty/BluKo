@@ -9,6 +9,14 @@ import com.raqust.bluko.common.wrapper.Constant.COMMAND_WHITE_LIST
 import com.raqust.bluko.common.wrapper.WhiteIntentWrapper
 import com.raqust.bluko.common.wrapper1.WhiteIntentWrapper1
 import kotlinx.android.synthetic.main.activity_two_text.*
+import com.raqust.bluko.MyApplication
+import android.content.ComponentName
+import cn.jpush.android.e.a.b.showToast
+import android.content.pm.PackageManager
+
+
+
+
 
 /**
  * Created by linzehao
@@ -25,7 +33,14 @@ class WhiteWrapperActivity : BaseActivity() {
 
     override fun setListener() {
         one.setOnClickListener {
-            WhiteIntentWrapper.whiteListMatters(this, "test", arrayListOf(COMMAND_START_YOURSELF))
+            val pm = packageManager
+            val permission = PackageManager.PERMISSION_GRANTED == pm.checkPermission("android.permission.RECORD_AUDIO", "packageName")
+            if (permission) {
+                Log.i("linzehao","111" )
+            } else {
+                Log.i("linzehao","222")
+            }
+//            WhiteIntentWrapper.whiteListMatters(this, "test", arrayListOf(COMMAND_START_YOURSELF))
         }
         two.setOnClickListener {
             WhiteIntentWrapper.whiteListMatters(this, "test", arrayListOf(COMMAND_START_YOURSELF,COMMAND_WHITE_LIST))
