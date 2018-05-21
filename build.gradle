@@ -2,6 +2,16 @@
 
 buildscript {
     ext.kotlin_version = '1.2.21'
+    ext.compileSdkVersion = 25
+    ext.buildToolsVersion = '26.0.2'
+
+    ext.targetSdkVersion = 25
+    //主程序版本
+    ext.minSdkVersion = 16
+    ext.versionCode = 1
+    ext.versionName = "1.0"
+    ext.support_version = '25.3.1'
+
     repositories {
         jcenter()
 //        maven {
@@ -35,19 +45,3 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-ext {
-    compileSdkVersion = 25
-    buildToolsVersion = '26.0.2'
-
-    targetSdkVersion = 25
-    //主程序版本
-    minSdkVersion = 16
-    versionCode = 1
-    versionName = "1.0"
-    //library版本
-    jjdxm_minSdkVersion = 9
-    jjdxm_versionCode = 1
-    jjdxm_versionName = "1.0.0"
-    jjdxm_v4 = 'com.android.support:support-v4:23.3.0'
-    jjdxm_v7 = 'com.android.support:appcompat-v7:23.3.0'
-}

@@ -77,13 +77,19 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    //美团.改 打包
+    implementation(name: 'xalle_android-release', ext: 'aar')
+
     compile 'commons-codec:commons-codec:1.10'
     compile 'cn.finalteam.rxgalleryfinal:library:1.0.9'
     compile 'com.aliyun.dpa:oss-android-sdk:2.4.5'
-    implementation(name: 'xalle_android-release', ext: 'aar')
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:recyclerview-v7:25.3.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    //支持库
+    api "com.android.support:design:$support_version"
+    api "com.android.support:cardview-v7:$support_version"
+    api "com.android.support:recyclerview-v7:$support_version"
+    api 'com.android.support:multidex:1.0.3'
+    api 'com.android.support.constraint:constraint-layout:1.0.2'
 
     //glide
     compile 'com.github.bumptech.glide:glide:3.7.0'
@@ -139,9 +145,6 @@ dependencies {
     compile 'com.shuyu:gsyVideoPlayer-java:4.0.0-beat1'
     compile 'com.shuyu:gsyVideoPlayer-armv7a:4.0.0-beat1'
 
-    //65K方法
-    compile 'com.android.support:multidex:1.0.1'
-
     //图片查看器
     compile 'com.davemorrissey.labs:subsampling-scale-image-view:3.5.0'
 
@@ -163,12 +166,12 @@ dependencies {
 
     //    implementation(name: 'UpsPushSDKLib-release-2.0.0', ext: 'aar')
     compile 'com.meizu.flyme.internet:push-internal:3.6.0@aar'
-    compile 'com.android.support:cardview-v7:25.3.1'
+
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-3'
     compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-3'
 
     //没有使用特殊Header，可以不加这行
-    api 'com.android.support:design:25.3.1'
+    api "com.android.support:design:$support_version"
 //    implementation files('libs/huawei-3.1.2-sources.jar')
 
     //material Dailog
