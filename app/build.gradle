@@ -163,13 +163,6 @@ dependencies {
     //FlexboxLayout
     compile 'com.google.android:flexbox:0.2.5'
 
-    //华为推送
-    String HMSSDKVer = '2.6.0.301'
-    compile 'com.huawei.android.hms:push:' + HMSSDKVer
-    implementation files('libs/MiPush_SDK_Client_3_6_2.jar')
-
-    //    implementation(name: 'UpsPushSDKLib-release-2.0.0', ext: 'aar')
-    compile 'com.meizu.flyme.internet:push-internal:3.6.0@aar'
 
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-3'
     compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-3'

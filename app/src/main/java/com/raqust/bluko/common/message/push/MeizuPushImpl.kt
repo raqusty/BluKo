@@ -1,8 +1,6 @@
 package com.raqust.bluko.common.message.push
 
 import android.app.Application
-import com.meizu.cloud.pushsdk.PushManager
-import com.meizu.cloud.pushsdk.util.MzSystemUtils
 
 /**
  * Created by linzehao
@@ -15,9 +13,6 @@ class MeizuPushImpl : IPushProvider {
     private val APP_KEY = "bd96751debf84f698f303d946caeb47d"
 
     override fun init(application: Application) {
-        if (MzSystemUtils.isBrandMeizu(application)) {
-            PushManager.register(application, APP_ID, APP_KEY);
-        }
     }
 
     override fun getPushId(application: Application) {

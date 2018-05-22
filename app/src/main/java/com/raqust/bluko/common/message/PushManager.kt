@@ -1,7 +1,6 @@
 package com.raqust.bluko.common.message
 
 import android.app.Application
-import com.meizu.cloud.pushsdk.util.MzSystemUtils
 import com.raqust.bluko.common.message.push.*
 
 /**

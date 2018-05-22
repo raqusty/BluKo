@@ -1,7 +1,6 @@
 package com.raqust.bluko.common.message.push
 
 import android.app.Application
-import com.xiaomi.mipush.sdk.MiPushClient
 
 /**
  * Created by linzehao
@@ -16,7 +15,6 @@ class MipushImpl : IPushProvider {
     private val APP_KEY = "5151776496097"
     
     override fun init(application: Application) {
-        MiPushClient.registerPush(application, APP_ID, APP_KEY);
     }
 
     override fun getPushId(application: Application) {
