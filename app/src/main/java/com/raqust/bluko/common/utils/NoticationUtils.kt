@@ -1,11 +1,16 @@
 package com.raqust.bluko.common.utils
 
 import android.app.AppOpsManager
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
+import android.support.v4.app.NotificationCompat
+import android.widget.RemoteViews
+import com.raqust.bluko.R
 import java.lang.reflect.InvocationTargetException
 
 
@@ -68,5 +73,22 @@ object NotificationsUtils {
             val intent = Intent(Settings.ACTION_SETTINGS)
             context.startActivity(intent)
         }
+    }
+
+    /**
+     产生消息
+     **/
+     fun handleNotification(context: Context, title: String, message: String, msgId: String, msgIntent: Intent) {
+        val notifyManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val builder = NotificationCompat.Builder(context)
+        //http://blog.csdn.net/moguivstianshi/article/details/52368175
+        val pendingIntent = PendingIntent.getActivity(context, System.currentTimeMillis().toInt(), msgIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        builder.setDefaults(NotificationCompat.DEFAULT_ALL)
+        builder.setContentIntent(pendingIntent)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setAutoCancel(true)
+        notifyManager.notify(msgId, 0, builder.build())
     }
 }

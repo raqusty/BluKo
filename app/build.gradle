@@ -95,6 +95,11 @@ dependencies {
     api 'com.android.support:multidex:1.0.3'
     api 'com.android.support.constraint:constraint-layout:1.0.2'
 
+    //Kotlin依赖库
+    api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    //Kotlin anko sqlite
+    api 'org.jetbrains.anko:anko-sqlite:0.10.4'
+
     //glide
     compile 'com.github.bumptech.glide:glide:3.7.0'
 
