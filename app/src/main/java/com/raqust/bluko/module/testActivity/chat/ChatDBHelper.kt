@@ -1,4 +1,4 @@
-package com.raqust.bluko.module.testActivity
+package com.raqust.bluko.module.testActivity.chat
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -25,9 +25,13 @@ internal class ChatDBHelper(ctx: Context = MyApplication.instance) : ManagedSQLi
                 ChatDbTable.CHATERTYPE to TEXT + DEFAULT("''"),
                 ChatDbTable.CHATERID to TEXT + DEFAULT("''"),
                 ChatDbTable.CHATERICON to TEXT + DEFAULT("''"),
+                ChatDbTable.CHATERNAME to TEXT + DEFAULT("''"),
+                ChatDbTable.ATTACHMENT to TEXT + DEFAULT("''"),
+                ChatDbTable.LETTERID to TEXT + DEFAULT("''"),
                 ChatDbTable.CHATERBODY to TEXT + DEFAULT("''"),
                 ChatDbTable.LASTMSG to TEXT + DEFAULT("''"),
                 ChatDbTable.TIME to INTEGER + DEFAULT("0"),
+                ChatDbTable.UNREADCOUNT to INTEGER + DEFAULT("0"),
                 ChatDbTable.TAG1 to TEXT + DEFAULT("''"))
 
     }

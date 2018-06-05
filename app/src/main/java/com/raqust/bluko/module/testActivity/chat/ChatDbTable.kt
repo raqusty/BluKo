@@ -1,4 +1,4 @@
-package com.raqust.bluko.module.testActivity
+package com.raqust.bluko.module.testActivity.chat
 
 import com.raqust.bluko.common.db.BaseTableFields
 
@@ -7,11 +7,10 @@ import com.raqust.bluko.common.db.BaseTableFields
  * time: 2018/5/28.
  * info:
  */
-internal object ChatDbTable:BaseTableFields{
-    override val TABLE_NAME: String
-        get() = "conversation_info"
-    override val PRIMARY_KEY_ID: String
-        get() = "_id"
+internal object ChatDbTable{
+    val TABLE_NAME = "conversation_info"
+
+    val PRIMARY_KEY_ID= "_id"
 
     /**
      * 聊天类型，目前没用
@@ -29,6 +28,21 @@ internal object ChatDbTable:BaseTableFields{
     val CHATERICON = "chaterIcon"
 
     /**
+     * 用户名字
+     */
+    val CHATERNAME = "chaterName"
+
+    /**
+     * 附件，用来保存图片，视频 json
+     */
+    val ATTACHMENT = "attachment"
+
+    /**
+     * letter id
+     */
+    val LETTERID = "letterId"
+
+    /**
      * 会话的数据 json
      */
     val CHATERBODY = "chaterBody"
@@ -42,6 +56,11 @@ internal object ChatDbTable:BaseTableFields{
      * 最后一条消息的时间
      */
     val TIME = "time"
+
+    /**
+     * 未读数
+     */
+    val UNREADCOUNT = "unReadCount"
 
     /**
      * 拓展字段
