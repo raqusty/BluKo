@@ -4,12 +4,12 @@ import android.app.AppOpsManager
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
+import android.content.Context.NOTIFICATION_SERVICE
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
 import android.support.v4.app.NotificationCompat
-import android.widget.RemoteViews
 import com.raqust.bluko.R
 import java.lang.reflect.InvocationTargetException
 
@@ -76,9 +76,9 @@ object NotificationsUtils {
     }
 
     /**
-     产生消息
+    产生消息
      **/
-     fun handleNotification(context: Context, title: String, message: String, msgId: String, msgIntent: Intent) {
+    fun handleNotification(context: Context, title: String, message: String, msgId: String, msgIntent: Intent) {
         val notifyManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val builder = NotificationCompat.Builder(context)
         //http://blog.csdn.net/moguivstianshi/article/details/52368175
@@ -89,6 +89,14 @@ object NotificationsUtils {
                 .setContentTitle(title)
                 .setContentText(message)
                 .setAutoCancel(true)
-        notifyManager.notify(msgId, 0, builder.build())
+        notifyManager.notify(msgId, 111, builder.build())
+    }
+
+    fun clearNotication(context: Context) {
+        val notificationManager = context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        //移除标记为id的通知 (只是针对当前Context下的所有Notification)
+        notificationManager.cancel("1111",111)
+        //移除所有通知
+//        notificationManager.cancelAll();
     }
 }
