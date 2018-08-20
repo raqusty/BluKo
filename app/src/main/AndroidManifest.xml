@@ -84,11 +84,20 @@
         </activity>
 
         <activity android:name=".module.testActivity.TestActivity">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+        <activity android:name=".module.testActivity.banner.TestBannerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+
         <activity android:name=".module.testActivity.Test2Activity">
         </activity>
         <activity android:name=".module.gsonActivity.TestActivity">
