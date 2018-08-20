@@ -12,6 +12,7 @@ import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.TextView
 import com.raqust.bluko.R
 import com.raqust.bluko.common.banner.listener.OnBannerListener
 import com.raqust.bluko.common.banner.loader.ImageLoader
@@ -33,6 +34,7 @@ class Banner : FrameLayout, ViewPager.OnPageChangeListener {
 
     private var mContext: Context? = null
     private var mViewPager: BannerViewPager? = null
+    private var mIndicatorText: TextView? = null
     private var mScroller: BannerScroller? = null
     private var listener: OnBannerListener? = null
     private val imageViews = mutableListOf<View>()
@@ -57,6 +59,7 @@ class Banner : FrameLayout, ViewPager.OnPageChangeListener {
     private fun initView() {
         val view = LayoutInflater.from(context).inflate(R.layout.layout_banner, this, true)
         mViewPager = view.findViewById(R.id.bannerViewPager) as BannerViewPager
+        mIndicatorText = view.findViewById(R.id.indicator_text) as TextView
         initViewPagerScroll()
     }
 
@@ -107,6 +110,7 @@ class Banner : FrameLayout, ViewPager.OnPageChangeListener {
             Log.e(tag, "The image data set is empty.")
             return
         }
+        initIndicator()
         for (i in 0..count + 1) {
             var imageView: View? = null
             if (imageLoader != null) {
@@ -129,6 +133,11 @@ class Banner : FrameLayout, ViewPager.OnPageChangeListener {
             else
                 Log.e(tag, "Please set images loader.")
         }
+    }
+
+    private fun initIndicator() {
+        imageViews.clear()
+        mIndicatorText?.text = "1/" + count
     }
 
     private val task = object : Runnable {
@@ -257,17 +266,7 @@ class Banner : FrameLayout, ViewPager.OnPageChangeListener {
 
         if (position == 0) position = count
         if (position > count) position = 1
-//        when (bannerStyle) {
-//            BannerConfig.CIRCLE_INDICATOR -> {
-//            }
-//            BannerConfig.NUM_INDICATOR -> numIndicator.setText(position.toString() + "/" + count)
-//            BannerConfig.NUM_INDICATOR_TITLE -> {
-//                numIndicatorInside.setText(position.toString() + "/" + count)
-//                bannerTitle.setText(titles.get(position - 1))
-//            }
-//            BannerConfig.CIRCLE_INDICATOR_TITLE -> bannerTitle.setText(titles.get(position - 1))
-//            BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE -> bannerTitle.setText(titles.get(position - 1))
-//        }
+        mIndicatorText?.text = position.toString() + "/" + count
     }
 
     /**

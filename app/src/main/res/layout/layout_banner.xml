@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <com.raqust.bluko.common.banner.BannerViewPager
@@ -9,4 +10,17 @@
         android:layout_height="match_parent"
         android:clipChildren="false" />
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/indicator_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="13dp"
+        android:background="#33333333"
+        android:paddingBottom="3dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="3dp"
+        android:textColor="#ffffff"
+        tools:text="1/1" />
+</FrameLayout>
