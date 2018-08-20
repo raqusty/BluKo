@@ -13,8 +13,6 @@ import com.raqust.bluko.common.AbstractFooterAdapter;
 import com.raqust.bluko.common.activity.BaseActivity;
 import com.raqust.bluko.common.activity.ToolBarManager;
 import com.raqust.bluko.common.widget.CommonRecyclerView;
-import com.raqust.bluko.module.DaggerMainComponent;
-import com.raqust.bluko.module.MainModule;
 import com.raqust.bluko.module.main.entity.EventEntity;
 import com.raqust.bluko.module.main.entity.EventListEntity;
 import com.raqust.bluko.module.main.presenter.HomePresenter;
@@ -51,10 +49,6 @@ public class FirstActivity extends BaseActivity implements IHomeView {
 
     @Override
     public void initViews() {
-        DaggerMainComponent.builder()
-                .mainModule(new MainModule(this))
-                .build()
-                .inject(this);
 
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         mAdapter = new HomeAdapter(mContext, mListData);
@@ -63,7 +57,7 @@ public class FirstActivity extends BaseActivity implements IHomeView {
         mRecyclerView.addItemDecoration(new SpacesItemDecoration(16));
         mCurPage = 1;
         requestData(mCurPage);
-        Log.i("linzehao",getIntent().getStringExtra("articleId"))
+        Log.i("linzehao", getIntent().getStringExtra("articleId"))
         ;
 
     }

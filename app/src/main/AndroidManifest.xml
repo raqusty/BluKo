@@ -89,6 +89,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".module.testActivity.Test2Activity">
+        </activity>
+        <activity android:name=".module.gsonActivity.TestActivity">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+        TestActivity
 
         <activity android:name="com.raqust.bluko.module.Recycler.RecyclerViewActivity">
             <!--<intent-filter>-->

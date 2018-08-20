@@ -36,7 +36,7 @@ class WhiteWrapperActivity : BaseActivity() {
             val pm = packageManager
             val permission = PackageManager.PERMISSION_GRANTED == pm.checkPermission("android.permission.RECORD_AUDIO", "packageName")
             if (permission) {
-                Log.i("linzehao","111" )
+                Log.i("linzehao","test_image" )
             } else {
                 Log.i("linzehao","222")
             }

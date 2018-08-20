@@ -112,7 +112,7 @@ class NetActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
             R.id.text4 -> {
             }
             R.id.text5 -> {
-                Log.i("linzehao", "111   " + ThinkFlyUtils.getDeviceID(this))
+                Log.i("linzehao", "test_image   " + ThinkFlyUtils.getDeviceID(this))
             }
             R.id.text6 -> {
                 if (!EasyPermissions.hasPermissions(this, Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {

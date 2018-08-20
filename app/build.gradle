@@ -15,7 +15,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         ndk {
-            abiFilters 'armeabi-v7a'
+            abiFilters 'armeabi-v7a', "x86_64","x86"
         }
 
         manifestPlaceholders = [
@@ -174,8 +174,8 @@ dependencies {
     compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-3'
 
     //material Dailog
-    compile 'com.afollestad.material-dialogs:core:0.9.1.0'
-    compile 'com.afollestad.material-dialogs:commons:0.9.1.0'
+//    compile 'com.afCoordinatorLayoutollestad.material-dialogs:core:0.9.1.0'
+//    compile 'com.afollestad.material-dialogs:commons:0.9.1.0'
 }
 repositories {
     mavenCentral()

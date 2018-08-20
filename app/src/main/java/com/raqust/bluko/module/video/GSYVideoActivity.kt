@@ -46,7 +46,8 @@ class GSYVideoActivity : BaseActivity() {
         //videoPlayer.setUp(url, true, new File(FileUtils.getPath()), "");
 
         //借用了jjdxm_ijkplayer的URL
-        val source1 = "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f20.mp4"
+//        val source1 = "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f20.mp4"
+        val source1 = "http://dev.raw.yiyoushuo.com/VIDEO/87EE2823189017F71F33FDCAA5617497-5978d7610daaba801478c0fcdfdbd8a0.mp4"
         val name = "普通"
         val switchVideoModel = SwitchVideoModel(name, source1)
 

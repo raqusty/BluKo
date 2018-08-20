@@ -4,13 +4,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
+    <EditText
         android:id="@+id/one"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:focusableInTouchMode="false"
         android:padding="20dp"
-        android:text="one" />
+        android:text="" />
 
     <TextView
         android:id="@+id/two"
@@ -19,4 +20,12 @@
         android:layout_weight="1"
         android:padding="20dp"
         android:text="two" />
+
+    <ImageView
+        android:id="@+id/three"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="20dp" />
+
 </LinearLayout>
